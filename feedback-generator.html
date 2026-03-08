@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPAN 1001 — Lab Feedback Generator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1a3a6b;
+  --blue: #2a5fad;
+  --blue-light: #dceeff;
+  --blue-pale: #f0f6ff;
+  --green: #1a5c38;
+  --green-light: #e4f5ec;
+  --red: #b5302a;
+  --red-light: #fdecea;
+  --amber: #9a4d07;
+  --amber-light: #fff3e0;
+  --purple: #5b2d8e;
+  --purple-light: #f2eaff;
+  --teal: #0a6b5e;
+  --teal-light: #e0f7f4;
+  --gray-50: #f8f9fb;
+  --gray-100: #f0f2f5;
+  --gray-200: #e2e5ea;
+  --gray-400: #636975;
+  --gray-600: #5a6070;
+  --gray-800: #2c3040;
+  --text: #1e2228;
+  --radius: 12px;
+  --radius-sm: 7px;
+  --shadow: 0 2px 12px rgba(0,0,0,0.07);
+  --shadow-md: 0 4px 24px rgba(0,0,0,0.11);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  background: #eef2f8;
+  min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.app-wrap {
+  display: grid;
+  grid-template-columns: 310px 1fr;
+  min-height: 100vh;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  background: var(--navy);
+  color: white;
+  padding: 24px 20px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.sidebar::-webkit-scrollbar { width: 3px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+
+.brand {
+  display: flex; align-items: center; gap: 11px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.brand-icon {
+  width: 38px; height: 38px;
+  background: linear-gradient(135deg, #2a5fad, #1a3a6b);
+  border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; flex-shrink: 0;
+  box-shadow: 0 2px 10px rgba(42,95,173,0.4);
+}
+.brand-text { font-size: 0.85rem; font-weight: 700; line-height: 1.3; }
+.brand-text span { display: block; font-size: 0.68rem; opacity: 0.5; font-weight: 400; margin-top: 1px; }
+
+.slabel {
+  font-size: 0.62rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.38);
+  margin-bottom: 7px;
+}
+
+/* Lab buttons */
+.lab-btns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+}
+.lab-btn {
+  background: rgba(255,255,255,0.07);
+  border: 1.5px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-sm);
+  padding: 7px 4px;
+  color: rgba(255,255,255,0.55);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
+}
+.lab-btn:hover { background: rgba(255,255,255,0.12); color: white; }
+.lab-btn.active {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: white;
+  box-shadow: 0 2px 10px rgba(42,95,173,0.4);
+}
+
+/* Input fields */
+.field-input {
+  width: 100%;
+  background: rgba(255,255,255,0.07);
+  border: 1.5px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius-sm);
+  padding: 8px 11px;
+  color: white;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.field-input::placeholder { color: rgba(255,255,255,0.28); }
+.field-input:focus { border-color: rgba(42,95,173,0.7); }
+
+/* Toggle */
+.toggle-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 9px 11px;
+  background: rgba(255,255,255,0.06);
+  border-radius: var(--radius-sm);
+  border: 1.5px solid rgba(255,255,255,0.1);
+}
+.toggle-lbl { font-size: 0.72rem; font-weight: 500; color: rgba(255,255,255,0.65); }
+.toggle-lbl span { display: block; font-size: 0.62rem; color: rgba(255,255,255,0.3); font-weight: 400; margin-top: 1px; }
+.toggle { position: relative; width: 34px; height: 19px; cursor: pointer; flex-shrink: 0; }
+.toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
+.toggle-track { position: absolute; inset: 0; background: rgba(255,255,255,0.15); border-radius: 20px; transition: background 0.2s; }
+.toggle input:checked ~ .toggle-track { background: var(--blue); }
+.toggle-thumb {
+  position: absolute;
+  top: 2.5px; left: 2.5px;
+  width: 14px; height: 14px;
+  background: white; border-radius: 50%;
+  transition: transform 0.2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+.toggle input:checked ~ .toggle-track ~ .toggle-thumb { transform: translateX(15px); }
+
+.gen-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #2a5fad, #1a3a6b);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 12px 18px;
+  color: white;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 14px rgba(26,58,107,0.4);
+  letter-spacing: 0.02em;
+  margin-top: auto;
+}
+.gen-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(26,58,107,0.5); }
+
+/* ── Main ── */
+.main { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+
+.main-header {
+  background: white;
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  box-shadow: var(--shadow);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 14px; flex-wrap: wrap;
+}
+.main-title { font-family: 'DM Serif Display', serif; font-size: 1.28rem; color: var(--navy); font-weight: 400; }
+.main-sub { font-size: 0.75rem; color: var(--gray-400); margin-top: 2px; }
+
+.action-btns { display: flex; gap: 7px; flex-wrap: wrap; }
+.act-btn {
+  background: white;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--gray-600);
+  cursor: pointer;
+  display: flex; align-items: center; gap: 5px;
+  transition: all 0.15s;
+  box-shadow: var(--shadow);
+}
+.act-btn:hover { border-color: var(--blue); color: var(--blue); }
+.act-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.act-btn.primary {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: white;
+}
+.act-btn.primary:hover { background: var(--blue); border-color: var(--blue); }
+
+/* ── Rubric panel ── */
+.rubric-panel {
+  background: white;
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  box-shadow: var(--shadow);
+}
+.panel-title {
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gray-400);
+  margin-bottom: 13px;
+}
+
+.rtabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+.rtab {
+  padding: 6px 13px;
+  border-radius: 20px;
+  border: 1.5px solid var(--gray-200);
+  background: var(--gray-50);
+  font-size: 0.72rem; font-weight: 600;
+  color: var(--gray-400);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.rtab:hover { border-color: var(--gray-300); color: var(--gray-600); }
+.rtab.active { border-color: var(--blue); background: var(--blue-light); color: var(--blue); }
+
+.err-panel { display: none; animation: fadeUp 0.18s ease; }
+.err-panel.vis { display: block; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
+
+.err-section-title {
+  font-size: 0.74rem; font-weight: 600; color: var(--navy);
+  margin-bottom: 9px; padding-bottom: 7px;
+  border-bottom: 1.5px solid var(--gray-100);
+}
+.err-group { margin-bottom: 14px; }
+.err-group-lbl {
+  font-size: 0.64rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.09em;
+  color: var(--gray-400); margin-bottom: 7px;
+}
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.chip {
+  display: flex; align-items: center; gap: 5px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  border: 1.5px solid var(--gray-200);
+  background: white;
+  font-size: 0.71rem; font-weight: 500;
+  color: var(--gray-600);
+  cursor: pointer;
+  transition: all 0.15s;
+  user-select: none;
+}
+.chip:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-pale); }
+.chip.sel { border-color: var(--blue); background: var(--blue-light); color: var(--blue); font-weight: 600; }
+.chip .ck { font-size: 0.65rem; opacity: 0; transition: opacity 0.1s; }
+.chip.sel .ck { opacity: 1; }
+
+.sound-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.schip {
+  width: 36px; height: 36px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--gray-200);
+  background: white;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Serif Display', serif;
+  font-size: 0.95rem; font-weight: 600;
+  color: var(--gray-600);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.schip:hover { border-color: var(--teal); color: var(--teal); background: var(--teal-light); }
+.schip.sel { border-color: var(--teal); background: var(--teal-light); color: var(--teal); }
+
+.notes-ta {
+  width: 100%;
+  background: var(--gray-50);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  padding: 9px 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.79rem;
+  color: var(--text);
+  resize: vertical;
+  min-height: 64px;
+  outline: none;
+  transition: border-color 0.15s;
+  line-height: 1.6;
+  margin-top: 7px;
+}
+.notes-ta:focus { border-color: var(--blue); background: white; }
+.notes-ta::placeholder { color: var(--gray-400); }
+
+/* ── Feedback output ── */
+.feedback-output {
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  min-height: 180px;
+}
+.fb-empty {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 52px 20px; color: var(--gray-400);
+  text-align: center; gap: 9px;
+}
+.fb-empty .ei { font-size: 2.2rem; opacity: 0.35; }
+.fb-empty p { font-size: 0.82rem; }
+
+.fb-content { display: none; animation: fadeUp 0.25s ease; }
+.fb-content.vis { display: block; }
+
+/* Preview (screen) */
+.fb-preview {
+  padding: 26px 28px;
+}
+.fb-hdr {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 14px; margin-bottom: 20px; padding-bottom: 16px;
+  border-bottom: 1.5px solid var(--gray-100); flex-wrap: wrap;
+}
+.fb-student { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--navy); font-weight: 400; }
+.fb-meta { font-size: 0.72rem; color: var(--gray-400); margin-top: 2px; }
+
+.fb-sec { margin-bottom: 18px; }
+.fb-sec-title {
+  font-size: 0.65rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--gray-400); margin-bottom: 9px;
+}
+
+.fb-compliment {
+  background: linear-gradient(135deg, #e4f5ec, #d8f5ee);
+  border: 1.5px solid #a7e8c8;
+  border-radius: var(--radius-sm);
+  padding: 13px 15px;
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: 0.88rem;
+  color: var(--green);
+  line-height: 1.7;
+}
+
+.fb-block {
+  margin-bottom: 12px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.fb-block-hdr {
+  display: flex; align-items: center; gap: 7px;
+  padding: 9px 13px;
+  background: var(--gray-50);
+  font-size: 0.75rem; font-weight: 600; color: var(--navy);
+  border-bottom: 1.5px solid var(--gray-100);
+}
+.fb-tag {
+  font-size: 0.6rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.07em;
+  padding: 2px 7px; border-radius: 9px; margin-left: auto;
+}
+.tag-g { background: var(--purple-light); color: var(--purple); }
+.tag-v { background: var(--amber-light); color: var(--amber); }
+.tag-p { background: var(--teal-light); color: var(--teal); }
+.tag-c { background: var(--blue-light); color: var(--blue); }
+.tag-d { background: var(--amber-light); color: var(--amber); }
+.tag-n { background: var(--gray-100); color: var(--gray-600); }
+
+.fb-block-body {
+  padding: 11px 13px;
+  font-size: 0.79rem; color: var(--gray-700); line-height: 1.7;
+}
+.fb-ex {
+  margin-top: 7px;
+  background: var(--blue-pale);
+  border-left: 3px solid var(--blue);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 7px 11px;
+  font-size: 0.76rem; color: var(--gray-700);
+}
+.fb-ex span { font-family: 'DM Serif Display', serif; font-style: italic; color: var(--blue); }
+
+@media (max-width: 800px) {
+  .app-wrap { grid-template-columns: 1fr; }
+  .sidebar { position: static; height: auto; }
+}
+</style>
+</head>
+<body>
+<div class="app-wrap">
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar">
+  <div class="brand">
+    <div class="brand-icon">🇪🇸</div>
+    <div class="brand-text">SPAN 1001 Feedback
+      <span>Lab Assistant Tool · Spring 2026</span>
+    </div>
+  </div>
+
+  <div>
+    <div class="slabel">Select Lab</div>
+    <div class="lab-btns">
+      <button class="lab-btn active" onclick="selectLab(1)">Lab 1</button>
+      <button class="lab-btn" onclick="selectLab(2)">Lab 2</button>
+      <button class="lab-btn" onclick="selectLab(3)">Lab 3</button>
+      <button class="lab-btn" onclick="selectLab(4)">Lab 4</button>
+      <button class="lab-btn" onclick="selectLab(5)">Lab 5</button>
+      <button class="lab-btn" onclick="selectLab(6)">Lab 6</button>
+    </div>
+  </div>
+
+  <div>
+    <div class="slabel">Student Name</div>
+    <input class="field-input" type="text" id="studentName" placeholder="e.g. María García">
+  </div>
+
+  <div>
+    <div class="toggle-row">
+      <div class="toggle-lbl">Compliment
+        <span>Randomized positive opener</span>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" id="complToggle" checked>
+        <div class="toggle-track"></div>
+        <div class="toggle-thumb"></div>
+      </label>
+    </div>
+  </div>
+
+  <button class="gen-btn" onclick="generateFeedback()">✨ Generate Feedback</button>
+</aside>
+
+<!-- ===== MAIN ===== -->
+<main class="main">
+
+  <div class="main-header">
+    <div>
+      <div class="main-title">Lab Feedback Generator</div>
+      <div class="main-sub" id="labSub">Lab 1 · Capítulo 1 — Saludos, artículos, ser, números, la hora</div>
+    </div>
+    <div class="action-btns">
+      <button class="act-btn" id="btnCopyBS" onclick="copyBrightspace()" disabled>📋 Copy for Brightspace</button>
+      <button class="act-btn" id="btnPrintFB" onclick="printFeedback()" disabled>🖨️ Print Feedback</button>
+    </div>
+  </div>
+
+  <!-- Rubric error selector -->
+  <div class="rubric-panel">
+    <div class="panel-title">Flag errors by rubric category</div>
+    <div class="rtabs">
+      <div class="rtab active" onclick="selTab('content')" data-tab="content">✅ Content</div>
+      <div class="rtab" onclick="selTab('comp')" data-tab="comp">💬 Comprehensibility</div>
+      <div class="rtab" onclick="selTab('discourse')" data-tab="discourse">🗂️ Discourse</div>
+      <div class="rtab" onclick="selTab('engagement')" data-tab="engagement">⭐ Engagement</div>
+      <div class="rtab" onclick="selTab('pron')" data-tab="pron">🔊 Pronunciation</div>
+    </div>
+
+    <div class="err-panel vis" id="ep-content">
+      <div class="err-section-title">Content / Completion issues</div>
+      <div id="contentChips"></div>
+      <textarea class="notes-ta" id="notes-content" placeholder="Additional notes for content…"></textarea>
+    </div>
+    <div class="err-panel" id="ep-comp">
+      <div class="err-section-title">Vocabulary &amp; grammar errors</div>
+      <div id="grammarChips"></div>
+      <textarea class="notes-ta" id="notes-comp" placeholder="Additional notes for comprehensibility / grammar…"></textarea>
+    </div>
+    <div class="err-panel" id="ep-discourse">
+      <div class="err-section-title">Discourse / sentence structure issues</div>
+      <div class="chips" id="discourseChips"></div>
+      <textarea class="notes-ta" id="notes-discourse" placeholder="Additional notes for discourse level…"></textarea>
+    </div>
+    <div class="err-panel" id="ep-engagement">
+      <div class="err-section-title">Engagement issues</div>
+      <div class="chips" id="engagementChips"></div>
+      <textarea class="notes-ta" id="notes-engagement" placeholder="Additional notes for engagement…"></textarea>
+    </div>
+    <div class="err-panel" id="ep-pron">
+      <div class="err-section-title">Pronunciation &amp; fluency issues</div>
+      <div class="err-group">
+        <div class="err-group-lbl">Specific sounds</div>
+        <div class="sound-chips">
+          <div class="schip" onclick="toggleSound(this)" data-s="h">h</div>
+          <div class="schip" onclick="toggleSound(this)" data-s="g">g</div>
+          <div class="schip" onclick="toggleSound(this)" data-s="j">j</div>
+          <div class="schip" onclick="toggleSound(this)" data-s="c">c</div>
+          <div class="schip" onclick="toggleSound(this)" data-s="z">z</div>
+          <div class="schip" onclick="toggleSound(this)" data-s="ñ">ñ</div>
+          <div class="schip" onclick="toggleSound(this)" data-s="rr">rr</div>
+          <div class="schip" onclick="toggleSound(this)" data-s="ll/y">ll/y</div>
+          <div class="schip" onclick="toggleSound(this)" data-s="v/b">v/b</div>
+          <div class="schip" onclick="toggleSound(this)" data-s="a">a</div>
+          <div class="schip" onclick="toggleSound(this)" data-s="e">e</div>
+          <div class="schip" onclick="toggleSound(this)" data-s="i">i</div>
+          <div class="schip" onclick="toggleSound(this)" data-s="o">o</div>
+          <div class="schip" onclick="toggleSound(this)" data-s="u">u</div>
+          <div class="schip" onclick="toggleSound(this)" data-s="accent">á/é/í</div>
+        </div>
+      </div>
+      <div class="err-group" style="margin-top:10px">
+        <div class="err-group-lbl">Fluency</div>
+        <div class="chips">
+          <div class="chip" onclick="toggleChip(this)" data-k="pron_pauses"><span class="ck">✓</span> Long pauses</div>
+          <div class="chip" onclick="toggleChip(this)" data-k="pron_robotic"><span class="ck">✓</span> Robotic/flat tone</div>
+          <div class="chip" onclick="toggleChip(this)" data-k="pron_rehearsed"><span class="ck">✓</span> Appears rehearsed/read</div>
+          <div class="chip" onclick="toggleChip(this)" data-k="pron_english_accent"><span class="ck">✓</span> Heavy English accent</div>
+          <div class="chip" onclick="toggleChip(this)" data-k="pron_word_stress"><span class="ck">✓</span> Incorrect word stress</div>
+        </div>
+      </div>
+      <textarea class="notes-ta" id="notes-pron" placeholder="Additional notes for pronunciation…"></textarea>
+    </div>
+  </div>
+
+  <!-- Output -->
+  <div class="feedback-output" id="fbOutput">
+    <div class="fb-empty" id="fbEmpty">
+      <div class="ei">📝</div>
+      <p>Select errors above and click <strong>Generate Feedback</strong></p>
+    </div>
+    <div class="fb-content" id="fbContent"></div>
+  </div>
+
+</main>
+</div>
+
+<!-- ===== PRINT TEMPLATE (hidden) ===== -->
+<div id="printArea" style="display:none"></div>
+
+<style>
+@media print {
+  body > * { display: none !important; }
+  #printArea { display: block !important; }
+  #printArea { font-family: 'DM Sans', sans-serif; padding: 24px; font-size: 11pt; color: #1e2228; }
+}
+</style>
+
+<script>
+// ─── DATA ──────────────────────────────────────────────────────────────────
+
+const LAB_SUBS = {
+  1: "Lab 1 · Capítulo 1 — Saludos, artículos, ser, números, la hora",
+  2: "Lab 2 · Capítulos 1–2 — Verbos -ar, preguntas, estar, números 31+",
+  3: "Lab 3 · Capítulos 1–3 — Adjetivos, posesivos, -er/-ir, tener/venir",
+  4: "Lab 4 · Capítulos 1–4 — Ir, cambios de raíz, yo irregular",
+  5: "Lab 5 · Capítulos 1–5 — Estar+emociones, progresivo, ser/estar, OD",
+  6: "Lab 6 · Repaso — Capítulos 1–5"
+};
+
+const COMPLIMENTS = [
+  "¡Muy bien hecho! Your dedication to this submission is clear, and it shows real growth in your Spanish.",
+  "¡Excelente trabajo! You approached this task with genuine effort — every sentence you produce in Spanish is meaningful progress.",
+  "¡Buen trabajo! There are real strengths in this submission, and you should feel proud of how far your Spanish has come.",
+  "¡Fantástico! Your commitment to communicating in Spanish shines through, and this submission has many strong moments.",
+  "¡Estupendo! You're building your Spanish skills steadily, and this video demonstrates genuine progress.",
+  "¡Buenísimo! Communicating in a new language takes courage and hard work — you're doing both, and it shows.",
+  "¡Muy bien! Several parts of your submission show clear understanding of the chapter material.",
+  "¡Genial! Speaking Spanish authentically is the most important goal of this course, and you are absolutely doing that.",
+];
+
+// ── Content errors by lab
+function getContentErrors(lab) {
+  const base = [
+    { k:"incomplete", lbl:"Response incomplete or too brief" },
+    { k:"under_time", lbl:"Under time requirement" },
+    { k:"off_prompt", lbl:"Off prompt / misunderstood question" },
+    { k:"no_detail",  lbl:"No elaboration or detail" },
+  ];
+  const byLab = {
+    1:[
+      { k:"missing_greeting", lbl:"No greeting or farewell" },
+      { k:"missing_intro",    lbl:"No self-introduction (me llamo / soy de)" },
+      { k:"missing_number",   lbl:"Number not given in Spanish" },
+      { k:"missing_time",     lbl:"Time not stated or wrong format" },
+    ],
+    2:[
+      { k:"missing_schedule", lbl:"No class/schedule content" },
+      { k:"no_ar_verb",       lbl:"No -ar verb activity described" },
+      { k:"missing_location", lbl:"No location with estar" },
+    ],
+    3:[
+      { k:"missing_family",   lbl:"No family members described" },
+      { k:"missing_adj_desc", lbl:"No physical/personality description" },
+      { k:"missing_nat",      lbl:"Nationality not mentioned" },
+      { k:"missing_prof",     lbl:"Profession not mentioned" },
+    ],
+    4:[
+      { k:"missing_pastime",  lbl:"No pastime or sport mentioned" },
+      { k:"missing_ir_dest",  lbl:"No ir a + destination/plan" },
+    ],
+    5:[
+      { k:"missing_vacation", lbl:"No vacation/travel content" },
+      { k:"missing_weather",  lbl:"Weather not mentioned" },
+      { k:"missing_emotion",  lbl:"No emotion/condition with estar" },
+    ],
+    6:[
+      { k:"skipped_topic",    lbl:"A chapter topic was skipped entirely" },
+      { k:"unbalanced",       lbl:"Coverage unbalanced — only 1–2 chapters shown" },
+    ]
+  };
+  return [...base, ...(byLab[lab]||[])];
+}
+
+// ── Grammar errors by lab
+function getGrammarErrors(lab) {
+  const groups = [];
+  groups.push({ lbl:"Cap. 1 — Ser, artículos, números, hora", errors:[
+    { k:"ser_conj",      lbl:"ser conjugation" },
+    { k:"me_llamo_es",   lbl:"me llamo es… (fixed phrase error)" },
+    { k:"gender_art",    lbl:"Article gender (el/la)" },
+    { k:"plural_art",    lbl:"Plural article (los/las)" },
+    { k:"time_format",   lbl:"Time: a las… vs son las…" },
+    { k:"time_es_la",    lbl:"Son las vs Es la (1:00)" },
+    { k:"number_spell",  lbl:"Number spelling/agreement" },
+  ]});
+  if(lab>=2) groups.push({ lbl:"Cap. 2 — Verbos -ar, estar, gustar, preguntas", errors:[
+    { k:"ar_conj",       lbl:"-ar verb conjugation" },
+    { k:"estar_conj",    lbl:"estar conjugation" },
+    { k:"gustar_yo",     lbl:"yo gusto (wrong form)" },
+    { k:"gustar_agree",  lbl:"me gusta los perros (noun agreement)" },
+    { k:"gustar_pronoun",lbl:"Wrong indirect object pronoun" },
+    { k:"q_word",        lbl:"Wrong question word" },
+    { k:"no_invert",     lbl:"Question not inverted" },
+    { k:"prep_place",    lbl:"Preposition of place wrong" },
+  ]});
+  if(lab>=3) groups.push({ lbl:"Cap. 3 — Adjetivos, posesivos, -er/-ir, tener", errors:[
+    { k:"adj_gender",    lbl:"Adjective gender mismatch" },
+    { k:"adj_number",    lbl:"Adjective number mismatch" },
+    { k:"adj_pos",       lbl:"Adjective before noun (wrong position)" },
+    { k:"poss_adj",      lbl:"Possessive adjective (mi/mis, etc.)" },
+    { k:"er_ir_conj",    lbl:"-er/-ir verb conjugation" },
+    { k:"tener_conj",    lbl:"tener/venir conjugation" },
+    { k:"tener_expr",    lbl:"Tener expression (tener hambre, etc.)" },
+  ]});
+  if(lab>=4) groups.push({ lbl:"Cap. 4 — Ir, cambios de raíz, yo irregular", errors:[
+    { k:"ir_conj",       lbl:"ir / ir a + infinitivo" },
+    { k:"stem_e_ie",     lbl:"Stem change e→ie" },
+    { k:"stem_o_ue",     lbl:"Stem change o→ue" },
+    { k:"stem_e_i",      lbl:"Stem change e→i" },
+    { k:"yo_irreg",      lbl:"Irregular yo form" },
+  ]});
+  if(lab>=5) groups.push({ lbl:"Cap. 5 — Estar+emoc., progresivo, ser/estar, OD", errors:[
+    { k:"estar_emo",     lbl:"Estar + emotion/condition" },
+    { k:"ser_estar",     lbl:"Ser vs. estar confusion" },
+    { k:"progressive",   lbl:"Present progressive (-ando/-iendo)" },
+    { k:"dir_obj",       lbl:"Direct object pronoun position" },
+  ]});
+  return groups;
+}
+
+const DISCOURSE_ERRORS = [
+  { k:"one_word",       lbl:"One/two-word answers" },
+  { k:"no_sentences",   lbl:"No complete sentences" },
+  { k:"no_linking",     lbl:"No linking words used" },
+  { k:"fragmented",     lbl:"Fragmented/choppy speech" },
+  { k:"no_variety",     lbl:"No sentence variety" },
+];
+const ENGAGEMENT_ERRORS = [
+  { k:"no_followup",    lbl:"No follow-up questions" },
+  { k:"no_creativity",  lbl:"No creativity shown" },
+  { k:"no_instructions",lbl:"Instructions not followed" },
+  { k:"too_short",      lbl:"Submission too short" },
+];
+
+// ── Feedback text DB
+const FB = {
+  // CONTENT
+  incomplete:     { title:"Incomplete Response",          tag:"tag-c", tagLbl:"Completion",  body:"Some parts of your response were incomplete or left unanswered. Aim to address every part of the prompt fully — partial credit is always better than none.", ex:null },
+  under_time:     { title:"Under Time Requirement",       tag:"tag-c", tagLbl:"Completion",  body:"Your submission didn't meet the minimum time requirement. Expand your answers with more detail, descriptions, and examples to reach the required length.", ex:null },
+  off_prompt:     { title:"Off Prompt / Misunderstood",   tag:"tag-c", tagLbl:"Completion",  body:"One or more responses didn't match what the question was asking. Re-read each prompt carefully before responding.", ex:null },
+  no_detail:      { title:"Needs More Elaboration",       tag:"tag-c", tagLbl:"Completion",  body:"Your answers need more detail. Aim for more than one sentence per idea — describe, compare, or give examples using chapter vocabulary.", ex:null },
+  missing_greeting:{ title:"Missing Greeting / Farewell", tag:"tag-c", tagLbl:"Completion",  body:"Remember to open with an appropriate Spanish greeting and close with a farewell.", ex:{w:null,r:"Hola, ¿qué tal? … ¡Hasta luego!"} },
+  missing_intro:  { title:"No Self-Introduction",         tag:"tag-c", tagLbl:"Completion",  body:"Include a self-introduction using key Cap. 1 phrases.", ex:{w:null,r:"Me llamo [name]. Soy de [city]."} },
+  missing_number: { title:"Number Not Given",             tag:"tag-c", tagLbl:"Completion",  body:"When a question asks for a number, state it clearly in Spanish.", ex:{w:null,r:"Mi número es el cuatro-cinco-seis…"} },
+  missing_time:   { title:"Time Not Stated / Wrong Format", tag:"tag-c", tagLbl:"Completion", body:"When giving the time, use the correct structure and remember to switch between es and son.", ex:{w:"El clase es doce.",r:"La clase es a las doce. / Son las dos."} },
+  missing_schedule:{ title:"No Class/Schedule Content",   tag:"tag-c", tagLbl:"Completion",  body:"The prompt asked about your schedule or classes. Mention specific courses, days, or times.", ex:{w:null,r:"Tengo biología los lunes a las diez."} },
+  no_ar_verb:     { title:"No -ar Verb Used",             tag:"tag-c", tagLbl:"Completion",  body:"Include at least one -ar verb activity from Cap. 2.", ex:{w:null,r:"Yo estudio en la biblioteca los martes."} },
+  missing_location:{ title:"No Location with Estar",      tag:"tag-c", tagLbl:"Completion",  body:"Use estar to indicate where you or someone is located — a key Cap. 2 structure.", ex:{w:null,r:"Estoy en la residencia estudiantil."} },
+  missing_family: { title:"No Family Members Described",  tag:"tag-c", tagLbl:"Completion",  body:"Mention at least two family members with relevant details.", ex:{w:null,r:"Mi hermana se llama Sofía y tiene veinte años."} },
+  missing_adj_desc:{ title:"No Physical/Personality Description", tag:"tag-c", tagLbl:"Completion", body:"Use descriptive adjectives from Cap. 3 to describe appearance or personality.", ex:{w:null,r:"Mi padre es alto, moreno y muy trabajador."} },
+  missing_nat:    { title:"Nationality Not Mentioned",    tag:"tag-c", tagLbl:"Completion",  body:"Include at least one nationality adjective from Cap. 3.", ex:{w:null,r:"Mi amigo es mexicano."} },
+  missing_prof:   { title:"Profession Not Mentioned",     tag:"tag-c", tagLbl:"Completion",  body:"Mention a profession using Cap. 3 vocabulary.", ex:{w:null,r:"Mi madre es médica."} },
+  missing_pastime:{ title:"No Pastime / Sport",           tag:"tag-c", tagLbl:"Completion",  body:"Include at least one leisure activity or sport from Cap. 4.", ex:{w:null,r:"Me gusta practicar el fútbol los fines de semana."} },
+  missing_ir_dest:{ title:"No Ir a + Plan",               tag:"tag-c", tagLbl:"Completion",  body:"Use ir + a + infinitive or ir + a + place to express a plan or destination.", ex:{w:null,r:"Voy al parque. / Voy a nadar mañana."} },
+  missing_vacation:{ title:"No Vacation/Travel Content",  tag:"tag-c", tagLbl:"Completion",  body:"The prompt requires vacation or travel vocabulary from Cap. 5.", ex:{w:null,r:"Voy a hacer un viaje a la playa en el verano."} },
+  missing_weather:{ title:"Weather Not Mentioned",        tag:"tag-c", tagLbl:"Completion",  body:"Use Cap. 5 weather expressions to describe the climate.", ex:{w:null,r:"Hace mucho calor. / Llueve en el otoño."} },
+  missing_emotion:{ title:"No Emotion/Condition",         tag:"tag-c", tagLbl:"Completion",  body:"Include an emotional or physical state using estar + adjective.", ex:{w:null,r:"Estoy cansado/a pero muy contento/a."} },
+  skipped_topic:  { title:"Chapter Topic Skipped",        tag:"tag-c", tagLbl:"Completion",  body:"At least one major review topic was not addressed. For Lab 6, aim to cover all five chapters.", ex:null },
+  unbalanced:     { title:"Unbalanced Coverage",          tag:"tag-c", tagLbl:"Completion",  body:"Your response drew heavily from one chapter while others were absent. Aim for balanced coverage across all chapters in this review lab.", ex:null },
+
+  // GRAMMAR
+  ser_conj:     { title:"Ser — Conjugation Error",          tag:"tag-g", tagLbl:"Grammar", body:"Ser is irregular and must agree with the subject. Review: soy, eres, es, somos, son.", ex:{w:"Tú ser estudiante.",r:"Tú eres estudiante. / Yo soy de Atlanta."} },
+  me_llamo_es:  { title:"Me llamo — Fixed Phrase Error",     tag:"tag-g", tagLbl:"Grammar", body:"Me llamo is a reflexive phrase meaning 'I call myself' — it already contains its own verb. Never add es or soy after it.", ex:{w:"Me llamo es María. / Me llamo soy Ana.",r:"Me llamo María. (full stop — no verb after)"} },
+  gender_art:   { title:"Article Gender (el / la)",         tag:"tag-g", tagLbl:"Grammar", body:"Spanish nouns have a fixed gender. Masculine nouns use el/un; feminine nouns use la/una.", ex:{w:"la libro, el mesa",r:"el libro, la mesa"} },
+  plural_art:   { title:"Plural Article (los / las)",       tag:"tag-g", tagLbl:"Grammar", body:"Use the correct plural article matching the noun's gender.", ex:{w:"los hermanas, las primos",r:"las hermanas, los primos"} },
+  time_format:  { title:"Time: a las… vs son las…",         tag:"tag-g", tagLbl:"Grammar", body:"Use son las… to tell the current time; a las… to say when something happens.", ex:{w:"La clase son las tres.",r:"La clase es a las tres. / Son las tres."} },
+  time_es_la:   { title:"Son las vs Es la (1:00)",          tag:"tag-g", tagLbl:"Grammar", body:"Use es la una only for 1:00. For all other hours, use son las…", ex:{w:"Son las una y media.",r:"Es la una y media. / Son las dos."} },
+  number_spell: { title:"Number Spelling / Agreement",      tag:"tag-g", tagLbl:"Grammar", body:"Check number spelling and gender agreement: veintiún (m.) / veintiuna (f.).", ex:{w:"veinte uno libros",r:"veintiún libros / treinta y una niñas"} },
+  ar_conj:      { title:"-ar Verb Conjugation Error",       tag:"tag-g", tagLbl:"Grammar", body:"Review -ar endings: -o, -as, -a, -amos, -an. The ending must match the subject.", ex:{w:"Ella estudias.",r:"Ella estudia. / Nosotros trabajamos."} },
+  estar_conj:   { title:"Estar — Conjugation Error",        tag:"tag-g", tagLbl:"Grammar", body:"Estar is irregular: estoy, estás, está, estamos, están.", ex:{w:"Yo esta en clase.",r:"Yo estoy en clase. / Ellos están aquí."} },
+  gustar_yo:    { title:"Gustar — Wrong Form (yo gusto)",   tag:"tag-g", tagLbl:"Grammar", body:"Gustar works differently from English 'to like.' The thing that is pleasing is the subject — so the verb agrees with that thing, not with the person. Use me gusta (singular) or me gustan (plural). Yo gusto is never correct.", ex:{w:"Yo gusto el café. / Yo gusto los perros.",r:"Me gusta el café. / Me gustan los perros."} },
+  gustar_agree: { title:"Gustar — Noun Agreement (gusta vs. gustan)", tag:"tag-g", tagLbl:"Grammar", body:"Use gusta when the thing liked is singular or an infinitive; use gustan when it is plural.", ex:{w:"Me gusta los perros. / Me gustan el fútbol.",r:"Me gustan los perros. / Me gusta el fútbol. / Me gusta nadar."} },
+  gustar_pronoun:{ title:"Gustar — Wrong Indirect Object Pronoun", tag:"tag-g", tagLbl:"Grammar", body:"The indirect object pronoun must match the person who likes something: me (I), te (you), le (he/she), nos (we), les (they).", ex:{w:"Mi amigo le gusta el fútbol. (wrong — le is correct here, but) / Me gusta tú el café.",r:"A mí me gusta el café. / A él le gustan los deportes. / A nosotros nos gusta bailar."} },
+  q_word:       { title:"Wrong Question Word",              tag:"tag-g", tagLbl:"Grammar", body:"¿Qué? = what (general); ¿Cuál? = which/what before es; ¿Cómo? = how/what (descriptions).", ex:{w:"¿Qué es tu nombre?",r:"¿Cómo te llamas? / ¿Cuál es tu nombre?"} },
+  no_invert:    { title:"Question Not Inverted",            tag:"tag-g", tagLbl:"Grammar", body:"In Spanish questions, the verb typically comes before the subject. Also add opening ¿.", ex:{w:"¿Tú estudias qué?",r:"¿Qué estudias tú?"} },
+  prep_place:   { title:"Preposition of Place Error",       tag:"tag-g", tagLbl:"Grammar", body:"Review: en, cerca de, lejos de, al lado de, encima de, debajo de, delante de.", ex:{w:"El libro está en encima de la mesa.",r:"El libro está encima de la mesa."} },
+  adj_gender:   { title:"Adjective Gender Mismatch",        tag:"tag-g", tagLbl:"Grammar", body:"Adjectives must agree in gender with the noun. Masculine → -o; feminine → -a.", ex:{w:"Mi hermana es alto y rubio.",r:"Mi hermana es alta y rubia."} },
+  adj_number:   { title:"Adjective Number Mismatch",        tag:"tag-g", tagLbl:"Grammar", body:"Adjectives must also be plural when the noun is plural.", ex:{w:"Mis hermanos son inteligente.",r:"Mis hermanos son inteligentes."} },
+  adj_pos:      { title:"Adjective Placement Error",        tag:"tag-g", tagLbl:"Grammar", body:"Descriptive adjectives in Spanish generally follow the noun, unlike in English.", ex:{w:"Tengo un azul libro.",r:"Tengo un libro azul."} },
+  poss_adj:     { title:"Possessive Adjective Error",       tag:"tag-g", tagLbl:"Grammar", body:"Possessives agree with the noun owned, not the owner: mi/mis, tu/tus, su/sus, nuestro/a/os/as.", ex:{w:"Mi hermanos. / Nuestro familia.",r:"Mis hermanos. / Nuestra familia."} },
+  er_ir_conj:   { title:"-er / -ir Conjugation Error",      tag:"tag-g", tagLbl:"Grammar", body:"Review -er endings (-o,-es,-e,-emos,-en) and -ir endings (-o,-es,-e,-imos,-en).", ex:{w:"Ella comen. / Nosotros vivemos.",r:"Ella come. / Nosotros vivimos."} },
+  tener_conj:   { title:"Tener / Venir Conjugation Error",  tag:"tag-g", tagLbl:"Grammar", body:"Both are irregular: yo tengo/vengo; stem changes in other forms: tienes, tiene, tienen.", ex:{w:"Yo teno un hermano.",r:"Yo tengo un hermano. / Ellos tienen veinte años."} },
+  tener_expr:   { title:"Tener Expression Error",           tag:"tag-g", tagLbl:"Grammar", body:"Tener expressions use a noun (not an adjective): tener hambre, tener frío, tener razón.", ex:{w:"Estoy hambre. / Tengo caliente.",r:"Tengo hambre. / Tengo calor."} },
+  ir_conj:      { title:"Ir / ir a + Infinitivo Error",     tag:"tag-g", tagLbl:"Grammar", body:"Ir is irregular: voy, vas, va, vamos, van. Use ir + a + infinitive for plans.", ex:{w:"Voy a la estudiar.",r:"Voy a estudiar. / Voy al parque."} },
+  stem_e_ie:    { title:"Stem Change e→ie Error",           tag:"tag-g", tagLbl:"Grammar", body:"Verbs like querer, preferir, empezar change e→ie in all forms except nosotros/vosotros.", ex:{w:"Yo quero ir. / Ellos preferen.",r:"Yo quiero ir. / Ellos prefieren."} },
+  stem_o_ue:    { title:"Stem Change o→ue Error",           tag:"tag-g", tagLbl:"Grammar", body:"Verbs like poder, volver, dormir change o→ue in all forms except nosotros/vosotros.", ex:{w:"Yo podo hablar.",r:"Yo puedo hablar. / Ella duerme bien."} },
+  stem_e_i:     { title:"Stem Change e→i Error",            tag:"tag-g", tagLbl:"Grammar", body:"Verbs like pedir, seguir, servir change e→i in all forms except nosotros/vosotros.", ex:{w:"Yo pedo una pizza.",r:"Yo pido una pizza. / Ellos siguen."} },
+  yo_irreg:     { title:"Irregular Yo Form Error",          tag:"tag-g", tagLbl:"Grammar", body:"Several verbs have irregular yo forms only: hacer→hago, salir→salgo, poner→pongo, decir→digo, ver→veo.", ex:{w:"Yo haco la tarea. / Yo salo.",r:"Yo hago la tarea. / Yo salgo a las ocho."} },
+  estar_emo:    { title:"Estar + Emotion/Condition Error",  tag:"tag-g", tagLbl:"Grammar", body:"Use estar (not ser) for temporary emotional or physical states. The adjective still must agree in gender/number.", ex:{w:"Soy cansado hoy. / Ella está contento.",r:"Estoy cansado/a hoy. / Ella está contenta."} },
+  ser_estar:    { title:"Ser vs. Estar Confusion",          tag:"tag-g", tagLbl:"Grammar", body:"Ser = identity, origin, profession, permanent traits. Estar = location, temporary states, conditions.", ex:{w:"La biblioteca está grande. / Estoy de México.",r:"La biblioteca es grande. / Soy de México."} },
+  progressive:  { title:"Present Progressive Error",        tag:"tag-g", tagLbl:"Grammar", body:"Progressive = estar + gerund. -ar → -ando; -er/-ir → -iendo. Watch -ir stem-changers: durmiendo, siguiendo.", ex:{w:"Estoy comendo.",r:"Estoy comiendo. / Él está durmiendo."} },
+  dir_obj:      { title:"Direct Object Pronoun Position",   tag:"tag-g", tagLbl:"Grammar", body:"Direct object pronouns (lo, la, los, las) go BEFORE the conjugated verb.", ex:{w:"Yo lo compro el libro.",r:"Yo lo compro. / Voy a comprarlo."} },
+
+  // DISCOURSE
+  one_word:     { title:"One/Two-Word Answers",             tag:"tag-d", tagLbl:"Discourse", body:"Answer in complete sentences rather than single words. Show command of Spanish sentence structure.", ex:{w:"Q: ¿Qué estudias? A: Biología.",r:"Estudio biología en la universidad."} },
+  no_sentences: { title:"Incomplete Sentences",             tag:"tag-d", tagLbl:"Discourse", body:"Each answer should form a complete sentence with a subject and conjugated verb.", ex:{w:"Hermano alto. Mi familia México.",r:"Mi hermano es alto. Mi familia es de México."} },
+  no_linking:   { title:"No Linking Words",                 tag:"tag-d", tagLbl:"Discourse", body:"Use y, también, pero, and porque to connect ideas and create more natural speech.", ex:{w:"Me gusta el fútbol. Me gusta nadar.",r:"Me gusta el fútbol y también me gusta nadar."} },
+  fragmented:   { title:"Fragmented / Choppy Speech",       tag:"tag-d", tagLbl:"Discourse", body:"Try to connect sentences more smoothly. Pause naturally between complete thoughts, not after every word.", ex:null },
+  no_variety:   { title:"No Sentence Variety",              tag:"tag-d", tagLbl:"Discourse", body:"Vary your sentence structures — mix declaratives, questions, negatives, and sentences with gustar.", ex:{w:"Soy… Tengo… Soy… Tengo…",r:"Soy estudiante. Tengo tres clases y me gusta mucho la biología."} },
+
+  // ENGAGEMENT
+  no_followup:  { title:"No Follow-Up Questions",           tag:"tag-d", tagLbl:"Engagement", body:"Ask at least one follow-up question to show genuine engagement. This is an easy way to boost your engagement score!", ex:{w:null,r:"¿Y tú? ¿Cuántos hermanos tienes?"} },
+  no_creativity:{ title:"No Creativity",                    tag:"tag-d", tagLbl:"Engagement", body:"Try to add personal touches or extra details beyond the minimum required. This makes your Spanish more authentic.", ex:null },
+  no_instructions:{ title:"Instructions Not Followed",      tag:"tag-d", tagLbl:"Engagement", body:"Review the assignment instructions and make sure you followed each step — some required elements may be missing.", ex:null },
+  too_short:    { title:"Submission Too Short",             tag:"tag-d", tagLbl:"Engagement", body:"Your submission was shorter than expected. Expand each answer with more detail and examples.", ex:null },
+
+  // PRONUNCIATION
+  h:            { title:"Silent h",                         tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"h",    body:"The h in Spanish is always silent. Do not pronounce it like an English h.", ex:{w:"hola → [HOH-la]",r:"hola → [OH-la] / hablar → [ah-BLAR]"} },
+  g:            { title:"The letter g",                     tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"g",    body:"G before e or i sounds like a soft English h (gente → [HEN-teh]). Before a, o, u it sounds like English g.", ex:{w:"gente → [GEN-teh]",r:"gente → [HEN-teh] / gusto → [GUS-toh]"} },
+  j:            { title:"The letter j",                     tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"j",    body:"The Spanish j is a strong h sound — never the English j sound.", ex:{w:"jueves → [JOO-eh-ves]",r:"jueves → [HWEH-bes]"} },
+  c:            { title:"The letter c",                     tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"c",    body:"C before e or i = s sound (Latin American). Before a, o, u = hard k sound.", ex:{w:"ciudad → [chi-u-dad]",r:"ciudad → [syoo-DAD] / casa → [KA-sa]"} },
+  z:            { title:"The letter z",                     tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"z",    body:"In Latin American Spanish, z is pronounced like s — not like English z.", ex:{w:"taza → [TAY-za]",r:"taza → [TA-sa]"} },
+  "ñ":          { title:"The letter ñ",                     tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"ñ",    body:"Ñ sounds like ny in canyon. It is completely different from plain n.", ex:{w:"año → [A-no]",r:"año → [A-nyo] / español → [es-pa-NYOL]"} },
+  rr:           { title:"The trilled rr",                   tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"rr",   body:"The double r (rr) and word-initial r require a trill or tap. Practice this sound separately.", ex:{w:"perro (English r)",r:"perro → trilled/tapped Spanish r"} },
+  "ll/y":       { title:"ll / y Sound",                     tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"ll/y", body:"In Latin American Spanish, ll and y are both pronounced like English y in yes.", ex:{w:"ella → [EL-la]",r:"ella → [EY-ya] / yo → [YO]"} },
+  "v/b":        { title:"v and b Sound",                    tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"v/b",  body:"In Spanish, v and b have the same soft bilabial sound — not the English v.", ex:{w:"voy (English v)",r:"voy ≈ soft b/v sound, like 'boy' without force"} },
+  a:            { title:"Vowel: a",                         tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"a",    body:"The Spanish a is a pure, open ah — like the a in father. Never ay or uh.", ex:{w:"gracias → [GRAY-see-us]",r:"gracias → [GRA-syas]"} },
+  e:            { title:"Vowel: e",                         tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"e",    body:"The Spanish e is a crisp eh — like in bed. Avoid the English ay glide.", ex:{w:"me → [may]",r:"me → [meh]"} },
+  i:            { title:"Vowel: i",                         tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"i",    body:"The Spanish i is a pure ee — shorter and crisper than English.", ex:{w:"sí → [sigh]",r:"sí → [see]"} },
+  o:            { title:"Vowel: o",                         tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"o",    body:"The Spanish o is a clean oh — no ow glide at the end.", ex:{w:"no → [now]",r:"no → [noh]"} },
+  u:            { title:"Vowel: u",                         tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"u",    body:"The Spanish u is a pure oo — shorter than English. Note: u is silent in que, qui, gue, gui.", ex:{w:"mucho → [MYOO-choh]",r:"mucho → [MOO-choh]"} },
+  accent:       { title:"Accent Mark Stress",               tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"á/é/í",body:"Accent marks indicate where to stress a syllable. Don't omit them in writing either.", ex:{w:"esta (this) vs. está (is)",r:"está → stress on last syllable [es-TAH]"} },
+  pron_pauses:  { title:"Long Pauses",                      tag:"tag-p", tagLbl:"Pronunciation", body:"Try to reduce long pauses. Practice speaking sentences aloud before recording to build fluency.", ex:null },
+  pron_robotic: { title:"Robotic / Flat Tone",              tag:"tag-p", tagLbl:"Pronunciation", body:"Spanish has natural melodic rises and falls. Practice reading sentences with more expressive intonation.", ex:null },
+  pron_rehearsed:{ title:"Response Appears Rehearsed",      tag:"tag-p", tagLbl:"Pronunciation", body:"Your response sounds memorized rather than spontaneous. Try to internalize ideas and speak naturally from memory.", ex:null },
+  pron_english_accent:{ title:"Heavy English Accent",       tag:"tag-p", tagLbl:"Pronunciation", body:"Focus on pronouncing Spanish vowels as crisp, pure sounds. Daily listening (podcasts, music) will help train your ear.", ex:null },
+  pron_word_stress:{ title:"Incorrect Word Stress",         tag:"tag-p", tagLbl:"Pronunciation", body:"Words ending in a vowel, n, or s stress the second-to-last syllable. All others stress the last syllable. Accent marks override.", ex:{w:"hablo → [ha-BLO]",r:"hablo → [HA-blo]"} },
+};
+
+// ─── STATE ─────────────────────────────────────────────────────────────────
+let currentLab = 1;
+let selectedKeys = new Set();
+let selectedSounds = new Set();
+let lastFeedbackHTML = '';
+let lastFeedbackText = '';
+
+// ─── INIT ──────────────────────────────────────────────────────────────────
+function init() {
+  buildContentChips();
+  buildGrammarChips();
+  buildStaticChips('discourseChips', DISCOURSE_ERRORS);
+  buildStaticChips('engagementChips', ENGAGEMENT_ERRORS);
+}
+
+function buildContentChips() {
+  document.getElementById('contentChips').innerHTML = `<div class="chips">${
+    getContentErrors(currentLab).map(e => `
+      <div class="chip ${selectedKeys.has(e.k)?'sel':''}" onclick="toggleChip(this)" data-k="${e.k}"><span class="ck">✓</span> ${e.lbl}</div>
+    `).join('')
+  }</div>`;
+}
+
+function buildGrammarChips() {
+  document.getElementById('grammarChips').innerHTML = getGrammarErrors(currentLab).map(g => `
+    <div class="err-group">
+      <div class="err-group-lbl">${g.lbl}</div>
+      <div class="chips">${g.errors.map(e => `
+        <div class="chip ${selectedKeys.has(e.k)?'sel':''}" onclick="toggleChip(this)" data-k="${e.k}"><span class="ck">✓</span> ${e.lbl}</div>
+      `).join('')}</div>
+    </div>
+  `).join('');
+}
+
+function buildStaticChips(id, arr) {
+  document.getElementById(id).innerHTML = arr.map(e => `
+    <div class="chip ${selectedKeys.has(e.k)?'sel':''}" onclick="toggleChip(this)" data-k="${e.k}"><span class="ck">✓</span> ${e.lbl}</div>
+  `).join('');
+}
+
+// ─── INTERACTIONS ──────────────────────────────────────────────────────────
+function selectLab(n) {
+  currentLab = n;
+  document.querySelectorAll('.lab-btn').forEach((b,i) => b.classList.toggle('active', i+1===n));
+  document.getElementById('labSub').textContent = LAB_SUBS[n];
+  buildContentChips();
+  buildGrammarChips();
+}
+
+function selTab(tab) {
+  document.querySelectorAll('.rtab').forEach(t => t.classList.toggle('active', t.dataset.tab===tab));
+  document.querySelectorAll('.err-panel').forEach(p => p.classList.toggle('vis', p.id===`ep-${tab}`));
+}
+
+function toggleChip(el) {
+  el.classList.toggle('sel');
+  const k = el.dataset.k;
+  if(el.classList.contains('sel')) selectedKeys.add(k);
+  else selectedKeys.delete(k);
+}
+
+function toggleSound(el) {
+  el.classList.toggle('sel');
+  const s = el.dataset.s;
+  if(el.classList.contains('sel')) selectedSounds.add(s);
+  else selectedSounds.delete(s);
+}
+
+// ─── GENERATE ──────────────────────────────────────────────────────────────
+function generateFeedback() {
+  const name = document.getElementById('studentName').value.trim() || 'Student';
+  const showComp = document.getElementById('complToggle').checked;
+  const comp = COMPLIMENTS[Math.floor(Math.random()*COMPLIMENTS.length)];
+  const today = new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+
+  // Collect all selected errors
+  const allKeys = [...selectedKeys, ...selectedSounds];
+  const notes = {
+    content: document.getElementById('notes-content').value.trim(),
+    comp:    document.getElementById('notes-comp').value.trim(),
+    discourse:document.getElementById('notes-discourse').value.trim(),
+    engage:  document.getElementById('notes-engagement').value.trim(),
+    pron:    document.getElementById('notes-pron').value.trim(),
+  };
+
+  // Build blocks
+  let blocksHTML = '';
+  let blocksText = '';
+
+  allKeys.forEach(k => {
+    const fb = FB[k]; if(!fb) return;
+    const soundBadge = fb.tag === 'tag-p' && fb.soundSymbol
+      ? `<span style="font-family:'DM Serif Display',serif;font-size:1.35rem;font-weight:600;color:var(--teal);background:var(--teal-light);border:1.5px solid #a0ddd4;border-radius:6px;padding:1px 10px;margin-right:6px;line-height:1.4;display:inline-block;">${fb.soundSymbol}</span>`
+      : '';
+    blocksHTML += `
+      <div class="fb-block">
+        <div class="fb-block-hdr">${soundBadge}${fb.title}<span class="fb-tag ${fb.tag}">${fb.tagLbl}</span></div>
+        <div class="fb-block-body">${fb.body}${fb.ex?`
+          <div class="fb-ex">${fb.ex.w?`<div>❌ <span>${fb.ex.w}</span></div>`:''}
+          <div>✅ <span>${fb.ex.r}</span></div></div>`:''}
+        </div>
+      </div>`;
+    blocksText += `\n• ${fb.title} (${fb.tagLbl})\n  ${fb.body}`;
+    if(fb.ex){ if(fb.ex.w) blocksText+=`\n  ❌ ${fb.ex.w}`; blocksText+=`\n  ✅ ${fb.ex.r}`; }
+    blocksText += '\n';
+  });
+
+  // Add free-text notes
+  const noteLabelMap = { content:'Content/Completion', comp:'Comprehensibility/Grammar', discourse:'Discourse Level', engage:'Engagement', pron:'Pronunciation/Fluency' };
+  Object.entries(notes).forEach(([k,v]) => {
+    if(!v) return;
+    blocksHTML += `
+      <div class="fb-block">
+        <div class="fb-block-hdr">Additional Note — ${noteLabelMap[k]}<span class="fb-tag tag-n">Note</span></div>
+        <div class="fb-block-body">${v}</div>
+      </div>`;
+    blocksText += `\n• Additional Note — ${noteLabelMap[k]}\n  ${v}\n`;
+  });
+
+  // Full HTML preview
+  const previewHTML = `
+    <div class="fb-preview">
+      <div class="fb-hdr">
+        <div>
+          <div class="fb-student">${name}</div>
+          <div class="fb-meta">${LAB_SUBS[currentLab]} &nbsp;·&nbsp; ${today}</div>
+        </div>
+      </div>
+      ${showComp?`<div class="fb-sec"><div class="fb-sec-title">✨ Strengths</div><div class="fb-compliment">${comp}</div></div>`:''}
+      ${blocksHTML?`<div class="fb-sec"><div class="fb-sec-title">💡 Areas for Improvement</div>${blocksHTML}</div>`
+        :`<div style="background:var(--green-light);border:1.5px solid #a7e8c8;border-radius:var(--radius-sm);padding:13px 15px;font-size:0.83rem;color:var(--green);">
+        ¡Excelente! No specific errors flagged — great submission! 🎉</div>`}
+      <div style="margin-top:18px;padding-top:14px;border-top:1.5px solid var(--gray-100);font-size:0.72rem;color:var(--gray-400);text-align:center;">
+        SPAN 1001 · ${LAB_SUBS[currentLab].split('·')[0].trim()} · Spring 2026
+      </div>
+    </div>`;
+
+  // Plain text for Brightspace
+  const plainText = `SPAN 1001 — Lab Feedback
+${name} | ${LAB_SUBS[currentLab]} | ${today}
+
+${showComp?`STRENGTHS\n${comp}\n\n`:''}${blocksText?`AREAS FOR IMPROVEMENT\n${blocksText}`:'No specific errors flagged — great submission! ¡Excelente!'}
+
+SPAN 1001 · Spring 2026`;
+
+  // Brightspace-ready HTML (clean, no CSS variables)
+  const bsHTML = buildBrightspaceHTML(name, today, showComp, comp, allKeys, notes, noteLabelMap);
+
+  lastFeedbackText = plainText;
+  lastFeedbackHTML = bsHTML;
+
+  document.getElementById('fbEmpty').style.display = 'none';
+  const fc = document.getElementById('fbContent');
+  fc.innerHTML = previewHTML;
+  fc.classList.add('vis');
+
+  document.getElementById('btnCopyBS').disabled = false;
+  document.getElementById('btnPrintFB').disabled = false;
+}
+
+// ─── BRIGHTSPACE HTML BUILDER ──────────────────────────────────────────────
+function buildBrightspaceHTML(name, today, showComp, comp, allKeys, notes, noteLabelMap) {
+  const headerBg = '#1a3a6b';
+  const headerText = '#ffffff';
+
+  let improvHTML = '';
+  allKeys.forEach(k => {
+    const fb = FB[k]; if(!fb) return;
+    let tagColor = '#5b2d8e'; let tagBg = '#f2eaff';
+    if(fb.tag==='tag-c'){tagColor='#2a5fad';tagBg='#dceeff';}
+    else if(fb.tag==='tag-p'){tagColor='#0a6b5e';tagBg='#e0f7f4';}
+    else if(fb.tag==='tag-d'){tagColor='#9a4d07';tagBg='#fff3e0';}
+    const bsSoundBadge = fb.soundSymbol
+      ? `<span style="font-family:Georgia,serif;font-size:15px;font-weight:700;color:#0a6b5e;background:#e0f7f4;border:1.5px solid #a0ddd4;border-radius:5px;padding:0 8px;margin-right:7px;line-height:1.6;display:inline-block;">${fb.soundSymbol}</span>`
+      : '';
+    improvHTML += `
+    <div style="margin-bottom:12px;border:1.5px solid #e2e5ea;border-radius:8px;overflow:hidden;">
+      <div style="background:#f8f9fb;padding:9px 13px;border-bottom:1px solid #e2e5ea;display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-size:13px;font-weight:700;color:#1a3a6b;">${bsSoundBadge}${fb.title}</span>
+        <span style="font-size:11px;font-weight:700;background:${tagBg};color:${tagColor};padding:2px 8px;border-radius:9px;text-transform:uppercase;letter-spacing:0.06em;">${fb.tagLbl}</span>
+      </div>
+      <div style="padding:10px 13px;font-size:13px;color:#5a6070;line-height:1.7;">
+        ${fb.body}
+        ${fb.ex?`<div style="margin-top:8px;background:#f0f6ff;border-left:3px solid #2a5fad;padding:7px 11px;border-radius:0 6px 6px 0;font-size:12px;">
+          ${fb.ex.w?`<div>❌ <em style="color:#2a5fad;">${fb.ex.w}</em></div>`:''}
+          <div>✅ <em style="color:#2a5fad;">${fb.ex.r}</em></div>
+        </div>`:''}
+      </div>
+    </div>`;
+  });
+  Object.entries(notes).forEach(([k,v])=>{
+    if(!v)return;
+    improvHTML+=`
+    <div style="margin-bottom:12px;border:1.5px solid #e2e5ea;border-radius:8px;overflow:hidden;">
+      <div style="background:#f8f9fb;padding:9px 13px;border-bottom:1px solid #e2e5ea;">
+        <span style="font-size:13px;font-weight:700;color:#1a3a6b;">Additional Note — ${noteLabelMap[k]}</span>
+      </div>
+      <div style="padding:10px 13px;font-size:13px;color:#5a6070;line-height:1.7;">${v}</div>
+    </div>`;
+  });
+
+  return `<div style="font-family:Arial,Helvetica,sans-serif;max-width:680px;margin:0 auto;color:#1e2228;">
+  <div style="background:${headerBg};color:${headerText};border-radius:8px;padding:18px 22px;margin-bottom:14px;">
+    <div style="font-size:17px;font-weight:700;margin-bottom:3px;">${name}</div>
+    <div style="font-size:12px;opacity:0.7;">${LAB_SUBS[currentLab]} &nbsp;·&nbsp; ${today}</div>
+  </div>
+  ${showComp?`<div style="background:#e4f5ec;border:1.5px solid #a7e8c8;border-radius:8px;padding:13px 16px;margin-bottom:14px;font-size:13px;font-style:italic;color:#1a5c38;line-height:1.7;">${comp}</div>`:''}
+  ${improvHTML?`<div style="margin-bottom:8px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.09em;color:#636975;">Areas for Improvement</div>${improvHTML}`
+    :`<div style="background:#e4f5ec;border:1.5px solid #a7e8c8;border-radius:8px;padding:12px 16px;font-size:13px;color:#1a5c38;">¡Excelente! No specific errors flagged — great submission! 🎉</div>`}
+  <div style="margin-top:16px;padding-top:12px;border-top:1.5px solid #e2e5ea;font-size:11px;color:#636975;text-align:center;">
+    SPAN 1001 · ${LAB_SUBS[currentLab].split('·')[0].trim()} · Spring 2026
+  </div>
+</div>`;
+}
+
+// ─── COPY FOR BRIGHTSPACE ──────────────────────────────────────────────────
+async function copyBrightspace() {
+  const btn = document.getElementById('btnCopyBS');
+  try {
+    // Try to copy as HTML (for rich text editors like Brightspace's)
+    if(navigator.clipboard && window.ClipboardItem) {
+      const blob = new Blob([lastFeedbackHTML], {type:'text/html'});
+      const textBlob = new Blob([lastFeedbackText], {type:'text/plain'});
+      await navigator.clipboard.write([
+        new ClipboardItem({'text/html':blob,'text/plain':textBlob})
+      ]);
+    } else {
+      await navigator.clipboard.writeText(lastFeedbackText);
+    }
+    btn.textContent = '✅ Copied!';
+    btn.style.background = '#1a5c38';
+    btn.style.color = 'white';
+    btn.style.borderColor = '#1a5c38';
+  } catch(e) {
+    // Fallback: select a hidden textarea
+    const ta = document.createElement('textarea');
+    ta.value = lastFeedbackHTML;
+    ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0;';
+    document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = '✅ HTML Copied!';
+    btn.style.background = '#1a5c38';
+    btn.style.color = 'white';
+    btn.style.borderColor = '#1a5c38';
+  }
+  setTimeout(()=>{
+    btn.textContent = '📋 Copy for Brightspace';
+    btn.style.background = btn.style.color = btn.style.borderColor = '';
+  }, 2500);
+}
+
+// ─── PRINT ────────────────────────────────────────────────────────────────
+function printFeedback() {
+  const printArea = document.getElementById('printArea');
+  const name = document.getElementById('studentName').value.trim() || 'Student';
+
+  printArea.innerHTML = `
+    <style>
+      body { font-family: Arial, Helvetica, sans-serif; }
+      @page { margin: 0.8in; }
+    </style>
+    <div style="font-family:Arial,Helvetica,sans-serif;color:#1e2228;max-width:700px;">
+      <div style="background:#1a3a6b;color:white;border-radius:8px;padding:18px 22px;margin-bottom:16px;">
+        <div style="font-size:18px;font-weight:700;">${name}</div>
+        <div style="font-size:11px;opacity:0.7;margin-top:3px;">${LAB_SUBS[currentLab]} · Printed ${new Date().toLocaleDateString()}</div>
+      </div>
+      ${lastFeedbackHTML}
+    </div>`;
+
+  // Swap visibility for print
+  document.querySelectorAll('body > *:not(#printArea)').forEach(el => el.style.display='none');
+  printArea.style.display = 'block';
+  window.print();
+  // Restore
+  setTimeout(()=>{
+    document.querySelectorAll('body > *:not(#printArea)').forEach(el => el.style.display='');
+    printArea.style.display = 'none';
+  }, 1000);
+}
+
+init();
+</script>
+</body>
+</html>

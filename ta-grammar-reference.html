@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPAN1001 — TA Grammar Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:       #1a3a6b;
+  --navy-mid:   #2a5fad;
+  --navy-light: #dceeff;
+  --ink:        #1a1d23;
+  --ink-mid:    #3a3f4a;
+  --ink-light:  #636878;
+  --bg:         #f4f5f7;
+  --white:      #ffffff;
+  --rule:       #d4d8e0;
+  --sidebar-bg: #1e2330;
+  --sidebar-border: rgba(255,255,255,0.08);
+  --green:      #1a5c38;
+  --green-light:#e4f5ec;
+  --green-border:#a7e8c8;
+  --amber:      #7a3805;
+  --amber-light:#fff3e0;
+  --amber-border:#f0c070;
+  --red:        #7a1f1a;
+  --red-light:  #fdecea;
+  --red-border: #e8a09a;
+  --teal:       #0a6b5e;
+  --teal-light: #e0f7f4;
+  --teal-border:#a0ddd4;
+  --purple:     #5b2d8e;
+  --purple-light:#f2eaff;
+  --radius:     8px;
+  --radius-sm:  5px;
+  --shadow:     0 2px 10px rgba(0,0,0,0.10);
+  --shadow-sm:  0 1px 3px rgba(0,0,0,0.08);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.55;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── TOP HEADER ── */
+.top-header {
+  background: var(--ink);
+  color: white;
+  padding: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+  flex-shrink: 0;
+}
+.top-header-inner {
+  display: flex; align-items: stretch; max-width: 100%;
+}
+.header-flag {
+  background: var(--navy);
+  padding: 13px 22px;
+  display: flex; flex-direction: column; justify-content: center; gap: 1px;
+  flex-shrink: 0;
+}
+.header-flag .course {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 600;
+  color: #8ab4e8; letter-spacing: 0.14em; text-transform: uppercase;
+}
+.header-flag .title { font-size: 15px; font-weight: 700; color: white; line-height: 1.2; }
+.header-divider { width: 1px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
+.header-meta {
+  padding: 13px 20px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; flex: 1;
+}
+.htag {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 4px; padding: 3px 9px; color: rgba(255,255,255,0.8);
+}
+.htag.ta { background: rgba(230,245,237,0.15); border-color: rgba(128,200,160,0.4); color: #a0ddb8; }
+.header-spacer { flex: 1; }
+.hlink {
+  font-size: 11px; font-weight: 600; color: #8ab4e8; text-decoration: none;
+  padding: 5px 12px; border: 1px solid rgba(138,180,232,0.35); border-radius: 4px;
+  transition: all 0.15s; white-space: nowrap;
+}
+.hlink:hover { background: rgba(138,180,232,0.12); }
+
+/* ── BODY LAYOUT ── */
+.body-layout {
+  display: flex; flex: 1; min-height: 0;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: 220px; flex-shrink: 0;
+  background: var(--sidebar-bg);
+  color: white;
+  display: flex; flex-direction: column;
+  overflow-y: auto;
+  padding: 16px 12px 24px;
+  gap: 6px;
+}
+.sidebar-label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35); margin: 12px 4px 5px;
+}
+.sidebar-label:first-child { margin-top: 0; }
+.lab-btn {
+  width: 100%; background: none; border: 1px solid transparent;
+  color: rgba(255,255,255,0.55); font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 500; padding: 8px 10px;
+  border-radius: var(--radius-sm); cursor: pointer; text-align: left;
+  transition: all 0.15s; display: flex; flex-direction: column; gap: 1px;
+}
+.lab-btn:hover { background: rgba(255,255,255,0.07); color: white; border-color: rgba(255,255,255,0.1); }
+.lab-btn.active { background: var(--navy); color: white; border-color: rgba(42,95,173,0.6); }
+.lab-btn .lb-num { font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 600; color: #8ab4e8; }
+.lab-btn .lb-title { font-size: 11px; line-height: 1.3; opacity: 0.7; }
+.lab-btn.active .lb-title { opacity: 0.85; }
+.sidebar-divider { height: 1px; background: var(--sidebar-border); margin: 6px 0; }
+.sidebar-nav-btn {
+  width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.7); font-family: 'DM Sans', sans-serif;
+  font-size: 12px; font-weight: 500; padding: 7px 10px;
+  border-radius: var(--radius-sm); cursor: pointer; text-align: left;
+  transition: all 0.15s; text-decoration: none; display: block;
+}
+.sidebar-nav-btn:hover { background: rgba(255,255,255,0.1); color: white; }
+
+/* ── MAIN PANEL ── */
+.main-panel {
+  flex: 1; min-width: 0; overflow-y: auto;
+  padding: 24px 28px 60px;
+}
+.lab-panel { display: none; }
+.lab-panel.vis { display: block; animation: fadeIn 0.2s ease; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+
+/* ── SECTION HEADING ── */
+.sh {
+  display: flex; align-items: center; gap: 10px; margin: 28px 0 14px;
+}
+.sh:first-child { margin-top: 0; }
+.sh h2 {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-light);
+  white-space: nowrap; margin: 0;
+}
+.sh-rule { flex: 1; height: 1px; background: var(--rule); }
+
+/* ── LAB BANNER ── */
+.lab-banner {
+  background: white; border: 1px solid var(--rule); border-left: 4px solid var(--navy);
+  border-radius: var(--radius); padding: 14px 18px; box-shadow: var(--shadow-sm);
+  display: flex; align-items: flex-start; gap: 18px; flex-wrap: wrap;
+}
+.lab-banner-info { flex: 1; min-width: 200px; }
+.lab-banner-num {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 600;
+  letter-spacing: 0.12em; color: #8ab4e8; text-transform: uppercase; margin-bottom: 3px;
+}
+.lab-banner-title {
+  font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--navy); margin-bottom: 4px;
+}
+.lab-banner-chaps { font-size: 12px; color: var(--ink-light); }
+.lab-banner-tags { display: flex; gap: 6px; flex-wrap: wrap; align-items: flex-start; }
+.lbtag {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  border-radius: 3px; padding: 3px 9px; border: 1px solid;
+}
+.lbtag-blue { background: var(--navy-light); color: var(--navy); border-color: #9ec5f5; }
+.lbtag-green { background: var(--green-light); color: var(--green); border-color: var(--green-border); }
+.lbtag-amber { background: var(--amber-light); color: var(--amber); border-color: var(--amber-border); }
+
+/* ── INSTRUCTIONS EMBED ── */
+.instructions-frame {
+  background: white; border: 1px solid var(--rule); border-radius: var(--radius);
+  box-shadow: var(--shadow-sm); overflow: hidden;
+}
+.instructions-toggle {
+  width: 100%; background: none; border: none; cursor: pointer;
+  padding: 12px 16px; display: flex; align-items: center; gap: 10px;
+  font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+  color: var(--navy); text-align: left; transition: background 0.15s;
+}
+.instructions-toggle:hover { background: var(--navy-light); }
+.instructions-toggle .toggle-arrow { margin-left: auto; font-size: 11px; transition: transform 0.2s; }
+.instructions-toggle.open .toggle-arrow { transform: rotate(180deg); }
+.instructions-content { display: none; border-top: 1px solid var(--rule); }
+.instructions-content.open { display: block; }
+.lab-iframe {
+  width: 100%; height: 520px; border: none; padding: 4px;
+  background: white;
+}
+
+/* ── VISTAS COVERAGE ── */
+.vistas-box {
+  background: white; border: 1px solid var(--rule);
+  border-left: 4px solid var(--green); border-radius: var(--radius);
+  padding: 14px 18px; box-shadow: var(--shadow-sm);
+}
+.vistas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 28px; }
+@media (max-width: 600px) { .vistas-grid { grid-template-columns: 1fr; } }
+.vcol-label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light);
+  margin-bottom: 8px; display: block;
+}
+.chip-group { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* ── CHIPS ── */
+.chip {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600;
+  border-radius: 4px; padding: 3px 9px; border: 1px solid; cursor: pointer;
+  transition: all 0.15s; display: inline-flex; align-items: center; gap: 4px;
+  text-decoration: none;
+}
+.chip-blue  { background: var(--navy-light); color: var(--navy); border-color: #9ec5f5; }
+.chip-blue:hover  { background: #c5ddff; border-color: var(--navy); box-shadow: 0 0 0 2px rgba(26,58,107,0.15); }
+.chip-green { background: var(--green-light); color: var(--green); border-color: var(--green-border); }
+.chip-green:hover { background: #caeeda; border-color: var(--green); box-shadow: 0 0 0 2px rgba(26,92,56,0.15); }
+.chip-amber { background: var(--amber-light); color: var(--amber); border-color: var(--amber-border); }
+.chip-amber:hover { background: #ffe0b2; border-color: var(--amber); box-shadow: 0 0 0 2px rgba(122,56,5,0.15); }
+.chip-teal  { background: var(--teal-light); color: var(--teal); border-color: var(--teal-border); }
+.chip-teal:hover  { background: #c0f0ec; border-color: var(--teal); }
+.chip.new-badge::after { content: 'NEW'; font-size: 8px; font-weight: 700; letter-spacing: 0.06em; background: var(--amber); color: white; border-radius: 2px; padding: 0 4px; margin-left: 2px; }
+.chip-link { text-decoration: none; }
+.chip-link::after { content: ' ↗'; opacity: 0.5; font-size: 10px; }
+
+/* ── RUBRIC ── */
+.rubric-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+.rubric-row { background: white; border: 1px solid var(--rule); border-radius: var(--radius); box-shadow: var(--shadow-sm); overflow: hidden; }
+.rubric-row-header {
+  background: var(--ink); color: white; padding: 9px 14px;
+  display: flex; align-items: baseline; gap: 10px;
+}
+.rr-name { font-size: 13px; font-weight: 700; margin: 0; }
+.rr-sub  { font-size: 11px; opacity: 0.6; font-style: italic; }
+.rr-pts  { margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600; color: #8ab4e8; }
+.rubric-levels { display: grid; grid-template-columns: repeat(4, 1fr); }
+.level-cell { padding: 10px 12px; border-right: 1px solid var(--rule); }
+.level-cell:last-child { border-right: none; }
+.level-cell.l1 { background: var(--red-light); }
+.level-cell.l2 { background: var(--amber-light); }
+.level-cell.l3 { background: #fff8e0; }
+.level-cell.l4 { background: var(--green-light); }
+.level-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 600;
+  border-radius: 3px; padding: 2px 7px; margin-bottom: 5px;
+}
+.level-cell.l1 .level-badge { background: var(--red-border); color: var(--red); }
+.level-cell.l2 .level-badge { background: var(--amber-border); color: var(--amber); }
+.level-cell.l3 .level-badge { background: #e0cc60; color: #5c4500; }
+.level-cell.l4 .level-badge { background: var(--green-border); color: var(--green); }
+.level-score { font-size: 9px; font-weight: 500; margin-left: 3px; opacity: 0.7; }
+.level-desc { font-size: 11.5px; line-height: 1.45; }
+.level-cell.l1 .level-desc { color: var(--red); }
+.level-cell.l2 .level-desc { color: var(--amber); }
+.level-cell.l3 .level-desc { color: #5c4500; }
+.level-cell.l4 .level-desc { color: var(--green); }
+.deduct-note {
+  font-size: 11px; background: var(--amber-light); border-top: 1px solid var(--amber-border);
+  padding: 7px 14px; color: var(--amber); font-style: italic;
+}
+.deduct-note strong { font-weight: 700; }
+
+/* ── GRAMMAR CARDS ── */
+.grammar-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px;
+}
+.grammar-card {
+  background: white; border: 1px solid var(--rule); border-radius: var(--radius);
+  box-shadow: var(--shadow-sm); overflow: hidden;
+}
+.gc-head {
+  padding: 9px 13px; border-bottom: 1px solid var(--rule);
+  display: flex; align-items: center; gap: 8px;
+}
+.gc-num {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 600;
+  background: var(--navy); color: white; border-radius: 3px; padding: 1px 6px; flex-shrink: 0;
+}
+.gc-title { font-size: 12.5px; font-weight: 700; color: var(--navy); }
+.gc-body { padding: 11px 13px; display: flex; flex-direction: column; gap: 9px; }
+.gc-label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 4px; display: block;
+}
+.error-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.error-list li {
+  font-size: 12px; color: var(--ink-mid); padding-left: 13px; position: relative; line-height: 1.45;
+}
+.error-list li::before { content: '▸'; position: absolute; left: 0; color: var(--red-border); font-size: 10px; top: 2px; }
+.error-list code { font-family: 'IBM Plex Mono', monospace; font-size: 11px; background: #f0f1f4; padding: 0 4px; border-radius: 2px; }
+.error-list .fix { color: var(--green); font-weight: 600; }
+.deduct-callout {
+  background: var(--red-light); border: 1px solid var(--red-border); border-radius: 4px;
+  padding: 7px 10px; font-size: 11.5px; color: var(--red); line-height: 1.5;
+}
+
+/* ── ANNOTATION GRID ── */
+.ann-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; }
+.ann-card {
+  background: white; border: 1px solid var(--rule); border-radius: var(--radius);
+  padding: 11px 13px; box-shadow: var(--shadow-sm);
+}
+.ann-sym { font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 600; color: var(--navy); display: block; margin-bottom: 3px; }
+.ann-name { font-size: 12px; font-weight: 700; color: var(--ink); margin: 0 0 2px; }
+.ann-desc { font-size: 11px; color: var(--ink-light); }
+.ann-ex { margin-top: 5px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; background: #f0f1f4; border-radius: 3px; padding: 3px 6px; color: var(--ink-mid); }
+
+/* ── PHRASE COLS ── */
+.phrase-cols { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+.phrase-group { background: white; border: 1px solid var(--rule); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); }
+.phrase-head { padding: 7px 12px; font-size: 10.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.phrase-head.pos  { background: var(--green-light); color: var(--green); }
+.phrase-head.corr { background: var(--amber-light); color: var(--amber); }
+.phrase-head.enc  { background: var(--navy-light); color: var(--navy); }
+.phrase-list { padding: 8px 12px; display: flex; flex-direction: column; gap: 5px; }
+.phrase-item { font-size: 12px; }
+.phrase-es { font-family: 'DM Serif Display', serif; font-style: italic; color: var(--ink); }
+.phrase-en { color: var(--ink-light); font-size: 11px; }
+
+/* ── GRAMMAR MODAL ── */
+.modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(10,13,20,0.6); z-index: 500;
+  align-items: center; justify-content: center; padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+.modal-box {
+  background: white; border-radius: 10px; max-width: 560px; width: 100%;
+  box-shadow: 0 12px 50px rgba(0,0,0,0.3); overflow: hidden;
+  animation: modalIn 0.18s ease;
+}
+@keyframes modalIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+.modal-head {
+  background: var(--ink); color: white; padding: 14px 18px;
+  display: flex; align-items: flex-start; gap: 10px;
+}
+.modal-title { font-size: 14px; font-weight: 700; flex: 1; margin: 0; line-height: 1.3; }
+.modal-cap { font-family: 'IBM Plex Mono', monospace; font-size: 9px; font-weight: 600; background: var(--navy); color: #8ab4e8; border-radius: 3px; padding: 2px 7px; flex-shrink: 0; margin-top: 2px; }
+.modal-close { background: none; border: none; color: rgba(255,255,255,0.5); font-size: 17px; cursor: pointer; padding: 0 3px; line-height: 1; transition: color 0.15s; flex-shrink: 0; }
+.modal-close:hover { color: white; }
+.modal-body { padding: 18px 20px; display: flex; flex-direction: column; gap: 14px; max-height: 70vh; overflow-y: auto; }
+.modal-sect-label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light);
+  margin-bottom: 5px; display: block;
+}
+.modal-formula {
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px; background: #f0f1f4;
+  border-radius: 4px; padding: 9px 12px; color: var(--ink); border-left: 3px solid var(--navy);
+}
+.modal-text { font-size: 13px; color: var(--ink-mid); line-height: 1.65; }
+.modal-examples { display: flex; flex-direction: column; gap: 7px; }
+.ex-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.ex-wrong { font-family: 'IBM Plex Mono', monospace; font-size: 11px; background: var(--red-light); border: 1px solid var(--red-border); border-radius: 3px; padding: 6px 9px; color: var(--red); }
+.ex-right { font-family: 'IBM Plex Mono', monospace; font-size: 11px; background: var(--green-light); border: 1px solid var(--green-border); border-radius: 3px; padding: 6px 9px; color: var(--green); }
+.ex-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.6; display: block; margin-bottom: 2px; }
+.modal-deduct { background: var(--red-light); border: 1px solid var(--red-border); border-radius: 4px; padding: 9px 12px; font-size: 12px; color: var(--red); line-height: 1.55; }
+.modal-tip { background: var(--navy-light); border: 1px solid #9ec5f5; border-radius: 4px; padding: 9px 12px; font-size: 12px; color: var(--navy); line-height: 1.55; }
+
+/* ── SESSION BANNER ── */
+.session-banner {
+  background: white; border: 1px solid var(--rule); border-left: 4px solid var(--navy);
+  border-radius: var(--radius); padding: 14px 18px; box-shadow: var(--shadow-sm);
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px 20px;
+}
+.session-step { display: flex; gap: 10px; align-items: flex-start; }
+.step-num {
+  background: var(--navy); color: white; font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 600; width: 21px; height: 21px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+}
+.step-text { font-size: 12px; color: var(--ink-mid); line-height: 1.45; }
+.step-text strong { color: var(--ink); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .body-layout { flex-direction: column; }
+  .sidebar { width: 100%; flex-direction: row; flex-wrap: wrap; padding: 10px; gap: 6px; overflow-y: visible; }
+  .sidebar-label { display: none; }
+  .lab-btn { width: auto; flex-direction: row; align-items: center; gap: 6px; padding: 6px 10px; }
+  .lab-btn .lb-title { display: none; }
+  .rubric-levels { grid-template-columns: repeat(2, 1fr); }
+  .main-panel { padding: 16px 14px 40px; }
+}
+@media print {
+  @page { margin: 1.4cm; size: letter; }
+  body { background: white; }
+  .top-header { position: static; }
+  .sidebar { display: none; }
+  .body-layout { display: block; }
+  .main-panel { padding: 0; overflow: visible; }
+  .lab-panel { display: none !important; }
+  .lab-panel.print-target { display: block !important; }
+  .modal-overlay { display: none !important; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+</style>
+</head>
+<body>
+
+<header class="top-header">
+  <div class="top-header-inner">
+    <div class="header-flag">
+      <span class="course">SPAN1001 · Spring 2026</span>
+      <span class="title">TA Grammar Reference</span>
+    </div>
+    <div class="header-divider"></div>
+    <div class="header-meta">
+      <span class="htag ta">TA Use Only</span>
+      <span class="htag">Video Grading Guide</span>
+      <div class="header-spacer"></div>
+      <a class="hlink" href="feedback-generator.html">✨ Feedback Generator</a>
+      <a class="hlink" href="index.html">⌂ Home</a>
+      <a class="hlink" href="javascript:window.print()">🖨 Print</a>
+    </div>
+  </div>
+</header>
+
+<div class="body-layout">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+    <div class="sidebar-label">Select Lab</div>
+    <button class="lab-btn active" onclick="selectLab(1)">
+      <span class="lb-num">LAB 1</span>
+      <span class="lb-title">Cap. 1 — ¡Hola!</span>
+    </button>
+    <button class="lab-btn" onclick="selectLab(2)">
+      <span class="lb-num">LAB 2</span>
+      <span class="lb-title">Cap. 1–2 — Universidad</span>
+    </button>
+    <button class="lab-btn" onclick="selectLab(3)">
+      <span class="lb-num">LAB 3</span>
+      <span class="lb-title">Cap. 1–3 — La familia</span>
+    </button>
+    <button class="lab-btn" onclick="selectLab(4)">
+      <span class="lb-num">LAB 4</span>
+      <span class="lb-title">Cap. 1–4 — Pasatiempos</span>
+    </button>
+    <button class="lab-btn" onclick="selectLab(5)">
+      <span class="lb-num">LAB 5</span>
+      <span class="lb-title">Cap. 1–5 — Vacaciones</span>
+    </button>
+    <button class="lab-btn" onclick="selectLab(6)">
+      <span class="lb-num">LAB 6</span>
+      <span class="lb-title">Cap. 1–5 — Repaso</span>
+    </button>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-label">Navigation</div>
+    <a class="sidebar-nav-btn" href="feedback-generator.html">✨ Feedback Generator</a>
+    <a class="sidebar-nav-btn" href="index.html">⌂ Back to Home</a>
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <main class="main-panel">
+
+    <!-- ════════════ LAB 1 ════════════ -->
+    <div class="lab-panel vis" id="panel-1">
+      <div class="lab-banner">
+        <div class="lab-banner-info">
+          <div class="lab-banner-num">Lab 1 · Video Activity</div>
+          <div class="lab-banner-title">¡Hola, qué tal!</div>
+          <div class="lab-banner-chaps">Capítulo 1 only · ser · articles · time · numbers</div>
+        </div>
+        <div class="lab-banner-tags">
+          <span class="lbtag lbtag-blue">Cap. 1</span>
+          <span class="lbtag lbtag-amber">New students</span>
+        </div>
+      </div>
+
+      <div class="sh"><h2>Lab assignment instructions</h2><div class="sh-rule"></div></div>
+      <div class="instructions-frame">
+        <button class="instructions-toggle" onclick="toggleInstructions(this)">
+          📋 View Lab 1 student instructions (click to expand)
+          <span class="toggle-arrow">▼</span>
+        </button>
+        <div class="instructions-content">
+          <iframe class="lab-iframe" src="lab-1.html" title="Lab 1 Instructions"></iframe>
+        </div>
+      </div>
+
+      <div class="sh"><h2>Grading workflow</h2><div class="sh-rule"></div></div>
+      <div class="session-banner">
+        <div class="session-step"><div class="step-num">1</div><div class="step-text"><strong>Open submission.</strong> Pull up the video in Brightspace. Open rubric in a second tab.</div></div>
+        <div class="session-step"><div class="step-num">2</div><div class="step-text"><strong>Full listen first.</strong> Watch without pausing. Note overall comprehensibility impression before scoring anything.</div></div>
+        <div class="session-step"><div class="step-num">3</div><div class="step-text"><strong>Category-by-category.</strong> Replay segments. Score Content first, then Language Control, then Pronunciation last.</div></div>
+        <div class="session-step"><div class="step-num">4</div><div class="step-text"><strong>Flag errors.</strong> Use annotation codes below when writing Brightspace feedback. Note timestamps for specific errors.</div></div>
+        <div class="session-step"><div class="step-num">5</div><div class="step-text"><strong>Paste feedback.</strong> Generate written feedback in the Feedback Generator tool, then paste into Brightspace.</div></div>
+      </div>
+
+      <div class="sh"><h2>Vistas coverage — Cap. 1 · click to open textbook section</h2><div class="sh-rule"></div></div>
+      <div class="vistas-box">
+        <div class="vistas-grid">
+          <div>
+            <span class="vcol-label">Vocabulary topics</span>
+            <div class="chip-group">
+              <a href="https://vistashigherlearning.com/vistas7/#cap1-greetings" target="_blank" class="chip chip-blue chip-link new-badge">Greetings &amp; farewells</a>
+              <a href="https://vistashigherlearning.com/vistas7/#cap1-courtesy" target="_blank" class="chip chip-blue chip-link new-badge">Courtesy phrases</a>
+              <a href="https://vistashigherlearning.com/vistas7/#cap1-numbers" target="_blank" class="chip chip-blue chip-link new-badge">Numbers 0–30</a>
+              <a href="https://vistashigherlearning.com/vistas7/#cap1-classroom" target="_blank" class="chip chip-blue chip-link new-badge">Classroom nouns</a>
+            </div>
+          </div>
+          <div>
+            <span class="vcol-label">Grammar structures — click for explanation</span>
+            <div class="chip-group">
+              <span class="chip chip-green new-badge" onclick="openModal('ser')">ser (present)</span>
+              <span class="chip chip-green new-badge" onclick="openModal('article_gender')">Nouns &amp; articles</span>
+              <span class="chip chip-green new-badge" onclick="openModal('telling_time')">Telling time</span>
+              <span class="chip chip-green new-badge" onclick="openModal('se_llama')">se llama / llamarse</span>
+              <span class="chip chip-green new-badge" onclick="openModal('numbers')">Numbers 0–30</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sh"><h2>Rubric — 25 pts total · when to deduct</h2><div class="sh-rule"></div></div>
+      <div class="rubric-grid">
+        <div class="rubric-row">
+          <div class="rubric-row-header"><h3 class="rr-name">1. Content / Completion</h3><span class="rr-sub">Greeting · self-intro · number · time · favorite class</span><span class="rr-pts">/7</span></div>
+          <div class="rubric-levels">
+            <div class="level-cell l1"><span class="level-badge">L1<span class="level-score">1–13%</span></span><div class="level-desc">No greeting or Spanish intro; number/time absent; mostly English</div></div>
+            <div class="level-cell l2"><span class="level-badge">L2<span class="level-score">56%</span></span><div class="level-desc">Greeting or intro present; number OR time given; very brief</div></div>
+            <div class="level-cell l3"><span class="level-badge">L3<span class="level-score">80%</span></span><div class="level-desc">Greeting + intro + number + time all present; one element weak</div></div>
+            <div class="level-cell l4"><span class="level-badge">L4<span class="level-score">100%</span></span><div class="level-desc">All elements complete; self-intro natural; number clear; time correctly formed</div></div>
+          </div>
+          <div class="deduct-note">⚠ <strong>Deduct</strong> if no greeting AND no self-introduction — these are the two non-negotiables for Lab 1 content.</div>
+        </div>
+        <div class="rubric-row">
+          <div class="rubric-row-header"><h3 class="rr-name">2. Comprehensibility / Language Control</h3><span class="rr-sub">ser forms · article gender · basic vocab</span><span class="rr-pts">/5</span></div>
+          <div class="rubric-levels">
+            <div class="level-cell l1"><span class="level-badge">L1</span><div class="level-desc">Mostly English; ser absent or infinitive; cannot follow meaning</div></div>
+            <div class="level-cell l2"><span class="level-badge">L2</span><div class="level-desc">Some Spanish; ser errors throughout; meaning requires guessing</div></div>
+            <div class="level-cell l3"><span class="level-badge">L3</span><div class="level-desc">Mostly understandable; ser mostly correct; minor article errors</div></div>
+            <div class="level-cell l4"><span class="level-badge">L4</span><div class="level-desc">Fully clear; correct ser forms; articles match noun gender throughout</div></div>
+          </div>
+          <div class="deduct-note">⚠ If student uses only English filler with isolated Spanish nouns → L1 regardless of quantity.</div>
+        </div>
+        <div class="rubric-row">
+          <div class="rubric-row-header"><h3 class="rr-name">3. Discourse Level</h3><span class="rr-sub">Complete sentences · connectors y / también</span><span class="rr-pts">/5</span></div>
+          <div class="rubric-levels">
+            <div class="level-cell l1"><span class="level-badge">L1</span><div class="level-desc">Single words or phrases only; no sentences attempted</div></div>
+            <div class="level-cell l2"><span class="level-badge">L2</span><div class="level-desc">Isolated sentences; no connectors; very choppy</div></div>
+            <div class="level-cell l3"><span class="level-badge">L3</span><div class="level-desc">Basic sentences throughout; at least one use of y or también</div></div>
+            <div class="level-cell l4"><span class="level-badge">L4</span><div class="level-desc">Varied sentence structure; natural connectors; ideas flow together</div></div>
+          </div>
+        </div>
+        <div class="rubric-row">
+          <div class="rubric-row-header"><h3 class="rr-name">4. Engagement</h3><span class="rr-sub">Follows prompt · asks question · personal detail</span><span class="rr-pts">/4</span></div>
+          <div class="rubric-levels">
+            <div class="level-cell l1"><span class="level-badge">L1</span><div class="level-desc">Does not follow prompt; no question; no personal detail</div></div>
+            <div class="level-cell l2"><span class="level-badge">L2</span><div class="level-desc">Follows prompt minimally; question missing or scripted-sounding</div></div>
+            <div class="level-cell l3"><span class="level-badge">L3</span><div class="level-desc">Mostly follows prompt; attempts a follow-up question</div></div>
+            <div class="level-cell l4"><span class="level-badge">L4</span><div class="level-desc">Prompt followed completely; genuine follow-up question; creative detail</div></div>
+          </div>
+        </div>
+        <div class="rubric-row">
+          <div class="rubric-row-header"><h3 class="rr-name">5. Pronunciation / Fluency</h3><span class="rr-sub">h silent · pure vowels · number stress · natural pace</span><span class="rr-pts">/4</span></div>
+          <div class="rubric-levels">
+            <div class="level-cell l1"><span class="level-badge">L1</span><div class="level-desc">Pervasive English pronunciation; h always voiced; vowels all English</div></div>
+            <div class="level-cell l2"><span class="level-badge">L2</span><div class="level-desc">Heavy English accent; several h or vowel errors; very halting pace</div></div>
+            <div class="level-cell l3"><span class="level-badge">L3</span><div class="level-desc">Mostly intelligible; 1–2 sound errors; reasonable fluency</div></div>
+            <div class="level-cell l4"><span class="level-badge">L4</span><div class="level-desc">Clear Spanish sounds; h silent; vowels pure; natural pace</div></div>
+          </div>
+          <div class="deduct-note">⚠ <strong>Deduct 3–5 pts total</strong> if response is clearly read from a script (applies across all categories).</div>
+        </div>
+      </div>
+
+      <div class="sh"><h2>Grammar focus — click any chip to expand</h2><div class="sh-rule"></div></div>
+      <div class="grammar-grid">
+        <div class="grammar-card">
+          <div class="gc-head"><span class="gc-num">G1</span><span class="gc-title">ser — identity &amp; origin</span></div>
+          <div class="gc-body">
+            <div><span class="gc-label">Grammar chips</span><div class="chip-group"><span class="chip chip-green" onclick="openModal('ser')">ser</span> <span class="chip chip-blue" onclick="openModal('se_llama')">se llama</span> <span class="chip chip-amber" onclick="openModal('ser_estar')">ser vs. estar</span></div></div>
+            <div class="deduct-callout">Deduct under <strong>Comprehensibility</strong> when ser is left as infinitive or replaced by estar for identity/origin.</div>
+            <div><span class="gc-label">Common errors</span>
+              <ul class="error-list">
+                <li>Infinitive as verb: <code>yo ser estudiante</code> → <code class="fix">soy estudiante</code></li>
+                <li><code>me llamo es María</code> — double verb: <code class="fix">me llamo María</code></li>
+                <li>Estar for origin: <code>estoy de México</code> → <code class="fix">soy de México</code></li>
+                <li>Profession: <code>soy un estudiante</code> ✓ both with/without article OK at this level</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="grammar-card">
+          <div class="gc-head"><span class="gc-num">G2</span><span class="gc-title">Nouns &amp; article gender</span></div>
+          <div class="gc-body">
+            <div><span class="gc-label">Grammar chips</span><div class="chip-group"><span class="chip chip-green" onclick="openModal('article_gender')">article gender</span> <span class="chip chip-blue" onclick="openModal('article_gender')">el / la</span> <span class="chip chip-blue" onclick="openModal('article_gender')">un / una</span></div></div>
+            <div class="deduct-callout">Deduct under <strong>Vocabulary</strong> for persistent wrong gender on high-frequency nouns (clase, libro, universidad).</div>
+            <div><span class="gc-label">Common errors</span>
+              <ul class="error-list">
+                <li>Wrong gender: <code>la libro, el mesa</code> → <code class="fix">el libro, la mesa</code></li>
+                <li>Missing article: <code>tengo pluma</code> → <code class="fix">tengo una pluma</code></li>
+                <li>Plural mismatch: <code>los clases</code> → <code class="fix">las clases</code></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="grammar-card">
+          <div class="gc-head"><span class="gc-num">G3</span><span class="gc-title">Telling time — la hora</span></div>
+          <div class="gc-body">
+            <div><span class="gc-label">Grammar chips</span><div class="chip-group"><span class="chip chip-green" onclick="openModal('telling_time')">telling time</span> <span class="chip chip-blue" onclick="openModal('ser')">ser (es/son)</span> <span class="chip chip-amber" onclick="openModal('numbers')">numbers 0–30</span></div></div>
+            <div class="deduct-callout">Deduct under <strong>Grammar</strong> for consistent es/son confusion — #1 Lab 1 time error.</div>
+            <div><span class="gc-label">Common errors</span>
+              <ul class="error-list">
+                <li><code>son las una</code> → <code class="fix">es la una</code> — only 1:00 uses <em>es</em></li>
+                <li><code>están las tres</code> → <code class="fix">son las tres</code></li>
+                <li>Scheduled time: <code>la clase son las diez</code> → <code class="fix">la clase es a las diez</code></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="grammar-card">
+          <div class="gc-head"><span class="gc-num">P1</span><span class="gc-title">Pronunciation — silent h &amp; vowels</span></div>
+          <div class="gc-body">
+            <div><span class="gc-label">Sound chips</span><div class="chip-group"><span class="chip chip-teal" onclick="openModal('h_silent')">h silent</span> <span class="chip chip-teal" onclick="openModal('vowels')">pure vowels</span></div></div>
+            <div><span class="gc-label">Common errors</span>
+              <ul class="error-list">
+                <li>Voiced h: <code>hola [HOH-la]</code> → <code class="fix">[OH-la]</code></li>
+                <li>English 'a': <code>gracias [GRAY-see-us]</code> → <code class="fix">[GRA-syas]</code></li>
+                <li>Glide on 'e': <code>me [may]</code> → <code class="fix">[meh]</code></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sh"><h2>Annotation codes</h2><div class="sh-rule"></div></div>
+      <div id="annotations-1"></div>
+      <div class="sh"><h2>Spoken feedback phrases</h2><div class="sh-rule"></div></div>
+      <div id="phrases-1"></div>
+    </div><!-- /panel-1 -->
+
+    <!-- ════════════ LAB 2 ════════════ -->
+    <div class="lab-panel" id="panel-2">
+      <div class="lab-banner">
+        <div class="lab-banner-info">
+          <div class="lab-banner-num">Lab 2 · Video Activity</div>
+          <div class="lab-banner-title">En la universidad</div>
+          <div class="lab-banner-chaps">Capítulos 1–2 · -ar verbs · gustar · estar · questions</div>
+        </div>
+        <div class="lab-banner-tags">
+          <span class="lbtag lbtag-blue">Cap. 1–2</span>
+          <span class="lbtag lbtag-green">+ -ar verbs</span>
+          <span class="lbtag lbtag-green">+ gustar</span>
+        </div>
+      </div>
+
+      <div class="sh"><h2>Lab assignment instructions</h2><div class="sh-rule"></div></div>
+      <div class="instructions-frame">
+        <button class="instructions-toggle" onclick="toggleInstructions(this)">
+          📋 View Lab 2 student instructions (click to expand)
+          <span class="toggle-arrow">▼</span>
+        </button>
+        <div class="instructions-content">
+          <iframe class="lab-iframe" src="lab-2.html" title="Lab 2 Instructions"></iframe>
+        </div>
+      </div>
+
+      <div class="sh"><h2>Grading workflow</h2><div class="sh-rule"></div></div>
+      <div class="session-banner">
+        <div class="session-step"><div class="step-num">1</div><div class="step-text"><strong>Cumulative check.</strong> All Cap. 1 structures still penalize. Cap. 1 errors should be less frequent by Lab 2.</div></div>
+        <div class="session-step"><div class="step-num">2</div><div class="step-text"><strong>Listen for -ar verbs.</strong> Most common Lab 2 error is wrong endings. Note the subject and verify the ending matches.</div></div>
+        <div class="session-step"><div class="step-num">3</div><div class="step-text"><strong>Check gustar.</strong> Listen for <em>yo gusto</em> (major error) and <em>me gusta los perros</em> (agreement error) — both penalized.</div></div>
+        <div class="session-step"><div class="step-num">4</div><div class="step-text"><strong>Check estar for location.</strong> Students often use ser for where things are — flag each swap with SE code.</div></div>
+        <div class="session-step"><div class="step-num">5</div><div class="step-text"><strong>Score and paste.</strong> Enter rubric scores in Brightspace, paste generated feedback from the Generator tool.</div></div>
+      </div>
+
+      <div class="sh"><h2>Vistas coverage — Cap. 1–2 · click to open</h2><div class="sh-rule"></div></div>
+      <div class="vistas-box">
+        <div class="vistas-grid">
+          <div>
+            <span class="vcol-label">Vocabulary topics</span>
+            <div class="chip-group">
+              <a href="https://vistashigherlearning.com/vistas7/#cap2-universidad" target="_blank" class="chip chip-blue chip-link new-badge">University places</a>
+              <a href="https://vistashigherlearning.com/vistas7/#cap2-materias" target="_blank" class="chip chip-blue chip-link new-badge">Academic subjects</a>
+              <a href="https://vistashigherlearning.com/vistas7/#cap2-dias" target="_blank" class="chip chip-blue chip-link new-badge">Days of week</a>
+              <a href="https://vistashigherlearning.com/vistas7/#cap2-numeros" target="_blank" class="chip chip-blue chip-link new-badge">Numbers 31–100</a>
+              <a href="https://vistashigherlearning.com/vistas7/#cap1-vocab" target="_blank" class="chip chip-blue chip-link">Cap. 1 vocab (review)</a>
+            </div>
+          </div>
+          <div>
+            <span class="vcol-label">Grammar structures — click for explanation</span>
+            <div class="chip-group">
+              <span class="chip chip-green new-badge" onclick="openModal('ar_verbs')">-ar conjugation</span>
+              <span class="chip chip-green new-badge" onclick="openModal('estar')">estar</span>
+              <span class="chip chip-green new-badge" onclick="openModal('gustar')">gustar structure</span>
+              <span class="chip chip-green new-badge" onclick="openModal('questions')">Questions</span>
+              <span class="chip chip-blue" onclick="openModal('ser')">ser (review)</span>
+              <span class="chip chip-blue" onclick="openModal('prepositions')">Prepositions of location</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sh"><h2>Rubric — 25 pts total · when to deduct</h2><div class="sh-rule"></div></div>
+      <div class="rubric-grid">
+        <div class="rubric-row">
+          <div class="rubric-row-header"><h3 class="rr-name">1. Content / Completion</h3><span class="rr-sub">Schedule · -ar activity · estar + location · question</span><span class="rr-pts">/7</span></div>
+          <div class="rubric-levels">
+            <div class="level-cell l1"><span class="level-badge">L1</span><div class="level-desc">No Cap. 2 content; only Cap. 1 or English; schedule absent</div></div>
+            <div class="level-cell l2"><span class="level-badge">L2</span><div class="level-desc">1–2 Cap. 2 elements; schedule or location missing; very brief</div></div>
+            <div class="level-cell l3"><span class="level-badge">L3</span><div class="level-desc">Schedule + -ar activity + location present; question attempted</div></div>
+            <div class="level-cell l4"><span class="level-badge">L4</span><div class="level-desc">All elements; specific course names; estar for location; genuine question</div></div>
+          </div>
+          <div class="deduct-note">⚠ Deduct if student uses ONLY Cap. 1 content — Lab 2 requires demonstrated use of -ar verbs and estar.</div>
+        </div>
+        <div class="rubric-row">
+          <div class="rubric-row-header"><h3 class="rr-name">2. Comprehensibility / Language Control</h3><span class="rr-sub">-ar endings · estar · gustar · question form</span><span class="rr-pts">/5</span></div>
+          <div class="rubric-levels">
+            <div class="level-cell l1"><span class="level-badge">L1</span><div class="level-desc">Verb endings absent; estar absent; gustar wrong; comprehension breaks</div></div>
+            <div class="level-cell l2"><span class="level-badge">L2</span><div class="level-desc">-ar errors frequent; estar/ser confusion; yo gusto present</div></div>
+            <div class="level-cell l3"><span class="level-badge">L3</span><div class="level-desc">Most -ar correct; estar used for location; gustar partially correct</div></div>
+            <div class="level-cell l4"><span class="level-badge">L4</span><div class="level-desc">Consistent -ar; estar for location; gustar correct; questions inverted</div></div>
+          </div>
+          <div class="deduct-note">⚠ <strong>Penalize 'yo gusto'</strong> as a major error (−2 pts). <strong>'Me gusta los perros'</strong> (no plural) = separate −1 deduction.</div>
+        </div>
+        <div class="rubric-row">
+          <div class="rubric-row-header"><h3 class="rr-name">3. Discourse Level</h3><span class="rr-sub">Full sentences · connectors · topic transitions</span><span class="rr-pts">/5</span></div>
+          <div class="rubric-levels">
+            <div class="level-cell l1"><span class="level-badge">L1</span><div class="level-desc">Word lists only; topics not distinguishable</div></div>
+            <div class="level-cell l2"><span class="level-badge">L2</span><div class="level-desc">Choppy isolated sentences; no transitions</div></div>
+            <div class="level-cell l3"><span class="level-badge">L3</span><div class="level-desc">Sentences throughout; y/también/pero; topics identifiable</div></div>
+            <div class="level-cell l4"><span class="level-badge">L4</span><div class="level-desc">Smooth transitions; varied sentence types; question integrates naturally</div></div>
+          </div>
+        </div>
+        <div class="rubric-row">
+          <div class="rubric-row-header"><h3 class="rr-name">4. Engagement</h3><span class="rr-sub">Prompt followed · follow-up question · personality</span><span class="rr-pts">/4</span></div>
+          <div class="rubric-levels">
+            <div class="level-cell l1"><span class="level-badge">L1</span><div class="level-desc">Prompt ignored; no question; robotic</div></div>
+            <div class="level-cell l2"><span class="level-badge">L2</span><div class="level-desc">Partial prompt; question absent or scripted</div></div>
+            <div class="level-cell l3"><span class="level-badge">L3</span><div class="level-desc">Prompt followed; question attempted; some personal detail</div></div>
+            <div class="level-cell l4"><span class="level-badge">L4</span><div class="level-desc">Full prompt; genuine question; creative detail; natural delivery</div></div>
+          </div>
+        </div>
+        <div class="rubric-row">
+          <div class="rubric-row-header"><h3 class="rr-name">5. Pronunciation / Fluency</h3><span class="rr-sub">-ar endings · g/j sounds · vowels · pace</span><span class="rr-pts">/4</span></div>
+          <div class="rubric-levels">
+            <div class="level-cell l1"><span class="level-badge">L1</span><div class="level-desc">-ar endings anglicized; English g/j; very halting pace</div></div>
+            <div class="level-cell l2"><span class="level-badge">L2</span><div class="level-desc">Several g/j or vowel errors; many pauses; heavily English-accented</div></div>
+            <div class="level-cell l3"><span class="level-badge">L3</span><div class="level-desc">Mostly clear; 1–2 sound errors; reasonable pace</div></div>
+            <div class="level-cell l4"><span class="level-badge">L4</span><div class="level-desc">Clear -ar endings; g/j correct; vowels pure; natural pace</div></div>
+          </div>
+          <div class="deduct-note">⚠ Deduct 3–5 pts total for clearly scripted/read delivery.</div>
+        </div>
+      </div>
+
+      <div class="sh"><h2>Grammar focus — click any chip to expand</h2><div class="sh-rule"></div></div>
+      <div class="grammar-grid">
+        <div class="grammar-card">
+          <div class="gc-head"><span class="gc-num">G1</span><span class="gc-title">-ar verb conjugation</span></div>
+          <div class="gc-body">
+            <div><span class="gc-label">Grammar chips</span><div class="chip-group"><span class="chip chip-green" onclick="openModal('ar_verbs')">-ar verbs</span> <span class="chip chip-blue" onclick="openModal('ar_verbs')">subject agreement</span></div></div>
+            <div class="deduct-callout">Core Lab 2 skill. <strong>VG flag</strong> for each wrong ending. Infinitive used as conjugated verb = major error.</div>
+            <ul class="error-list">
+              <li>Wrong ending: <code>ella estudias</code> → <code class="fix">ella estudia</code></li>
+              <li>Infinitive: <code>yo trabajar en la biblioteca</code> → <code class="fix">yo trabajo</code></li>
+              <li>Nosotros skipped: <code>nosotros trabaja</code> → <code class="fix">nosotros trabajamos</code></li>
+            </ul>
+          </div>
+        </div>
+        <div class="grammar-card">
+          <div class="gc-head"><span class="gc-num">G2</span><span class="gc-title">Gustar structure</span></div>
+          <div class="gc-body">
+            <div><span class="gc-label">Grammar chips</span><div class="chip-group"><span class="chip chip-green" onclick="openModal('gustar')">gustar</span> <span class="chip chip-amber" onclick="openModal('gustar')">gusta/gustan</span> <span class="chip chip-blue" onclick="openModal('gustar')">IOP me/te/le…</span></div></div>
+            <div class="deduct-callout"><strong>'yo gusto' = major Grammar error (−2 pts).</strong> Gusta/gustan mismatch = −1 pt.</div>
+            <ul class="error-list">
+              <li><code>yo gusto el café</code> → <code class="fix">me gusta el café</code></li>
+              <li><code>me gusta los perros</code> → <code class="fix">me gustan los perros</code></li>
+              <li><code>me gustan bailar</code> → <code class="fix">me gusta bailar</code> (infinitive = singular)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="grammar-card">
+          <div class="gc-head"><span class="gc-num">G3</span><span class="gc-title">Estar — location &amp; ser/estar</span></div>
+          <div class="gc-body">
+            <div><span class="gc-label">Grammar chips</span><div class="chip-group"><span class="chip chip-green" onclick="openModal('estar')">estar</span> <span class="chip chip-amber" onclick="openModal('ser_estar')">ser vs. estar</span> <span class="chip chip-blue" onclick="openModal('prepositions')">prepositions</span></div></div>
+            <div class="deduct-callout"><strong>SE flag</strong> for location with ser. <strong>PR flag</strong> for incomplete prep phrases.</div>
+            <ul class="error-list">
+              <li><code>la biblioteca es aquí</code> → <code class="fix">está aquí</code></li>
+              <li><code>al lado</code> → <code class="fix">al lado de la cafetería</code> (complete the phrase)</li>
+              <li><code>al lado de el edificio</code> → <code class="fix">al lado del edificio</code></li>
+            </ul>
+          </div>
+        </div>
+        <div class="grammar-card">
+          <div class="gc-head"><span class="gc-num">G4</span><span class="gc-title">Question formation</span></div>
+          <div class="gc-body">
+            <div><span class="gc-label">Grammar chips</span><div class="chip-group"><span class="chip chip-green" onclick="openModal('questions')">question words</span> <span class="chip chip-amber" onclick="openModal('questions')">¿qué? vs ¿cuál?</span></div></div>
+            <ul class="error-list">
+              <li>No inversion: <code>¿Tú estudias qué?</code> → <code class="fix">¿Qué estudias?</code></li>
+              <li><code>¿Qué es tu nombre?</code> → <code class="fix">¿Cuál es tu nombre?</code></li>
+              <li>Missing ¿: <code>Qué estudias?</code> → <code class="fix">¿Qué estudias?</code></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sh"><h2>Annotation codes</h2><div class="sh-rule"></div></div>
+      <div id="annotations-2"></div>
+      <div class="sh"><h2>Spoken feedback phrases</h2><div class="sh-rule"></div></div>
+      <div id="phrases-2"></div>
+    </div><!-- /panel-2 -->
+
+    <!-- Labs 3–6: condensed panels (same structure) -->
+    <div class="lab-panel" id="panel-3">
+      <div class="lab-banner"><div class="lab-banner-info"><div class="lab-banner-num">Lab 3 · Video Activity</div><div class="lab-banner-title">La familia</div><div class="lab-banner-chaps">Capítulos 1–3 · adjective agreement · possessives · -er/-ir · tener/venir</div></div><div class="lab-banner-tags"><span class="lbtag lbtag-blue">Cap. 1–3</span><span class="lbtag lbtag-green">+ adj. agreement</span><span class="lbtag lbtag-green">+ tener/venir</span></div></div>
+      <div class="sh"><h2>Lab assignment instructions</h2><div class="sh-rule"></div></div>
+      <div class="instructions-frame"><button class="instructions-toggle" onclick="toggleInstructions(this)">📋 View Lab 3 student instructions (click to expand)<span class="toggle-arrow">▼</span></button><div class="instructions-content"><iframe class="lab-iframe" src="lab-3.html" title="Lab 3 Instructions"></iframe></div></div>
+      <div class="sh"><h2>Grading workflow</h2><div class="sh-rule"></div></div>
+      <div class="session-banner">
+        <div class="session-step"><div class="step-num">1</div><div class="step-text"><strong>Cumulative check.</strong> All Cap. 1–2 grammar still applies. Gustar and -ar should be solidifying.</div></div>
+        <div class="session-step"><div class="step-num">2</div><div class="step-text"><strong>Adjective agreement audit.</strong> #1 Lab 3 error. Check gender AND number on every adjective.</div></div>
+        <div class="session-step"><div class="step-num">3</div><div class="step-text"><strong>Tener/venir yo forms.</strong> Flag 'teno'/'veno' — each is a VG error. Should be tengo/vengo.</div></div>
+        <div class="session-step"><div class="step-num">4</div><div class="step-text"><strong>Possessive agreement.</strong> 'Mi hermanos' is extremely common — check every possessive for number agreement.</div></div>
+        <div class="session-step"><div class="step-num">5</div><div class="step-text"><strong>Score and paste feedback</strong> into Brightspace via the Feedback Generator.</div></div>
+      </div>
+      <div class="sh"><h2>Vistas coverage — Cap. 1–3</h2><div class="sh-rule"></div></div>
+      <div class="vistas-box"><div class="vistas-grid">
+        <div><span class="vcol-label">Vocabulary topics</span><div class="chip-group">
+          <a href="https://vistashigherlearning.com/vistas7/#cap3-familia" target="_blank" class="chip chip-blue chip-link new-badge">Family vocabulary</a>
+          <a href="https://vistashigherlearning.com/vistas7/#cap3-adjetivos" target="_blank" class="chip chip-blue chip-link new-badge">Descriptive adjectives</a>
+          <a href="https://vistashigherlearning.com/vistas7/#cap3-profesiones" target="_blank" class="chip chip-blue chip-link new-badge">Professions</a>
+          <a href="https://vistashigherlearning.com/vistas7/#cap3-nacionalidades" target="_blank" class="chip chip-blue chip-link new-badge">Nationalities</a>
+        </div></div>
+        <div><span class="vcol-label">Grammar — click for explanation</span><div class="chip-group">
+          <span class="chip chip-green new-badge" onclick="openModal('adj_agreement')">Adjective agreement</span>
+          <span class="chip chip-green new-badge" onclick="openModal('possessives')">Possessive adjectives</span>
+          <span class="chip chip-green new-badge" onclick="openModal('er_ir_verbs')">-er / -ir verbs</span>
+          <span class="chip chip-green new-badge" onclick="openModal('tener_venir')">tener / venir</span>
+          <span class="chip chip-blue" onclick="openModal('gustar')">gustar (review)</span>
+        </div></div>
+      </div></div>
+      <div class="sh"><h2>Grammar focus — click any chip</h2><div class="sh-rule"></div></div>
+      <div class="grammar-grid">
+        <div class="grammar-card"><div class="gc-head"><span class="gc-num">G1</span><span class="gc-title">Adjective agreement</span></div><div class="gc-body"><div><span class="gc-label">Chips</span><div class="chip-group"><span class="chip chip-green" onclick="openModal('adj_agreement')">adjective agreement</span><span class="chip chip-amber" onclick="openModal('adj_agreement')">masc/fem/plural</span></div></div><div class="deduct-callout"><strong>AC flag for every error.</strong> Gender AND number errors counted separately. Lab 3 = no tolerance for persistent agreement errors.</div><ul class="error-list"><li><code>mi hermana es alto</code> → <code class="fix">alta</code></li><li><code>mis hermanos son inteligente</code> → <code class="fix">inteligentes</code></li><li>Adj. before noun: <code>una simpática chica</code> → <code class="fix">una chica simpática</code></li><li>Nationality: <code>ella es mexicano</code> → <code class="fix">mexicana</code></li></ul></div></div>
+        <div class="grammar-card"><div class="gc-head"><span class="gc-num">G2</span><span class="gc-title">Possessive adjectives</span></div><div class="gc-body"><div><span class="gc-label">Chips</span><div class="chip-group"><span class="chip chip-green" onclick="openModal('possessives')">possessives</span><span class="chip chip-amber" onclick="openModal('possessives')">mi/mis · nuestro/a</span></div></div><div class="deduct-callout"><strong>AC flag</strong> for possessive agreement errors. Most common: mi/mis confusion.</div><ul class="error-list"><li><code>mi hermanos</code> → <code class="fix">mis hermanos</code></li><li><code>nuestro familia</code> → <code class="fix">nuestra familia</code></li><li><code>mi madre ella es…</code> → drop pronoun or restructure</li></ul></div></div>
+        <div class="grammar-card"><div class="gc-head"><span class="gc-num">G3</span><span class="gc-title">tener / venir — irregular</span></div><div class="gc-body"><div><span class="gc-label">Chips</span><div class="chip-group"><span class="chip chip-green" onclick="openModal('tener_venir')">tener/venir</span><span class="chip chip-blue" onclick="openModal('tener_venir')">tener expressions</span></div></div><div class="deduct-callout"><strong>VG flag</strong> for teno/veno yo-form errors. <strong>VG flag</strong> when tener expression uses estar.</div><ul class="error-list"><li><code>yo teno un hermano</code> → <code class="fix">yo tengo</code></li><li><code>estoy hambre</code> → <code class="fix">tengo hambre</code></li><li><code>ella es 30 años</code> → <code class="fix">ella tiene 30 años</code></li></ul></div></div>
+        <div class="grammar-card"><div class="gc-head"><span class="gc-num">G4</span><span class="gc-title">-er / -ir conjugation</span></div><div class="gc-body"><div><span class="gc-label">Chips</span><div class="chip-group"><span class="chip chip-green" onclick="openModal('er_ir_verbs')">-er/-ir verbs</span></div></div><ul class="error-list"><li>Nosotros -ir: <code>nosotros vivemos</code> → <code class="fix">vivimos</code></li><li>-ar endings on -er: <code>ella coma</code> → <code class="fix">ella come</code></li><li>Infinitive: <code>mi padre leer</code> → <code class="fix">mi padre lee</code></li></ul></div></div>
+      </div>
+      <div class="sh"><h2>Annotation codes</h2><div class="sh-rule"></div></div><div id="annotations-3"></div>
+      <div class="sh"><h2>Spoken feedback phrases</h2><div class="sh-rule"></div></div><div id="phrases-3"></div>
+    </div><!-- /panel-3 -->
+
+    <div class="lab-panel" id="panel-4">
+      <div class="lab-banner"><div class="lab-banner-info"><div class="lab-banner-num">Lab 4 · Video Activity</div><div class="lab-banner-title">Los pasatiempos</div><div class="lab-banner-chaps">Capítulos 1–4 · stem changes · irregular yo · ir a + infinitive</div></div><div class="lab-banner-tags"><span class="lbtag lbtag-blue">Cap. 1–4</span><span class="lbtag lbtag-green">+ stem changes</span><span class="lbtag lbtag-green">+ irreg. yo</span></div></div>
+      <div class="sh"><h2>Lab assignment instructions</h2><div class="sh-rule"></div></div>
+      <div class="instructions-frame"><button class="instructions-toggle" onclick="toggleInstructions(this)">📋 View Lab 4 student instructions (click to expand)<span class="toggle-arrow">▼</span></button><div class="instructions-content"><iframe class="lab-iframe" src="lab-4.html" title="Lab 4 Instructions"></iframe></div></div>
+      <div class="sh"><h2>Grading workflow</h2><div class="sh-rule"></div></div>
+      <div class="session-banner">
+        <div class="session-step"><div class="step-num">1</div><div class="step-text"><strong>Cumulative.</strong> All Cap. 1–3 grammar still applies. Adjective agreement should be solidifying.</div></div>
+        <div class="session-step"><div class="step-num">2</div><div class="step-text"><strong>Listen for stem changes.</strong> The boot — quiero/quero? puedo/podo? Note verb, person, and type.</div></div>
+        <div class="session-step"><div class="step-num">3</div><div class="step-text"><strong>Check irregular yo.</strong> Hago, salgo, pongo — 'haco'/'salo' are common. Flag each with VG.</div></div>
+        <div class="session-step"><div class="step-num">4</div><div class="step-text"><strong>ir a + infinitive.</strong> Listen for article before infinitive (voy a la estudiar) or missing infinitive.</div></div>
+        <div class="session-step"><div class="step-num">5</div><div class="step-text"><strong>Score and paste feedback</strong> into Brightspace.</div></div>
+      </div>
+      <div class="sh"><h2>Vistas coverage — Cap. 1–4</h2><div class="sh-rule"></div></div>
+      <div class="vistas-box"><div class="vistas-grid">
+        <div><span class="vcol-label">Vocabulary topics</span><div class="chip-group">
+          <a href="https://vistashigherlearning.com/vistas7/#cap4-deportes" target="_blank" class="chip chip-blue chip-link new-badge">Sports &amp; pastimes</a>
+          <a href="https://vistashigherlearning.com/vistas7/#cap4-lugares" target="_blank" class="chip chip-blue chip-link new-badge">Leisure places</a>
+          <a href="https://vistashigherlearning.com/vistas7/#cap4-frecuencia" target="_blank" class="chip chip-blue chip-link new-badge">Frequency expressions</a>
+          <a href="https://vistashigherlearning.com/vistas7/#cap4-tiempo" target="_blank" class="chip chip-blue chip-link new-badge">Seasons &amp; time</a>
+        </div></div>
+        <div><span class="vcol-label">Grammar — click for explanation</span><div class="chip-group">
+          <span class="chip chip-green new-badge" onclick="openModal('ir_a')">ir + ir a + inf.</span>
+          <span class="chip chip-green new-badge" onclick="openModal('stem_e_ie')">Stem change e→ie</span>
+          <span class="chip chip-green new-badge" onclick="openModal('stem_o_ue')">Stem change o→ue</span>
+          <span class="chip chip-green new-badge" onclick="openModal('stem_e_i')">Stem change e→i</span>
+          <span class="chip chip-green new-badge" onclick="openModal('irreg_yo')">Irregular yo (-go)</span>
+        </div></div>
+      </div></div>
+      <div class="sh"><h2>Grammar focus — click any chip</h2><div class="sh-rule"></div></div>
+      <div class="grammar-grid">
+        <div class="grammar-card"><div class="gc-head"><span class="gc-num">G1</span><span class="gc-title">Stem-changing verbs (all 3 types)</span></div><div class="gc-body"><div><span class="gc-label">Chips</span><div class="chip-group"><span class="chip chip-green" onclick="openModal('stem_e_ie')">e→ie</span><span class="chip chip-green" onclick="openModal('stem_o_ue')">o→ue</span><span class="chip chip-green" onclick="openModal('stem_e_i')">e→i</span></div></div><div class="deduct-callout"><strong>VG flag</strong> for each stem change error. Do NOT penalize nosotros (queremos ✓, podemos ✓).</div><ul class="error-list"><li><code>yo quero</code> → <code class="fix">quiero</code>; <code>ellos preferen</code> → <code class="fix">prefieren</code></li><li><code>yo podo</code> → <code class="fix">puedo</code>; <code>ella duermo</code> → <code class="fix">duerme</code></li><li><code>yo pedo pizza</code> → <code class="fix">yo pido pizza</code></li></ul></div></div>
+        <div class="grammar-card"><div class="gc-head"><span class="gc-num">G2</span><span class="gc-title">Irregular yo forms</span></div><div class="gc-body"><div><span class="gc-label">Chips</span><div class="chip-group"><span class="chip chip-green" onclick="openModal('irreg_yo')">irregular yo</span></div></div><div class="deduct-callout"><strong>VG flag</strong> for each regularized yo form. 3+ errors = push toward L2 on Grammar.</div><ul class="error-list"><li><code>yo haco</code> → <code class="fix">hago</code>; <code>yo salo</code> → <code class="fix">salgo</code></li><li><code>yo pono</code> → <code class="fix">pongo</code>; <code>yo traio</code> → <code class="fix">traigo</code></li><li><code>yo veo TV</code> → ✓ correct (ver → veo)</li></ul></div></div>
+        <div class="grammar-card"><div class="gc-head"><span class="gc-num">G3</span><span class="gc-title">ir a + infinitive</span></div><div class="gc-body"><div><span class="gc-label">Chips</span><div class="chip-group"><span class="chip chip-green" onclick="openModal('ir_a')">ir a + inf.</span></div></div><ul class="error-list"><li><code>voy a la estudiar</code> → <code class="fix">voy a estudiar</code> (no article)</li><li><code>voy a el parque</code> → <code class="fix">voy al parque</code></li><li><code>yo vo al gimnasio</code> → <code class="fix">yo voy al gimnasio</code></li></ul></div></div>
+        <div class="grammar-card"><div class="gc-head"><span class="gc-num">P1</span><span class="gc-title">Pronunciation — rr / ll / stem vowels</span></div><div class="gc-body"><div><span class="gc-label">Sound chips</span><div class="chip-group"><span class="chip chip-teal" onclick="openModal('r_rr')">r / rr</span><span class="chip chip-teal" onclick="openModal('vowels')">stem vowels</span></div></div><ul class="error-list"><li>rr trill absent in <em>partido, correo</em></li><li>Stem vowel: <code>quiero [KYEH-ro]</code> not stretched</li><li>ll/y: <em>llegar</em> = [ye-GAR]</li></ul></div></div>
+      </div>
+      <div class="sh"><h2>Annotation codes</h2><div class="sh-rule"></div></div><div id="annotations-4"></div>
+      <div class="sh"><h2>Spoken feedback phrases</h2><div class="sh-rule"></div></div><div id="phrases-4"></div>
+    </div><!-- /panel-4 -->
+
+    <div class="lab-panel" id="panel-5">
+      <div class="lab-banner"><div class="lab-banner-info"><div class="lab-banner-num">Lab 5 · Video Activity</div><div class="lab-banner-title">Las vacaciones</div><div class="lab-banner-chaps">Capítulos 1–5 · ser/estar full · present progressive · DO pronouns</div></div><div class="lab-banner-tags"><span class="lbtag lbtag-blue">Cap. 1–5</span><span class="lbtag lbtag-green">+ progressive</span><span class="lbtag lbtag-green">+ DO pronouns</span></div></div>
+      <div class="sh"><h2>Lab assignment instructions</h2><div class="sh-rule"></div></div>
+      <div class="instructions-frame"><button class="instructions-toggle" onclick="toggleInstructions(this)">📋 View Lab 5 student instructions (click to expand)<span class="toggle-arrow">▼</span></button><div class="instructions-content"><iframe class="lab-iframe" src="lab-5.html" title="Lab 5 Instructions"></iframe></div></div>
+      <div class="sh"><h2>Grading workflow</h2><div class="sh-rule"></div></div>
+      <div class="session-banner">
+        <div class="session-step"><div class="step-num">1</div><div class="step-text"><strong>Cumulative audit.</strong> Cap. 1–4 should be mostly automatic. Flag regressions more harshly.</div></div>
+        <div class="session-step"><div class="step-num">2</div><div class="step-text"><strong>Ser/estar distinction.</strong> Biggest Lab 5 focus. Listen for ser used with emotions or temporary states.</div></div>
+        <div class="session-step"><div class="step-num">3</div><div class="step-text"><strong>Progressive construction.</strong> -ando/-iendo. Stem-change -ir gerunds (durmiendo, sirviendo) are frequent errors.</div></div>
+        <div class="session-step"><div class="step-num">4</div><div class="step-text"><strong>DO pronouns.</strong> lo/la/los/las BEFORE the conjugated verb. After = error.</div></div>
+        <div class="session-step"><div class="step-num">5</div><div class="step-text"><strong>Score and paste feedback.</strong> Use Feedback Generator for all written comments.</div></div>
+      </div>
+      <div class="sh"><h2>Vistas coverage — Cap. 1–5</h2><div class="sh-rule"></div></div>
+      <div class="vistas-box"><div class="vistas-grid">
+        <div><span class="vcol-label">Vocabulary topics</span><div class="chip-group">
+          <a href="https://vistashigherlearning.com/vistas7/#cap5-vacaciones" target="_blank" class="chip chip-blue chip-link new-badge">Vacation &amp; travel</a>
+          <a href="https://vistashigherlearning.com/vistas7/#cap5-tiempo" target="_blank" class="chip chip-blue chip-link new-badge">Weather expressions</a>
+          <a href="https://vistashigherlearning.com/vistas7/#cap5-emociones" target="_blank" class="chip chip-blue chip-link new-badge">Emotion adjectives</a>
+          <a href="https://vistashigherlearning.com/vistas7/#cap5-estaciones" target="_blank" class="chip chip-blue chip-link new-badge">Seasons</a>
+        </div></div>
+        <div><span class="vcol-label">Grammar — click for explanation</span><div class="chip-group">
+          <span class="chip chip-green new-badge" onclick="openModal('estar_emotions')">estar + emotions</span>
+          <span class="chip chip-green new-badge" onclick="openModal('progressive')">Present progressive</span>
+          <span class="chip chip-green new-badge" onclick="openModal('ser_estar')">ser vs. estar (full)</span>
+          <span class="chip chip-green new-badge" onclick="openModal('do_pronouns')">DO pronouns</span>
+        </div></div>
+      </div></div>
+      <div class="sh"><h2>Grammar focus — click any chip</h2><div class="sh-rule"></div></div>
+      <div class="grammar-grid">
+        <div class="grammar-card"><div class="gc-head"><span class="gc-num">G1</span><span class="gc-title">ser vs. estar — full distinction</span></div><div class="gc-body"><div><span class="gc-label">Chips</span><div class="chip-group"><span class="chip chip-green" onclick="openModal('ser_estar')">ser vs. estar</span><span class="chip chip-blue" onclick="openModal('estar_emotions')">estar + emotions</span></div></div><div class="deduct-callout"><strong>SE flag</strong> for every swap. Primary Lab 5 focus — consistent confusion = L2 or below on Grammar.</div><ul class="error-list"><li><code>soy cansado hoy</code> → <code class="fix">estoy cansado</code></li><li><code>estoy de México</code> → <code class="fix">soy de México</code></li><li><code>ella está contento</code> → <code class="fix">ella está contenta</code> (adj. must agree)</li></ul></div></div>
+        <div class="grammar-card"><div class="gc-head"><span class="gc-num">G2</span><span class="gc-title">Present progressive</span></div><div class="gc-body"><div><span class="gc-label">Chips</span><div class="chip-group"><span class="chip chip-green" onclick="openModal('progressive')">progressive</span><span class="chip chip-amber" onclick="openModal('progressive')">-ando/-iendo</span></div></div><div class="deduct-callout"><strong>VG flag</strong> for wrong gerund. <strong>VG flag</strong> for missing stem change in -ir gerunds.</div><ul class="error-list"><li><code>estoy comendo</code> → <code class="fix">estoy comiendo</code></li><li><code>él está dormando</code> → <code class="fix">él está durmiendo</code></li><li>-ar gerund: <code>hablando ✓</code>; -er: <code>bebiendo ✓</code></li></ul></div></div>
+        <div class="grammar-card"><div class="gc-head"><span class="gc-num">G3</span><span class="gc-title">Direct object pronouns</span></div><div class="gc-body"><div><span class="gc-label">Chips</span><div class="chip-group"><span class="chip chip-green" onclick="openModal('do_pronouns')">DO pronouns</span></div></div><div class="deduct-callout"><strong>Pronoun after conjugated verb = major Grammar error.</strong> Wrong gender = AC flag.</div><ul class="error-list"><li><code>compro lo</code> → <code class="fix">lo compro</code></li><li><code>la libro</code> → <code class="fix">lo compro</code> (el libro = lo)</li><li>With infinitive: <code>lo quiero ver</code> = <code>quiero verlo</code> ✓ both OK</li></ul></div></div>
+        <div class="grammar-card"><div class="gc-head"><span class="gc-num">P1</span><span class="gc-title">Pronunciation — c/z · v/b · intonation</span></div><div class="gc-body"><div><span class="gc-label">Sound chips</span><div class="chip-group"><span class="chip chip-teal" onclick="openModal('vowels')">c/z sounds</span><span class="chip chip-teal" onclick="openModal('vowels')">v/b bilabial</span></div></div><ul class="error-list"><li>c before e/i: <em>hace</em> → [HA-se] not ch/k</li><li>v/b: <em>voy, bien</em> → soft bilabial, not English v</li><li>Question intonation should rise at end</li></ul></div></div>
+      </div>
+      <div class="sh"><h2>Annotation codes</h2><div class="sh-rule"></div></div><div id="annotations-5"></div>
+      <div class="sh"><h2>Spoken feedback phrases</h2><div class="sh-rule"></div></div><div id="phrases-5"></div>
+    </div><!-- /panel-5 -->
+
+    <div class="lab-panel" id="panel-6">
+      <div class="lab-banner"><div class="lab-banner-info"><div class="lab-banner-num">Lab 6 · Video Activity</div><div class="lab-banner-title">Repaso — Capítulos 1–5</div><div class="lab-banner-chaps">All chapters · breadth of coverage · integration · no regressions</div></div><div class="lab-banner-tags"><span class="lbtag lbtag-blue">Cap. 1–5</span><span class="lbtag lbtag-amber">Final review</span></div></div>
+      <div class="sh"><h2>Lab assignment instructions</h2><div class="sh-rule"></div></div>
+      <div class="instructions-frame"><button class="instructions-toggle" onclick="toggleInstructions(this)">📋 View Lab 6 student instructions (click to expand)<span class="toggle-arrow">▼</span></button><div class="instructions-content"><iframe class="lab-iframe" src="lab-6.html" title="Lab 6 Instructions"></iframe></div></div>
+      <div class="sh"><h2>Grading workflow</h2><div class="sh-rule"></div></div>
+      <div class="session-banner">
+        <div class="session-step"><div class="step-num">1</div><div class="step-text"><strong>Coverage audit first.</strong> Before scoring errors, determine which chapters are represented. Only 1–2 chapters = cannot exceed L2 on Content.</div></div>
+        <div class="session-step"><div class="step-num">2</div><div class="step-text"><strong>Score breadth.</strong> Reward integration from multiple chapters. A student using Cap. 1–5 vocabulary and grammar = strong Content score.</div></div>
+        <div class="session-step"><div class="step-num">3</div><div class="step-text"><strong>Check for regression.</strong> Early structures should be automatic. Cap. 1–2 errors in Lab 6 = penalize more heavily.</div></div>
+        <div class="session-step"><div class="step-num">4</div><div class="step-text"><strong>Full grammar list applies.</strong> All five chapter grammar points are in scope. Use all chips below.</div></div>
+        <div class="session-step"><div class="step-num">5</div><div class="step-text"><strong>Final feedback.</strong> Note strengths across chapters AND 1–2 specific patterns still needing improvement.</div></div>
+      </div>
+      <div class="sh"><h2>Vistas coverage — All chapters</h2><div class="sh-rule"></div></div>
+      <div class="vistas-box"><div class="vistas-grid">
+        <div><span class="vcol-label">Vocabulary review</span><div class="chip-group">
+          <a href="https://vistashigherlearning.com/vistas7/#cap1-vocab" target="_blank" class="chip chip-blue chip-link">Cap. 1 vocab</a>
+          <a href="https://vistashigherlearning.com/vistas7/#cap2-vocab" target="_blank" class="chip chip-blue chip-link">Cap. 2 vocab</a>
+          <a href="https://vistashigherlearning.com/vistas7/#cap3-vocab" target="_blank" class="chip chip-blue chip-link">Cap. 3 vocab</a>
+          <a href="https://vistashigherlearning.com/vistas7/#cap4-vocab" target="_blank" class="chip chip-blue chip-link">Cap. 4 vocab</a>
+          <a href="https://vistashigherlearning.com/vistas7/#cap5-vocab" target="_blank" class="chip chip-blue chip-link">Cap. 5 vocab</a>
+        </div></div>
+        <div><span class="vcol-label">All grammar — click for explanation</span><div class="chip-group">
+          <span class="chip chip-green" onclick="openModal('ser')">ser</span>
+          <span class="chip chip-green" onclick="openModal('estar')">estar</span>
+          <span class="chip chip-green" onclick="openModal('ser_estar')">ser vs. estar</span>
+          <span class="chip chip-blue" onclick="openModal('ar_verbs')">-ar verbs</span>
+          <span class="chip chip-blue" onclick="openModal('er_ir_verbs')">-er/-ir verbs</span>
+          <span class="chip chip-blue" onclick="openModal('gustar')">gustar</span>
+          <span class="chip chip-blue" onclick="openModal('adj_agreement')">adj. agreement</span>
+          <span class="chip chip-blue" onclick="openModal('possessives')">possessives</span>
+          <span class="chip chip-blue" onclick="openModal('tener_venir')">tener/venir</span>
+          <span class="chip chip-amber" onclick="openModal('stem_e_ie')">e→ie</span>
+          <span class="chip chip-amber" onclick="openModal('stem_o_ue')">o→ue</span>
+          <span class="chip chip-amber" onclick="openModal('stem_e_i')">e→i</span>
+          <span class="chip chip-amber" onclick="openModal('irreg_yo')">irreg. yo</span>
+          <span class="chip chip-amber" onclick="openModal('ir_a')">ir a + inf.</span>
+          <span class="chip chip-amber" onclick="openModal('progressive')">progressive</span>
+          <span class="chip chip-amber" onclick="openModal('do_pronouns')">DO pronouns</span>
+        </div></div>
+      </div></div>
+      <div class="sh"><h2>Rubric — Lab 6 scoring emphasis</h2><div class="sh-rule"></div></div>
+      <div class="rubric-grid">
+        <div class="rubric-row"><div class="rubric-row-header"><h3 class="rr-name">1. Content / Completion</h3><span class="rr-sub">3+ chapters · balanced coverage · full prompt response</span><span class="rr-pts">/7</span></div><div class="rubric-levels"><div class="level-cell l1"><span class="level-badge">L1</span><div class="level-desc">Only 1 chapter; major topics absent; mostly English</div></div><div class="level-cell l2"><span class="level-badge">L2</span><div class="level-desc">2–3 chapters; coverage uneven; some topics absent</div></div><div class="level-cell l3"><span class="level-badge">L3</span><div class="level-desc">3–4 chapters covered; most areas addressed; minor gaps</div></div><div class="level-cell l4"><span class="level-badge">L4</span><div class="level-desc">All 5 chapters integrated; balanced and varied; no major topic absent</div></div></div><div class="deduct-note">⚠ <strong>Breadth is the primary measure for Lab 6.</strong> Perfect grammar covering only one chapter ≠ L3 or L4 on Content.</div></div>
+        <div class="rubric-row"><div class="rubric-row-header"><h3 class="rr-name">2. Comprehensibility / Language Control</h3><span class="rr-sub">Early structures solid · Cap. 4–5 applied · no major regressions</span><span class="rr-pts">/5</span></div><div class="rubric-levels"><div class="level-cell l1"><span class="level-badge">L1</span><div class="level-desc">Cap. 1–2 grammar broken; Cap. 4–5 structures absent</div></div><div class="level-cell l2"><span class="level-badge">L2</span><div class="level-desc">Early structures shaky; Cap. 4–5 partially attempted; several errors</div></div><div class="level-cell l3"><span class="level-badge">L3</span><div class="level-desc">Cap. 1–3 solid; Cap. 4–5 mostly correct; occasional errors</div></div><div class="level-cell l4"><span class="level-badge">L4</span><div class="level-desc">All chapters' grammar applied correctly; no regressions; stem changes, progressive, DO pronouns</div></div></div><div class="deduct-note">⚠ Cap. 1–2 regressions in Lab 6 = penalize more heavily than in earlier labs. These should be automatic by now.</div></div>
+      </div>
+      <div class="sh"><h2>Annotation codes</h2><div class="sh-rule"></div></div><div id="annotations-6"></div>
+      <div class="sh"><h2>Spoken feedback phrases</h2><div class="sh-rule"></div></div><div id="phrases-6"></div>
+    </div><!-- /panel-6 -->
+
+  </main>
+</div>
+
+<!-- ── GRAMMAR MODAL ── -->
+<div class="modal-overlay" id="grammar-modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h2 class="modal-title" id="modal-title"></h2>
+      <span class="modal-cap" id="modal-cap"></span>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div><span class="modal-sect-label">Rule / Formula</span><div class="modal-formula" id="modal-rule"></div></div>
+      <div><span class="modal-sect-label">Explanation</span><div class="modal-text" id="modal-text"></div></div>
+      <div><span class="modal-sect-label">Examples</span><div class="modal-examples" id="modal-examples"></div></div>
+      <div id="modal-deduct-wrap"><span class="modal-sect-label">When to deduct points</span><div class="modal-deduct" id="modal-deduct"></div></div>
+      <div id="modal-tip-wrap"><span class="modal-sect-label">TA tip</span><div class="modal-tip" id="modal-tip"></div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Lab selector
+function selectLab(n) {
+  document.querySelectorAll('.lab-panel').forEach(p => p.classList.remove('vis'));
+  document.querySelectorAll('.lab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + n).classList.add('vis');
+  document.querySelectorAll('.lab-btn')[n-1].classList.add('active');
+  // Inject shared annotation + phrase sections
+  const aId = 'annotations-' + n;
+  const pId = 'phrases-' + n;
+  if (!document.getElementById(aId).innerHTML) {
+    document.getElementById(aId).innerHTML = ANNOTATIONS_HTML;
+    document.getElementById(pId).innerHTML = PHRASES_HTML;
+  }
+}
+
+// ── Instructions toggle
+function toggleInstructions(btn) {
+  btn.classList.toggle('open');
+  btn.nextElementSibling.classList.toggle('open');
+}
+
+// ── Init shared sections on load
+window.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('annotations-1').innerHTML = ANNOTATIONS_HTML;
+  document.getElementById('phrases-1').innerHTML = PHRASES_HTML;
+});
+
+// ── Shared annotation HTML
+const ANNOTATIONS_HTML = `
+<div class="ann-grid">
+  <div class="ann-card"><span class="ann-sym">VG</span><h3 class="ann-name">Verb / conjugation</h3><div class="ann-desc">Incorrect verb form, wrong ending, or infinitive used as conjugated verb</div><div class="ann-ex">yo tomar → VG → yo tomo</div></div>
+  <div class="ann-card"><span class="ann-sym">AC</span><h3 class="ann-name">Agreement</h3><div class="ann-desc">Gender or number mismatch on adjective or possessive</div><div class="ann-ex">ella es alto → AC → ella es alta</div></div>
+  <div class="ann-card"><span class="ann-sym">GU</span><h3 class="ann-name">Gustar structure</h3><div class="ann-desc">Wrong IOP or gusta/gustan mismatch</div><div class="ann-ex">yo gusto → GU → me gusta</div></div>
+  <div class="ann-card"><span class="ann-sym">SE</span><h3 class="ann-name">Ser / Estar</h3><div class="ann-desc">Wrong verb choice for context (identity vs. location/temp.)</div><div class="ann-ex">está de México → SE → es de México</div></div>
+  <div class="ann-card"><span class="ann-sym">PR</span><h3 class="ann-name">Preposition</h3><div class="ann-desc">Missing, wrong, or incomplete preposition phrase</div><div class="ann-ex">al lado → PR → al lado de la mesa</div></div>
+  <div class="ann-card"><span class="ann-sym">ART</span><h3 class="ann-name">Article</h3><div class="ann-desc">Missing, wrong gender, or unnecessary article</div><div class="ann-ex">hay el libro → ART → hay un libro</div></div>
+  <div class="ann-card"><span class="ann-sym">VOC</span><h3 class="ann-name">Vocabulary</h3><div class="ann-desc">English word used or wrong Spanish word choice</div><div class="ann-ex">mi major → VOC → mi especialización</div></div>
+  <div class="ann-card"><span class="ann-sym">PR·N</span><h3 class="ann-name">Pronunciation</h3><div class="ann-desc">Specific sound error noted during playback</div><div class="ann-ex">hola [HOH-la] → PR·N → [OH-la]</div></div>
+  <div class="ann-card"><span class="ann-sym">✓</span><h3 class="ann-name">Correct</h3><div class="ann-desc">Mark good usage to reinforce it</div><div class="ann-ex">¡Bien! / ✓ / ¡Excelente!</div></div>
+  <div class="ann-card"><span class="ann-sym">↑</span><h3 class="ann-name">Expand</h3><div class="ann-desc">Response too brief; needs more detail or longer sentence</div><div class="ann-ex">↑ more activities / ↑ time expression</div></div>
+</div>`;
+
+const PHRASES_HTML = `
+<div class="phrase-cols">
+  <div class="phrase-group"><div class="phrase-head pos">✓ Positive reinforcement</div><div class="phrase-list">
+    <div class="phrase-item"><span class="phrase-es">¡Muy bien hecho!</span> <span class="phrase-en">Very well done!</span></div>
+    <div class="phrase-item"><span class="phrase-es">Eso es correcto.</span> <span class="phrase-en">That's correct.</span></div>
+    <div class="phrase-item"><span class="phrase-es">Me gusta cómo usaste…</span> <span class="phrase-en">I like how you used…</span></div>
+    <div class="phrase-item"><span class="phrase-es">Tu pronunciación mejora mucho.</span> <span class="phrase-en">Your pronunciation is improving a lot.</span></div>
+    <div class="phrase-item"><span class="phrase-es">Usaste bien los conectores.</span> <span class="phrase-en">You used connectors well.</span></div>
+  </div></div>
+  <div class="phrase-group"><div class="phrase-head corr">↺ Corrective guidance</div><div class="phrase-list">
+    <div class="phrase-item"><span class="phrase-es">¿Puedes cambiar el verbo?</span> <span class="phrase-en">Can you change the verb?</span></div>
+    <div class="phrase-item"><span class="phrase-es">¿Necesitas ser o estar aquí?</span> <span class="phrase-en">Do you need ser or estar here?</span></div>
+    <div class="phrase-item"><span class="phrase-es">El adjetivo — ¿masculino o femenino?</span> <span class="phrase-en">The adjective — masculine or feminine?</span></div>
+    <div class="phrase-item"><span class="phrase-es">Hay un error pequeño aquí…</span> <span class="phrase-en">There's a small error here…</span></div>
+    <div class="phrase-item"><span class="phrase-es">¿Cómo se pronuncia esta letra?</span> <span class="phrase-en">How do you pronounce this letter?</span></div>
+  </div></div>
+  <div class="phrase-group"><div class="phrase-head enc">→ Extending &amp; encouraging</div><div class="phrase-list">
+    <div class="phrase-item"><span class="phrase-es">¿Puedes agregar más detalles?</span> <span class="phrase-en">Can you add more details?</span></div>
+    <div class="phrase-item"><span class="phrase-es">¿Recuerdas otra forma de gustar?</span> <span class="phrase-en">Do you remember another gustar form?</span></div>
+    <div class="phrase-item"><span class="phrase-es">Trata de conectar con y o pero.</span> <span class="phrase-en">Try connecting with y or pero.</span></div>
+    <div class="phrase-item"><span class="phrase-es">Para el próximo lab, practica…</span> <span class="phrase-en">For the next lab, practice…</span></div>
+    <div class="phrase-item"><span class="phrase-es">¿Qué más puedes decir sobre esto?</span> <span class="phrase-en">What else can you say about this?</span></div>
+  </div></div>
+</div>`;
+
+// ── Grammar modal definitions
+const GRAMMAR = {
+  ser: { title:"ser — to be (identity & characteristics)", cap:"Cap. 1", rule:"soy · eres · es · somos · son", text:"Use ser for permanent identity: names, origin, nationality, profession, and inherent traits. Also for telling time. Never use ser for location or temporary conditions.", examples:[{w:"Ella está profesora.",r:"Ella es profesora."},{w:"Yo ser de México.",r:"Yo soy de México."},{w:"Son las doce.",r:"✓ correct — telling time uses ser"}], deduct:"Penalize under Comprehensibility when ser is left as infinitive or replaced by estar for identity/origin. Each instance = Grammar error.", tip:"Professions after ser take no article unless modified: 'es médico' not 'es un médico' (unless: 'es un buen médico')."},
+  estar: { title:"estar — to be (location & conditions)", cap:"Cap. 1–2", rule:"estoy · estás · está · estamos · están", text:"Use estar for: (1) location of people or things, (2) temporary states and conditions, (3) progressive tenses. Not for permanent identity.", examples:[{w:"La biblioteca es aquí.",r:"La biblioteca está aquí."},{w:"Yo esta cansado.",r:"Yo estoy cansado."},{w:"Estoy en clase.",r:"✓ correct — location uses estar"}], deduct:"Penalize when estar is used for nationality/profession, or when estar is conjugated incorrectly for the subject.", tip:"Cap. 5 extends estar to emotions and progressive. The ser/estar distinction is the single most tested grammar point across all labs."},
+  ser_estar: { title:"ser vs. estar — choosing the right verb", cap:"Cap. 1–5", rule:"ser = identity/permanent · estar = location/temporary", text:"Quick test: Can this state change tomorrow? If yes → estar. Is it core identity (origin, nationality, profession)? → ser. Some adjectives change meaning: 'ser aburrido' = to be boring; 'estar aburrido' = to be bored.", examples:[{w:"Es en la biblioteca. (location)",r:"Está en la biblioteca."},{w:"Estoy mexicano.",r:"Soy mexicano."},{w:"Ella está aburrida hoy.",r:"✓ temporary state — estar correct"}], deduct:"Major Grammar error. 1–2 swaps = stay in L3 range. Consistent confusion across the video = L2 for Grammar.", tip:"'Listo': ser listo = to be clever; estar listo = to be ready. 'Malo': ser malo = to be bad; estar malo = to be sick. These dual-meaning adjectives are tested frequently."},
+  se_llama: { title:"llamarse — reflexive verb for names", cap:"Cap. 1", rule:"me llamo · te llamas · se llama · nos llamamos · se llaman", text:"Llamarse is a reflexive verb. 'Se llama' already contains a complete verb — never add 'es' or 'soy' after it. Also acceptable: 'mi nombre es…'", examples:[{w:"Me llamo es María.",r:"Me llamo María."},{w:"Se llama soy Juan.",r:"Se llama Juan."},{w:"¿Cómo te llamas?",r:"✓ correct question form"}], deduct:"VG flag. Common first error in Lab 1. Usually a one-time correction is sufficient — note in feedback.", tip:"'Mi nombre es' is fully correct at this level. Accept both forms."},
+  article_gender: { title:"Article gender — el / la / un / una", cap:"Cap. 1", rule:"Masc: el, un · Fem: la, una · Plural: los/las, unos/unas", text:"Spanish nouns have fixed grammatical gender. The article must agree. Most nouns ending in -o are masculine; -a are feminine. Exceptions: el problema, la mano, el día.", examples:[{w:"la libro, el mesa",r:"el libro, la mesa"},{w:"un clase difícil",r:"una clase difícil"},{w:"los estudiantes",r:"✓ correct plural masculine"}], deduct:"Penalize under Vocabulary Use for persistent wrong-gender articles on high-frequency nouns. Occasional slip ≠ same as consistent error.", tip:"Teach students to memorize nouns with their article from day 1: 'el libro', not just 'libro'."},
+  telling_time: { title:"Telling time — la hora", cap:"Cap. 1", rule:"Es la una. · Son las dos/tres… · +y cuarto (+15) · +y media (+30) · -menos cuarto (−15)", text:"Es (singular) is used ONLY for 1:00. Son las (plural) for all other hours. Use 'a las' for scheduled times ('la clase es a las tres'). De la mañana/tarde/noche for AM/PM.", examples:[{w:"Son las una y media.",r:"Es la una y media."},{w:"La clase son las tres.",r:"La clase es a las tres."},{w:"Son las cuatro menos cuarto.",r:"✓ correct — 3:45"}], deduct:"VG flag for consistent es/son confusion. Minor deduction for quarter/half phrasing errors.", tip:"For scheduled times (class at 3), use 'a las tres' — not 'son las tres' (which means 'it is 3 o'clock', not 'at 3')."},
+  numbers: { title:"Numbers 0–30 — cardinal numbers", cap:"Cap. 1", rule:"0 cero · 10 diez · 16 dieciséis · 21–29 veinti… · uno→un before masc. noun", text:"Key irregulars: 16=dieciséis, 22=veintidós, 23=veintitrés, 26=veintiséis (accents required). Uno becomes 'un' before masculine nouns, 'una' before feminine nouns.", examples:[{w:"veinte uno estudiantes",r:"veintiún estudiantes"},{w:"Tengo veintiuno años.",r:"Tengo veintiún años."},{w:"Hay veintiuna estudiantes.",r:"✓ -una before feminine noun"}], deduct:"Minor deduction under Vocabulary if consistently wrong. Only major if blocking comprehension.", tip:"Veintiún/veintiuna agreement before nouns is a common trap — watch for it when numbers directly precede nouns."},
+  ar_verbs: { title:"-ar verb conjugation (Cap. 2)", cap:"Cap. 2", rule:"-o · -as · -a · -amos · -áis · -an (remove -ar, add ending)", text:"Remove the -ar infinitive ending and add the personal ending. The ending must agree with the grammatical subject. Students often forget the -amos nosotros form or leave verbs as infinitives.", examples:[{w:"Ella estudias mucho.",r:"Ella estudia mucho."},{w:"Nosotros trabajas juntos.",r:"Nosotros trabajamos juntos."},{w:"Yo hablo español.",r:"✓ correct"}], deduct:"Core skill from Cap. 2 forward. Wrong ending = VG flag each time. Consistent errors across the video = L2 or below on Grammar.", tip:"The nosotros -amos ending is most often skipped. Ask students to conjugate at least one nosotros verb in their video."},
+  gustar: { title:"gustar — indirect object structure", cap:"Cap. 2+", rule:"IOP + gusta (sing./inf.) / gustan (plural noun)", text:"Gustar works backwards from English. The THING liked is the grammatical subject. The person who likes it is an indirect object pronoun (IOP): me / te / le / nos / les. Never use subject pronouns (yo, tú).", examples:[{w:"Yo gusto el café.",r:"Me gusta el café."},{w:"Me gusta los perros.",r:"Me gustan los perros."},{w:"Me gusta bailar.",r:"✓ infinitive always triggers singular gusta"}], deduct:"'Yo gusto' = major Grammar error (−2 pts, GU flag). Gusta/gustan mismatch = −1 pt (GU flag). Consistent wrong pronoun = Grammar L2.", tip:"Full forms: me / te / le / nos / les gusta(n). Clarifiers: a mí me gusta, a ti te gusta, a ella le gusta, etc."},
+  questions: { title:"Question formation — interrogatives", cap:"Cap. 2", rule:"¿[Question word] + verb + subject? · Opening ¿ required in writing", text:"Spanish questions invert subject and verb. Opening ¿ is required in formal written Spanish. Key question words: ¿qué? ¿quién? ¿cuándo? ¿dónde? ¿cómo? ¿cuál/cuáles? ¿cuánto/a/os/as? ¿por qué?", examples:[{w:"¿Tú estudias qué?",r:"¿Qué estudias (tú)?"},{w:"¿Qué es tu nombre?",r:"¿Cuál es tu nombre? / ¿Cómo te llamas?"},{w:"¿Dónde vives?",r:"✓ correct — verb precedes subject"}], deduct:"Missing ¿ = minor written error. Wrong question word (qué vs. cuál) = Grammar error. No inversion = Grammar error.", tip:"¿Qué es? asks for a definition. ¿Cuál es? asks for identification or selection — very common confusion with 'nombre', 'especialización'."},
+  prepositions: { title:"Prepositions of location (Cap. 2)", cap:"Cap. 2", rule:"en · cerca de · lejos de · al lado de · encima de · debajo de · delante de · detrás de · entre", text:"Compound prepositions require 'de' followed by a noun phrase — they cannot be left incomplete. Location uses estar, not ser. De + el contracts to del.", examples:[{w:"El libro está en encima de la mesa.",r:"El libro está encima de la mesa."},{w:"La cama es al lado.",r:"La cama está al lado de la ventana."},{w:"El baño está detrás del cuarto.",r:"✓ de + el = del"}], deduct:"PR flag for incomplete prep phrases (missing 'de' or following noun). SE flag for using ser instead of estar for location.", tip:"de + el = del. de + la stays as 'de la'. Students most often drop the second half of the phrase — 'al lado' without 'de la mesa'."},
+  adj_agreement: { title:"Adjective gender & number agreement", cap:"Cap. 3", rule:"Masc. sg: -o/✓ · Fem. sg: -a/✓ · Plural: add -s or -es", text:"Spanish adjectives agree with the noun they describe in BOTH gender AND number. Adjectives ending in -e or a consonant don't change for gender but do add -s/-es for plural. Descriptive adjectives follow the noun.", examples:[{w:"Mi hermana es alto y rubio.",r:"Mi hermana es alta y rubia."},{w:"Mis hermanos son inteligente.",r:"Mis hermanos son inteligentes."},{w:"El libro es interesante.",r:"✓ -e adjective — no gender change"}], deduct:"AC flag for each error. Gender errors and number errors counted separately. Both penalized under Grammar from Lab 3.", tip:"Nationality adjectives also agree: mexicano/mexicana/mexicanos/mexicanas. Adjectives ending in -ista don't change gender (optimista/pesimista)."},
+  possessives: { title:"Possessive adjectives — mi/mis, tu/tus, su/sus…", cap:"Cap. 3", rule:"mi/mis · tu/tus · su/sus · nuestro/a/os/as · vuestro/a/os/as", text:"Possessives agree with the NOUN OWNED, not the owner. Mi hermano (one brother). Mis hermanos (multiple brothers). Nuestro/nuestra also agrees in gender.", examples:[{w:"Mi hermanos son altos.",r:"Mis hermanos son altos."},{w:"Nuestro familia es grande.",r:"Nuestra familia es grande."},{w:"Sus libros están aquí.",r:"✓ sus = multiple books (their/his/her)"}], deduct:"AC flag for possessive agreement errors. Mi/mis and nuestro/nuestra gender are the two most common errors in Lab 3.", tip:"Su is ambiguous (his/her/your formal/their). For clarity, teach 'el libro de Juan' instead of 'su libro' when context is unclear."},
+  er_ir_verbs: { title:"-er / -ir verb conjugation (Cap. 3)", cap:"Cap. 3", rule:"-er: -o -es -e -emos -en · -ir: -o -es -e -imos -en", text:"The only difference between -er and -ir is in the nosotros form: -emos (comer→comemos) vs. -imos (vivir→vivimos). The yo form is -o for both.", examples:[{w:"Ella comen pizza.",r:"Ella come pizza."},{w:"Nosotros vivemos aquí.",r:"Nosotros vivimos aquí."},{w:"Yo bebo agua.",r:"✓ correct — -er yo form = -o"}], deduct:"VG flag from Lab 3. Watch for students applying -ar endings to -er/-ir verbs (ella coma instead of ella come).", tip:"Common -er verbs: comer, beber, leer, comprender. Common -ir: vivir, escribir, abrir, recibir, asistir."},
+  tener_venir: { title:"tener / venir — irregular present tense", cap:"Cap. 3", rule:"tengo/vengo · tienes/vienes · tiene/viene · tenemos/venimos · tienen/vienen", text:"Both verbs have an irregular yo form (-go) and vowel stem changes in other forms (e→ie). The pattern (go + ie) also appears in decir and other Cap. 4 verbs. Tener is also used in many fixed expressions.", examples:[{w:"Yo teno un hermano.",r:"Yo tengo un hermano."},{w:"Ella vene a clase.",r:"Ella viene a clase."},{w:"Nosotros tenemos clase.",r:"✓ correct — nosotros form regular"}], deduct:"VG flag for teno/veno yo-form errors. VG flag when estar is used in a tener expression (estoy hambre → tengo hambre).", tip:"Tener expressions are noun phrases — no adjective. 'Tengo calor' not 'tengo caliente'. Full list: hambre, sed, frío, calor, miedo, sueño, razón, prisa, celos, vergüenza."},
+  ir_a: { title:"ir — to go + ir a + infinitive (near future)", cap:"Cap. 4", rule:"voy · vas · va · vamos · van · + ir a + infinitivo (no article)", text:"Ir is fully irregular. Use 'ir a + infinitive' for near future plans. Use 'ir a + place' for physical destination. a + el = al. No article before the infinitive in 'ir a + inf.'", examples:[{w:"Voy a la estudiar.",r:"Voy a estudiar. (no article before inf.)"},{w:"Voy a el parque.",r:"Voy al parque. (a + el = al)"},{w:"Ellos van a jugar fútbol.",r:"✓ correct"}], deduct:"PR flag for article inserted before infinitive. VG flag for incorrect ir conjugation. Both penalized from Lab 4.", tip:"Vamos a + infinitive can also mean 'let's': ¡Vamos a comer! = Let's eat! A nice structure for students to know."},
+  stem_e_ie: { title:"Stem-changing verbs — e → ie", cap:"Cap. 4", rule:"All forms EXCEPT nosotros/vosotros change e → ie in the stem", text:"Verbs: querer, preferir, empezar, pensar, entender, perder, cerrar. The stem vowel changes in all stressed forms. Nosotros is unstressed — no change. This is called the 'boot' pattern.", examples:[{w:"Yo quero ir al cine.",r:"Yo quiero ir al cine."},{w:"Nosotros querimos pizza.",r:"Nosotros queremos. (no stem change!)"},{w:"Ellos preferen estudiar.",r:"Ellos prefieren estudiar."}], deduct:"VG flag for missing stem change in stressed forms. VG flag for applying it to nosotros (overcorrection). Both penalized under Grammar.", tip:"Preferir is -ir, so its gerund also changes: prefiriendo (not *preferiendo). This applies in Cap. 5 progressive."},
+  stem_o_ue: { title:"Stem-changing verbs — o → ue", cap:"Cap. 4", rule:"All forms EXCEPT nosotros/vosotros change o → ue", text:"Verbs: poder, volver, dormir, costar, encontrar, morir. Note: jugar changes u → ue (not o → ue, but same boot pattern). Nosotros keeps original vowel.", examples:[{w:"Yo podo hablar español.",r:"Yo puedo hablar español."},{w:"Ella duermo ocho horas.",r:"Ella duerme ocho horas."},{w:"Nosotros podemos ir.",r:"✓ correct — no stem change in nosotros"}], deduct:"Same as e→ie: failure to apply or over-applying to nosotros. VG flag each time.", tip:"Jugar is u→ue: juego, juegas, juega, jugamos, juegan. The most common sports/pastimes verb in Cap. 4."},
+  stem_e_i: { title:"Stem-changing verbs — e → i", cap:"Cap. 4", rule:"Only -ir verbs · All forms EXCEPT nosotros/vosotros change e → i", text:"Verbs: pedir, servir, seguir, repetir, decir (irregular yo: digo). The gerund also changes: pidiendo, sirviendo, siguiendo. Students often confuse e→i with e→ie.", examples:[{w:"Yo pedo una pizza.",r:"Yo pido una pizza."},{w:"Él siervie la comida.",r:"Él sirve la comida."},{w:"Ellos siguen estudiando.",r:"✓ correct — gerund also uses i"}], deduct:"VG flag each time. 'Siervie' (mixing e→ie and e→i) is a very common error — note specifically.", tip:"Decir has e→i AND an irregular yo: digo, dices, dice, decimos, dicen. Gerund: diciendo."},
+  irreg_yo: { title:"Irregular yo forms — -go verbs", cap:"Cap. 4", rule:"hacer→hago · salir→salgo · poner→pongo · traer→traigo · decir→digo · ver→veo · saber→sé · conocer→conozco", text:"These verbs are only irregular in the yo form. All other forms are regular or stem-changing. Students commonly regularize: 'haco', 'salo', 'pono'.", examples:[{w:"Yo haco la tarea.",r:"Yo hago la tarea."},{w:"Yo salo a las ocho.",r:"Yo salgo a las ocho."},{w:"Yo veo mucha televisión.",r:"✓ correct — ver → veo"}], deduct:"VG flag for each wrong yo form from Lab 4. Three or more = push toward L2 on Grammar.", tip:"Ver is irregular in yo (veo) but doesn't follow the -go pattern. Saber (sé) and conocer (conozco) are also irregular yo but not -go pattern."},
+  estar_emotions: { title:"estar + emotion/condition adjectives (Cap. 5)", cap:"Cap. 5", rule:"estar + adjective (temporary state) · adjective MUST agree with subject", text:"Emotions and conditions use estar because they are temporary. The adjective must still agree in gender AND number with the subject. Common: contento/a, nervioso/a, cansado/a, aburrido/a, emocionado/a, enojado/a, feliz.", examples:[{w:"Soy cansado hoy.",r:"Estoy cansado/a hoy."},{w:"Ella está contento.",r:"Ella está contenta. (adj. agrees)"},{w:"Estamos emocionados.",r:"✓ correct — nosotros → -os"}], deduct:"SE flag for ser instead of estar for emotions. AC flag for adjective not agreeing with subject. Both penalized under Grammar.", tip:"Feliz (plural: felices) doesn't change for gender — ends in consonant. Triste similarly: triste/tristes."},
+  progressive: { title:"Present progressive — estar + gerund", cap:"Cap. 5", rule:"estar + -ando (-ar verbs) / -iendo (-er and -ir verbs)", text:"Form: conjugated estar + gerund. -ar → -ando. -er/-ir → -iendo. Stem-changing -ir verbs change the stem in the gerund: dormir→durmiendo, pedir→pidiendo, servir→sirviendo, decir→diciendo.", examples:[{w:"Estoy comendo.",r:"Estoy comiendo. (-er → -iendo)"},{w:"Él está dormando.",r:"Él está durmiendo. (o→u in gerund)"},{w:"Estamos hablando.",r:"✓ correct — -ar → -ando"}], deduct:"VG flag for wrong gerund ending (-endo instead of -iendo). VG flag for missing stem change in -ir gerunds. Both penalized from Lab 5.", tip:"Irregular gerunds: leer→leyendo, traer→trayendo, ir→yendo, poder→pudiendo, oír→oyendo."},
+  do_pronouns: { title:"Direct object pronouns — lo/la/los/las", cap:"Cap. 5", rule:"lo (m.sg) · la (f.sg) · los (m.pl) · las (f.pl) · BEFORE conjugated verb", text:"The DO pronoun replaces the direct object noun and must agree in gender and number with that noun. It goes BEFORE the conjugated verb. With infinitives or gerunds it can attach to the end OR precede the conjugated verb.", examples:[{w:"Yo lo compro el libro.",r:"Yo lo compro. (el libro dropped)"},{w:"Compro lo.",r:"Lo compro. (before verb)"},{w:"Voy a comprarlo / Lo voy a comprar.",r:"✓ both correct with infinitive"}], deduct:"Pronoun placed after conjugated verb = major Grammar error. Wrong gender agreement = AC flag. Both penalized from Lab 5.", tip:"With infinitives/gerunds: 'Lo quiero ver' and 'Quiero verlo' are both fully correct. Accept either."},
+  h_silent: { title:"Silent h — la h muda", cap:"Pronunciation", rule:"h is ALWAYS silent in Spanish — never pronounced", text:"Unlike English, the letter h in Spanish is completely silent in all positions. Words: hola, hablar, hacer, hay, hermano, hospital, hora, ahora. Students often voice it like English h.", examples:[{w:"hola → [HOH-la]",r:"hola → [OH-la]"},{w:"hablar → [HAB-lar]",r:"hablar → [ah-BLAR]"},{w:"hay → [HAY] (English h)",r:"hay → [AY] (like 'I')"}], deduct:"PR·N flag when h is consistently voiced. Note in Pronunciation/Fluency feedback.", tip:"Exception: 'ch' is its own digraph (chico, mucho) — that's not a silent h situation."},
+  vowels: { title:"Spanish vowel sounds — pure, no glides", cap:"Pronunciation", rule:"a=[ah] e=[eh] i=[ee] o=[oh] u=[oo] · always short, pure, no English glide", text:"Spanish vowels are monophthongs — pure single sounds with no glide. English vowels often glide (English 'no' ends with a [w] glide). Spanish 'no' is a clean [noh].", examples:[{w:"gracias → [GRAY-see-us]",r:"gracias → [GRA-syas]"},{w:"me → [may]",r:"me → [meh]"},{w:"sí → [sigh]",r:"sí → [see]"}], deduct:"PR·N flag when English vowel sounds consistently replace Spanish pure vowels.", tip:"The 'ay' glide on 'e' words (me → may) and 'ow' glide on 'o' words are the two most common English interference patterns."},
+  r_rr: { title:"Spanish r and rr — tap and trill", cap:"Pronunciation", rule:"Single r between vowels = tap (like English 'butter' -tt-) · rr or word-initial r = trill", text:"Spanish 'r' between vowels is a single alveolar tap. Double 'rr' and word-initial 'r' require a full trill. English 'r' (retroflex) is never correct in Spanish.", examples:[{w:"pero (with English r)",r:"pero → single tap [pé-ɾo]"},{w:"perro (with English r)",r:"perro → trilled [pé-r̄o]"},{w:"rojo, real — word-initial",r:"word-initial r = full trill"}], deduct:"PR·N flag for consistent use of English retroflex r. Note in Pronunciation/Fluency feedback.", tip:"Exercise: say 'butter' repeatedly fast — the -tt- is close to the Spanish tap r. For the trill, try buzzing the tip of the tongue against the ridge behind the upper teeth."}
+};
+
+function openModal(key) {
+  const d = GRAMMAR[key];
+  if (!d) return;
+  document.getElementById('modal-title').textContent = d.title;
+  document.getElementById('modal-cap').textContent = d.cap;
+  document.getElementById('modal-rule').textContent = d.rule;
+  document.getElementById('modal-text').textContent = d.text;
+  document.getElementById('modal-examples').innerHTML = d.examples.map(e => `
+    <div class="ex-row">
+      <div class="ex-wrong"><span class="ex-label">❌ Wrong</span>${e.w}</div>
+      <div class="ex-right"><span class="ex-label">✅ Correct</span>${e.r}</div>
+    </div>`).join('');
+  const dw = document.getElementById('modal-deduct-wrap');
+  const dd = document.getElementById('modal-deduct');
+  if (d.deduct) { dd.textContent = d.deduct; dw.style.display = ''; }
+  else { dw.style.display = 'none'; }
+  const tw = document.getElementById('modal-tip-wrap');
+  const dt = document.getElementById('modal-tip');
+  if (d.tip) { dt.textContent = d.tip; tw.style.display = ''; }
+  else { tw.style.display = 'none'; }
+  document.getElementById('grammar-modal').classList.add('open');
+}
+function closeModal() { document.getElementById('grammar-modal').classList.remove('open'); }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
