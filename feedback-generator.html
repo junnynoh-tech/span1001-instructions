@@ -245,6 +245,16 @@ body {
 }
 .rtab:hover { border-color: var(--gray-300); color: var(--gray-600); }
 .rtab.active { border-color: var(--blue); background: var(--blue-light); color: var(--blue); }
+.rtab.strengths-tab { border-color: rgba(26,92,56,0.3); color: var(--green); }
+.rtab.strengths-tab:hover { border-color: var(--green); background: var(--green-light); color: var(--green); }
+.rtab.strengths-tab.active { border-color: var(--green); background: var(--green-light); color: var(--green); }
+.chip.str { border-color: rgba(26,92,56,0.3); color: var(--green); }
+.chip.str:hover { border-color: var(--green); background: var(--green-light); }
+.chip.str.sel { border-color: var(--green); background: var(--green-light); font-weight: 600; }
+.schip-speak { cursor:pointer; position:relative; }
+.schip-speak:hover::after { content:'🔊'; position:absolute; top:-18px; left:50%; transform:translateX(-50%); font-size:10px; }
+.ex-speak { cursor:pointer; border-bottom:1px dashed var(--blue); }
+.ex-speak:hover { color: var(--navy); }
 
 .err-panel { display: none; animation: fadeUp 0.18s ease; }
 .err-panel.vis { display: block; }
@@ -390,6 +400,7 @@ body {
 .tag-c { background: var(--blue-light); color: var(--blue); }
 .tag-d { background: var(--amber-light); color: var(--amber); }
 .tag-n { background: var(--gray-100); color: var(--gray-600); }
+.tag-s { background: var(--green-light); color: var(--green); }
 
 .fb-block-body {
   padding: 11px 13px;
@@ -404,6 +415,17 @@ body {
   font-size: 0.76rem; color: var(--gray-700);
 }
 .fb-ex span { font-family: 'DM Serif Display', serif; font-style: italic; color: var(--blue); }
+.fb-strength-block {
+  margin-bottom: 8px;
+  border: 1.5px solid #a7e8c8;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.fb-strength-block .fb-block-hdr {
+  background: var(--green-light);
+  border-bottom: 1.5px solid #a7e8c8;
+}
+.fb-strength-block .fb-block-body { color: var(--green); font-size: 0.82rem; }
 
 @media (max-width: 800px) {
   .app-wrap { grid-template-columns: 1fr; }
@@ -422,6 +444,7 @@ body {
       <span>Lab Assistant Tool · Spring 2026</span>
     </div>
   </div>
+  <a href="index.html" style="display:flex;align-items:center;gap:7px;padding:7px 10px;border-radius:6px;border:1.5px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.65);font-size:0.72rem;font-weight:600;text-decoration:none;transition:all 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.1)';this.style.color='white'" onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.color='rgba(255,255,255,0.65)'">⌂ Back to Home</a>
 
   <div>
     <div class="slabel">Select Lab</div>
@@ -477,8 +500,9 @@ body {
       <div class="rtab active" onclick="selTab('content')" data-tab="content">✅ Content</div>
       <div class="rtab" onclick="selTab('comp')" data-tab="comp">💬 Comprehensibility</div>
       <div class="rtab" onclick="selTab('discourse')" data-tab="discourse">🗂️ Discourse</div>
-      <div class="rtab" onclick="selTab('engagement')" data-tab="engagement">⭐ Engagement</div>
+      <div class="rtab" onclick="selTab('engagement')" data-tab="engagement">🎯 Engagement</div>
       <div class="rtab" onclick="selTab('pron')" data-tab="pron">🔊 Pronunciation</div>
+      <div class="rtab strengths-tab" onclick="selTab('strengths')" data-tab="strengths">⭐ Strengths</div>
     </div>
 
     <div class="err-panel vis" id="ep-content">
@@ -535,6 +559,13 @@ body {
       </div>
       <textarea class="notes-ta" id="notes-pron" placeholder="Additional notes for pronunciation…"></textarea>
     </div>
+
+    <div class="err-panel" id="ep-strengths">
+      <div class="err-section-title" style="color:var(--green);">⭐ Select strengths to include in feedback</div>
+      <div style="font-size:0.7rem;color:var(--gray-400);margin-bottom:11px;line-height:1.5;">ACTFL Novice-High / Intermediate-Low indicators. Selected strengths appear in the feedback under <strong>Strengths</strong> with the student's name.</div>
+      <div id="strengthsChips"></div>
+      <textarea class="notes-ta" id="notes-strengths" placeholder="Additional strength or specific praise…"></textarea>
+    </div>
   </div>
 
   <!-- Output -->
@@ -573,14 +604,51 @@ const LAB_SUBS = {
 };
 
 const COMPLIMENTS = [
-  "¡Muy bien hecho! Your dedication to this submission is clear, and it shows real growth in your Spanish.",
-  "¡Excelente trabajo! You approached this task with genuine effort — every sentence you produce in Spanish is meaningful progress.",
-  "¡Buen trabajo! There are real strengths in this submission, and you should feel proud of how far your Spanish has come.",
-  "¡Fantástico! Your commitment to communicating in Spanish shines through, and this submission has many strong moments.",
-  "¡Estupendo! You're building your Spanish skills steadily, and this video demonstrates genuine progress.",
-  "¡Buenísimo! Communicating in a new language takes courage and hard work — you're doing both, and it shows.",
-  "¡Muy bien! Several parts of your submission show clear understanding of the chapter material.",
-  "¡Genial! Speaking Spanish authentically is the most important goal of this course, and you are absolutely doing that.",
+  "Your dedication to this submission is clear, and it shows real growth in your Spanish.",
+  "You approached this task with genuine effort — every sentence you produce in Spanish is meaningful progress.",
+  "There are real strengths in this submission, and you should feel proud of how far your Spanish has come.",
+  "Your commitment to communicating in Spanish shines through, and this submission has many strong moments.",
+  "You're building your Spanish skills steadily, and this video demonstrates genuine progress.",
+  "Communicating in a new language takes courage and hard work — you're doing both, and it shows.",
+  "Several parts of your submission show clear understanding of the chapter material.",
+  "Speaking Spanish authentically is the most important goal of this course, and you are absolutely doing that.",
+];
+
+// ── ACTFL-grounded strengths data
+const STRENGTHS_DATA = [
+  { group:"Communication — ACTFL Novice High", items:[
+    { k:"str_comprehensible", lbl:"Comprehensible to sympathetic listener", body:"Your message came through clearly. A Spanish speaker unfamiliar with learner errors could follow your meaning — that's the key benchmark at this level." },
+    { k:"str_full_sentences", lbl:"Consistently uses complete sentences", body:"You consistently formed complete sentences rather than isolated words or phrases, placing you at the sentence level of Novice High — a real achievement." },
+    { k:"str_familiar_questions", lbl:"Handles familiar topics with confidence", body:"You responded to familiar prompts with confidence and detail, demonstrating solid control within well-practiced topics." },
+    { k:"str_memorized_phrases", lbl:"Memorized chunks used naturally", body:"You used memorized phrases and chunks — like ¡Me gusta mucho!, ¿Cómo te llamas?, buenos días — in natural, appropriate contexts." },
+    { k:"str_circumlocution", lbl:"Works around unknown vocabulary", body:"When you didn't know a word, you found ways to express the same idea with vocabulary you did know — a key real-world communication skill." },
+  ]},
+  { group:"Grammar — Evidence of Accuracy", items:[
+    { k:"str_ser_solid", lbl:"Ser used accurately for identity/origin", body:"Your use of ser for identity, origin, and description showed solid command of this foundational verb — one of the most important structures in elementary Spanish." },
+    { k:"str_ar_verbs", lbl:"-ar verb endings consistent and correct", body:"Your -ar verb conjugations were consistently accurate, demonstrating a strong grasp of the most productive verb pattern in the language." },
+    { k:"str_gustar_correct", lbl:"Gustar structure used correctly", body:"You used the gustar structure correctly — with the right indirect object pronoun and gusta/gustan agreement — which many students find tricky at this stage." },
+    { k:"str_adj_agreement", lbl:"Adjective gender/number agreement accurate", body:"Your adjectives agreed with the nouns they described in both gender and number — demonstrating attention to one of the most detail-heavy aspects of Spanish grammar." },
+    { k:"str_stem_changes", lbl:"Stem-changing verbs applied correctly", body:"You applied stem changes accurately (e→ie, o→ue, or e→i), which requires genuine internalization of the pattern — this shows real progress." },
+    { k:"str_ser_estar", lbl:"Ser/estar distinction handled well", body:"You made accurate ser/estar choices throughout — identity vs. temporary states, location vs. inherent traits — one of the most tested distinctions in Spanish." },
+  ]},
+  { group:"Discourse — Novice High / Int-Low Range", items:[
+    { k:"str_connectors", lbl:"Uses linking words to connect ideas", body:"You connected ideas with words like y, también, pero, and porque, moving beyond choppy isolated sentences into more flowing, natural speech." },
+    { k:"str_elaboration", lbl:"Elaborates beyond minimum required", body:"You went beyond the bare minimum and added details, examples, or explanations — this kind of elaboration is a hallmark of Intermediate-Low range proficiency." },
+    { k:"str_variety", lbl:"Varied sentence types and structures", body:"You mixed declaratives, questions, negatives, and gustar-type sentences, giving your speech natural variety rather than repetitive patterns." },
+    { k:"str_paragraph", lbl:"Ideas organized into coherent sequences", body:"Your ideas followed a logical sequence — you didn't just list items but organized them in a way that was easy for the listener to follow." },
+  ]},
+  { group:"Pronunciation & Fluency", items:[
+    { k:"str_vowels", lbl:"Spanish vowels mostly pure and accurate", body:"Your vowel sounds were mostly crisp and pure — the foundation of a Spanish accent — without the English glides that many learners carry over." },
+    { k:"str_h_silent", lbl:"Silent h consistently silent", body:"You consistently kept the h silent — a simple but surprisingly difficult habit to break, and you handled it naturally." },
+    { k:"str_fluency", lbl:"Natural pace and rhythm", body:"You spoke at a natural, steady pace without excessive pausing or rushing — your speech had a rhythm that made it easy to follow." },
+    { k:"str_natural", lbl:"Response sounded spontaneous, not scripted", body:"Your delivery sounded genuine and spontaneous rather than rehearsed, which is exactly what video lab assignments are designed to develop." },
+  ]},
+  { group:"Engagement & Effort", items:[
+    { k:"str_prompt_followed", lbl:"Prompt followed fully and accurately", body:"You addressed every part of the prompt completely and accurately, demonstrating careful attention to instructions." },
+    { k:"str_question", lbl:"Included a genuine follow-up question", body:"Your follow-up question showed real communicative intent — you weren't just reciting responses but engaging in an authentic exchange." },
+    { k:"str_detail", lbl:"Added personal, creative detail", body:"You added personal details that went beyond the minimum — specific names, real preferences, genuine opinions — making your Spanish authentic and memorable." },
+    { k:"str_time", lbl:"Met time requirement comfortably", body:"Your submission met the time requirement comfortably, with enough content and detail to show genuine engagement with the task." },
+  ]},
 ];
 
 // ── Content errors by lab
@@ -786,6 +854,7 @@ const FB = {
 let currentLab = 1;
 let selectedKeys = new Set();
 let selectedSounds = new Set();
+let selectedStrengths = new Set();
 let lastFeedbackHTML = '';
 let lastFeedbackText = '';
 
@@ -795,6 +864,18 @@ function init() {
   buildGrammarChips();
   buildStaticChips('discourseChips', DISCOURSE_ERRORS);
   buildStaticChips('engagementChips', ENGAGEMENT_ERRORS);
+  buildStrengthChips();
+}
+
+function buildStrengthChips() {
+  document.getElementById('strengthsChips').innerHTML = STRENGTHS_DATA.map(g => `
+    <div class="err-group">
+      <div class="err-group-lbl">${g.group}</div>
+      <div class="chips">${g.items.map(e => `
+        <div class="chip str ${selectedStrengths.has(e.k)?'sel':''}" onclick="toggleStrength(this)" data-k="${e.k}"><span class="ck">✓</span> ${e.lbl}</div>
+      `).join('')}</div>
+    </div>
+  `).join('');
 }
 
 function buildContentChips() {
@@ -850,6 +931,13 @@ function toggleSound(el) {
   else selectedSounds.delete(s);
 }
 
+function toggleStrength(el) {
+  el.classList.toggle('sel');
+  const k = el.dataset.k;
+  if(el.classList.contains('sel')) selectedStrengths.add(k);
+  else selectedStrengths.delete(k);
+}
+
 // ─── GENERATE ──────────────────────────────────────────────────────────────
 function generateFeedback() {
   const name = document.getElementById('studentName').value.trim() || 'Student';
@@ -866,8 +954,30 @@ function generateFeedback() {
     engage:  document.getElementById('notes-engagement').value.trim(),
     pron:    document.getElementById('notes-pron').value.trim(),
   };
+  const strengthNote = document.getElementById('notes-strengths').value.trim();
 
-  // Build blocks
+  // Build strength blocks (screen)
+  const allStrengthKeys = [...selectedStrengths];
+  let strengthsHTML = '';
+  allStrengthKeys.forEach(k => {
+    const sg = STRENGTHS_DATA.flatMap(g=>g.items).find(i=>i.k===k);
+    if (!sg) return;
+    strengthsHTML += `
+      <div class="fb-strength-block">
+        <div class="fb-block-hdr"><span style="font-size:0.9rem;margin-right:5px;">⭐</span>${sg.lbl}<span class="fb-tag tag-s">Strength</span></div>
+        <div class="fb-block-body">${sg.body}</div>
+      </div>`;
+  });
+  if (strengthNote) {
+    strengthsHTML += `
+      <div class="fb-strength-block">
+        <div class="fb-block-hdr"><span style="font-size:0.9rem;margin-right:5px;">⭐</span>Additional Strength<span class="fb-tag tag-s">Strength</span></div>
+        <div class="fb-block-body">${strengthNote}</div>
+      </div>`;
+  }
+  const hasStrengths = strengthsHTML || showComp;
+
+  // Build error blocks (screen)
   let blocksHTML = '';
   let blocksText = '';
 
@@ -876,13 +986,17 @@ function generateFeedback() {
     const soundBadge = fb.tag === 'tag-p' && fb.soundSymbol
       ? `<span style="font-family:'DM Serif Display',serif;font-size:1.35rem;font-weight:600;color:var(--teal);background:var(--teal-light);border:1.5px solid #a0ddd4;border-radius:6px;padding:1px 10px;margin-right:6px;line-height:1.4;display:inline-block;">${fb.soundSymbol}</span>`
       : '';
+    // Make examples speakable for pronunciation items
+    let exHTML = '';
+    if (fb.ex) {
+      const wrongSpeak = fb.ex.w ? buildSpeakSpan(fb.ex.w, 'es-US') : null;
+      const rightSpeak = buildSpeakSpan(fb.ex.r, 'es-US');
+      exHTML = `<div class="fb-ex">${wrongSpeak?`<div>❌ ${wrongSpeak}</div>`:''}<div>✅ ${rightSpeak}</div></div>`;
+    }
     blocksHTML += `
       <div class="fb-block">
-        <div class="fb-block-hdr">${soundBadge}${fb.title}<span class="fb-tag ${fb.tag}">${fb.tagLbl}</span></div>
-        <div class="fb-block-body">${fb.body}${fb.ex?`
-          <div class="fb-ex">${fb.ex.w?`<div>❌ <span>${fb.ex.w}</span></div>`:''}
-          <div>✅ <span>${fb.ex.r}</span></div></div>`:''}
-        </div>
+        <div class="fb-block-hdr">${soundBadge}${fb.tag==='tag-p'&&fb.soundSymbol?`<span class="schip-speak" style="cursor:pointer;text-decoration:underline dotted var(--teal);color:var(--teal);" onclick="speak('${escQ(fb.soundSymbol)}','es-US')" title="Click to hear this sound">${fb.title}</span>`:fb.title}<span class="fb-tag ${fb.tag}">${fb.tagLbl}</span></div>
+        <div class="fb-block-body">${fb.body}${exHTML}</div>
       </div>`;
     blocksText += `\n• ${fb.title} (${fb.tagLbl})\n  ${fb.body}`;
     if(fb.ex){ if(fb.ex.w) blocksText+=`\n  ❌ ${fb.ex.w}`; blocksText+=`\n  ✅ ${fb.ex.r}`; }
@@ -901,7 +1015,16 @@ function generateFeedback() {
     blocksText += `\n• Additional Note — ${noteLabelMap[k]}\n  ${v}\n`;
   });
 
+  // Strength text for plain
+  let strengthsText = '';
+  allStrengthKeys.forEach(k => {
+    const sg = STRENGTHS_DATA.flatMap(g=>g.items).find(i=>i.k===k);
+    if (sg) strengthsText += `\n• ${sg.lbl}\n  ${sg.body}\n`;
+  });
+  if (strengthNote) strengthsText += `\n• Additional Strength\n  ${strengthNote}\n`;
+
   // Full HTML preview
+  const opener = showComp ? `<div class="fb-compliment">¡Buen trabajo, ${name}! ${comp}</div>` : '';
   const previewHTML = `
     <div class="fb-preview">
       <div class="fb-hdr">
@@ -910,7 +1033,7 @@ function generateFeedback() {
           <div class="fb-meta">${LAB_SUBS[currentLab]} &nbsp;·&nbsp; ${today}</div>
         </div>
       </div>
-      ${showComp?`<div class="fb-sec"><div class="fb-sec-title">✨ Strengths</div><div class="fb-compliment">${comp}</div></div>`:''}
+      ${hasStrengths?`<div class="fb-sec"><div class="fb-sec-title">⭐ Strengths</div>${opener}${strengthsHTML}</div>`:''}
       ${blocksHTML?`<div class="fb-sec"><div class="fb-sec-title">💡 Areas for Improvement</div>${blocksHTML}</div>`
         :`<div style="background:var(--green-light);border:1.5px solid #a7e8c8;border-radius:var(--radius-sm);padding:13px 15px;font-size:0.83rem;color:var(--green);">
         ¡Excelente! No specific errors flagged — great submission! 🎉</div>`}
@@ -919,16 +1042,11 @@ function generateFeedback() {
       </div>
     </div>`;
 
-  // Plain text for Brightspace
-  const plainText = `SPAN 1001 — Lab Feedback
-${name} | ${LAB_SUBS[currentLab]} | ${today}
+  // Plain text for Brightspace fallback
+  const plainText = `SPAN 1001 — Lab Feedback\n${name} | ${LAB_SUBS[currentLab]} | ${today}\n\n${hasStrengths?`STRENGTHS\n¡Buen trabajo, ${name}! ${comp}${strengthsText}\n`:''}${blocksText?`AREAS FOR IMPROVEMENT\n${blocksText}`:'No specific errors flagged — great submission! ¡Excelente!'}\n\nSPAN 1001 · Spring 2026`;
 
-${showComp?`STRENGTHS\n${comp}\n\n`:''}${blocksText?`AREAS FOR IMPROVEMENT\n${blocksText}`:'No specific errors flagged — great submission! ¡Excelente!'}
-
-SPAN 1001 · Spring 2026`;
-
-  // Brightspace-ready HTML (clean, no CSS variables)
-  const bsHTML = buildBrightspaceHTML(name, today, showComp, comp, allKeys, notes, noteLabelMap);
+  // Brightspace-ready HTML
+  const bsHTML = buildBrightspaceHTML(name, today, showComp, comp, allKeys, allStrengthKeys, strengthNote, notes, noteLabelMap);
 
   lastFeedbackText = plainText;
   lastFeedbackHTML = bsHTML;
@@ -942,11 +1060,62 @@ SPAN 1001 · Spring 2026`;
   document.getElementById('btnPrintFB').disabled = false;
 }
 
-// ─── BRIGHTSPACE HTML BUILDER ──────────────────────────────────────────────
-function buildBrightspaceHTML(name, today, showComp, comp, allKeys, notes, noteLabelMap) {
-  const headerBg = '#1a3a6b';
-  const headerText = '#ffffff';
+// ─── TTS HELPERS ───────────────────────────────────────────────────────────
+function speak(text, lang) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = lang || 'es-US';
+  u.rate = 0.82;
+  window.speechSynthesis.speak(u);
+}
+function escQ(s) { return s.replace(/'/g,"&#39;").replace(/"/g,"&quot;"); }
+function extractSpanish(s) {
+  const parts = s.split(/→/);
+  const raw = (parts[0] || s).trim();
+  return raw.replace(/\[.*?\]/g,'').replace(/[❌✅]/g,'').trim();
+}
+function buildSpeakSpan(text, lang) {
+  const spanish = extractSpanish(text);
+  if (!spanish) return `<span>${text}</span>`;
+  return `<span class="ex-speak" onclick="speak('${escQ(spanish)}','${lang}')" title="🔊 Click to hear in Spanish" style="cursor:pointer;border-bottom:1px dashed #2a5fad;">${text}</span>`;
+}
+// Inline-style version for pasted BS HTML (no class dependency, self-contained onclick)
+function buildSpeakSpanBS(text) {
+  const spanish = extractSpanish(text);
+  if (!spanish) return text;
+  return `<span onclick="(function(){var u=new SpeechSynthesisUtterance('${escQ(spanish)}');u.lang='es-US';u.rate=0.82;window.speechSynthesis.cancel();window.speechSynthesis.speak(u);})()" title="🔊 Click to hear in Spanish" style="cursor:pointer;border-bottom:1px dashed #2a5fad;">${text}</span>`;
+}
 
+// ─── BRIGHTSPACE HTML BUILDER ──────────────────────────────────────────────
+function buildBrightspaceHTML(name, today, showComp, comp, allKeys, allStrengthKeys, strengthNote, notes, noteLabelMap) {
+  // ── Strengths section
+  let strengthsHtmlBS = '';
+  allStrengthKeys.forEach(k => {
+    const sg = STRENGTHS_DATA.flatMap(g=>g.items).find(i=>i.k===k);
+    if (!sg) return;
+    strengthsHtmlBS += `
+    <div style="margin-bottom:8px;border:1.5px solid #a7e8c8;border-radius:8px;overflow:hidden;">
+      <div style="background:#e4f5ec;padding:9px 13px;border-bottom:1.5px solid #a7e8c8;display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-size:13px;font-weight:700;color:#1a5c38;">⭐ ${sg.lbl}</span>
+        <span style="font-size:11px;font-weight:700;background:#a7e8c8;color:#1a5c38;padding:2px 8px;border-radius:9px;text-transform:uppercase;letter-spacing:0.06em;">Strength</span>
+      </div>
+      <div style="padding:10px 13px;font-size:13px;color:#1a5c38;line-height:1.7;background:#f4fcf7;">${sg.body}</div>
+    </div>`;
+  });
+  if (strengthNote) {
+    strengthsHtmlBS += `
+    <div style="margin-bottom:8px;border:1.5px solid #a7e8c8;border-radius:8px;overflow:hidden;">
+      <div style="background:#e4f5ec;padding:9px 13px;border-bottom:1.5px solid #a7e8c8;display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-size:13px;font-weight:700;color:#1a5c38;">⭐ Additional Strength</span>
+        <span style="font-size:11px;font-weight:700;background:#a7e8c8;color:#1a5c38;padding:2px 8px;border-radius:9px;text-transform:uppercase;letter-spacing:0.06em;">Strength</span>
+      </div>
+      <div style="padding:10px 13px;font-size:13px;color:#1a5c38;line-height:1.7;background:#f4fcf7;">${strengthNote}</div>
+    </div>`;
+  }
+  const hasStrengthsBS = showComp || strengthsHtmlBS;
+
+  // ── Improvement blocks
   let improvHTML = '';
   allKeys.forEach(k => {
     const fb = FB[k]; if(!fb) return;
@@ -957,19 +1126,22 @@ function buildBrightspaceHTML(name, today, showComp, comp, allKeys, notes, noteL
     const bsSoundBadge = fb.soundSymbol
       ? `<span style="font-family:Georgia,serif;font-size:15px;font-weight:700;color:#0a6b5e;background:#e0f7f4;border:1.5px solid #a0ddd4;border-radius:5px;padding:0 8px;margin-right:7px;line-height:1.6;display:inline-block;">${fb.soundSymbol}</span>`
       : '';
+    let exBS = '';
+    if (fb.ex) {
+      const isPron = fb.tag === 'tag-p';
+      const wrongHTML = fb.ex.w
+        ? `<div style="margin-bottom:3px;">❌ <em style="color:#b5302a;">${isPron ? buildSpeakSpanBS(fb.ex.w) : fb.ex.w}</em></div>`
+        : '';
+      const rightHTML = `<div>✅ <em style="color:#1a5c38;">${isPron ? buildSpeakSpanBS(fb.ex.r) : fb.ex.r}</em></div>`;
+      exBS = `<div style="margin-top:8px;background:#f0f6ff;border-left:3px solid #2a5fad;padding:7px 11px;border-radius:0 6px 6px 0;font-size:12px;">${wrongHTML}${rightHTML}</div>`;
+    }
     improvHTML += `
     <div style="margin-bottom:12px;border:1.5px solid #e2e5ea;border-radius:8px;overflow:hidden;">
       <div style="background:#f8f9fb;padding:9px 13px;border-bottom:1px solid #e2e5ea;display:flex;align-items:center;justify-content:space-between;">
         <span style="font-size:13px;font-weight:700;color:#1a3a6b;">${bsSoundBadge}${fb.title}</span>
         <span style="font-size:11px;font-weight:700;background:${tagBg};color:${tagColor};padding:2px 8px;border-radius:9px;text-transform:uppercase;letter-spacing:0.06em;">${fb.tagLbl}</span>
       </div>
-      <div style="padding:10px 13px;font-size:13px;color:#5a6070;line-height:1.7;">
-        ${fb.body}
-        ${fb.ex?`<div style="margin-top:8px;background:#f0f6ff;border-left:3px solid #2a5fad;padding:7px 11px;border-radius:0 6px 6px 0;font-size:12px;">
-          ${fb.ex.w?`<div>❌ <em style="color:#2a5fad;">${fb.ex.w}</em></div>`:''}
-          <div>✅ <em style="color:#2a5fad;">${fb.ex.r}</em></div>
-        </div>`:''}
-      </div>
+      <div style="padding:10px 13px;font-size:13px;color:#5a6070;line-height:1.7;">${fb.body}${exBS}</div>
     </div>`;
   });
   Object.entries(notes).forEach(([k,v])=>{
@@ -983,16 +1155,38 @@ function buildBrightspaceHTML(name, today, showComp, comp, allKeys, notes, noteL
     </div>`;
   });
 
-  return `<div style="font-family:Arial,Helvetica,sans-serif;max-width:680px;margin:0 auto;color:#1e2228;">
-  <div style="background:${headerBg};color:${headerText};border-radius:8px;padding:18px 22px;margin-bottom:14px;">
-    <div style="font-size:17px;font-weight:700;margin-bottom:3px;">${name}</div>
-    <div style="font-size:12px;opacity:0.7;">${LAB_SUBS[currentLab]} &nbsp;·&nbsp; ${today}</div>
+  return `<div style="font-family:Arial,Helvetica,sans-serif;max-width:700px;margin:0 auto;color:#1e2228;background:#ffffff;">
+
+  <!-- Header -->
+  <div style="background:#1a3a6b;color:#ffffff;border-radius:8px 8px 0 0;padding:20px 24px 16px;">
+    <div style="font-size:18px;font-weight:700;margin-bottom:3px;">${name}</div>
+    <div style="font-size:12px;opacity:0.65;">${LAB_SUBS[currentLab]} &nbsp;·&nbsp; ${today}</div>
   </div>
-  ${showComp?`<div style="background:#e4f5ec;border:1.5px solid #a7e8c8;border-radius:8px;padding:13px 16px;margin-bottom:14px;font-size:13px;font-style:italic;color:#1a5c38;line-height:1.7;">${comp}</div>`:''}
-  ${improvHTML?`<div style="margin-bottom:8px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.09em;color:#636975;">Areas for Improvement</div>${improvHTML}`
-    :`<div style="background:#e4f5ec;border:1.5px solid #a7e8c8;border-radius:8px;padding:12px 16px;font-size:13px;color:#1a5c38;">¡Excelente! No specific errors flagged — great submission! 🎉</div>`}
-  <div style="margin-top:16px;padding-top:12px;border-top:1.5px solid #e2e5ea;font-size:11px;color:#636975;text-align:center;">
+
+  <div style="border:1.5px solid #dceeff;border-top:none;border-radius:0 0 8px 8px;padding:20px 22px;">
+
+  ${hasStrengthsBS ? `
+  <!-- Strengths section label -->
+  <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:#636975;margin-bottom:10px;">⭐ Strengths</div>
+  ${showComp ? `
+  <!-- Opener -->
+  <div style="background:linear-gradient(135deg,#e4f5ec,#d8f5ee);border:1.5px solid #a7e8c8;border-radius:8px;padding:14px 16px;margin-bottom:10px;font-size:14px;font-style:italic;color:#1a5c38;line-height:1.75;">
+    ¡Buen trabajo, ${name}! ${comp}
+  </div>` : ''}
+  ${strengthsHtmlBS}
+  <div style="height:1px;background:#e2e5ea;margin:18px 0;"></div>` : ''}
+
+  ${improvHTML ? `
+  <!-- Improvement section label -->
+  <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:#636975;margin-bottom:10px;">💡 Areas for Improvement</div>
+  ${improvHTML}` :
+  `<div style="background:#e4f5ec;border:1.5px solid #a7e8c8;border-radius:8px;padding:12px 16px;font-size:13px;color:#1a5c38;">¡Excelente! No specific errors flagged — great submission! 🎉</div>`}
+
+  <!-- Footer -->
+  <div style="margin-top:20px;padding-top:14px;border-top:1.5px solid #e2e5ea;font-size:11px;color:#636975;text-align:center;">
     SPAN 1001 · ${LAB_SUBS[currentLab].split('·')[0].trim()} · Spring 2026
+  </div>
+
   </div>
 </div>`;
 }
