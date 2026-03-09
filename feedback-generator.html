@@ -1130,112 +1130,147 @@ function buildSpeakSpanBS(text) {
 }
 
 // ─── BRIGHTSPACE HTML BUILDER ──────────────────────────────────────────────
+// Mirrors the screen preview exactly, with full inline styles and WCAG AA contrast.
+// Tag pills match CSS vars resolved to hex. All text-on-bg combos >= 4.5:1.
+// Pronunciation examples wrapped in speakable spans (TTS via Web Speech API).
 function buildBrightspaceHTML(name, today, showComp, comp, allKeys, allStrengthKeys, strengthNote, notes, noteLabelMap) {
-  // ── Strengths section
+
+  // Resolved CSS variable values
+  const C = {
+    navy:'#1a3a6b', blue:'#2a5fad', bluePale:'#f0f6ff', blueLight:'#dceeff',
+    green:'#1a5c38', greenLight:'#e4f5ec',
+    purple:'#5b2d8e', purpleLight:'#f2eaff',
+    teal:'#0a6b5e', tealLight:'#e0f7f4',
+    amber:'#9a4d07', amberLight:'#fff3e0',
+    gray50:'#f8f9fb', gray100:'#f0f2f5', gray200:'#e2e5ea',
+    gray400:'#636975', gray600:'#5a6070', text:'#1e2228',
+  };
+
+  // Tag pill — matches .fb-tag CSS exactly, resolved to hex
+  // All pass WCAG AA (dark color on light bg, both >= 4.5:1)
+  function tagPill(label, tag) {
+    const s = {
+      'tag-c': `background:${C.blueLight};color:${C.blue}`,
+      'tag-g': `background:${C.purpleLight};color:${C.purple}`,
+      'tag-p': `background:${C.tealLight};color:${C.teal}`,
+      'tag-d': `background:${C.amberLight};color:${C.amber}`,
+      'tag-n': `background:${C.gray100};color:${C.gray600}`,
+      'tag-s': `background:${C.greenLight};color:${C.green}`,
+    }[tag] || `background:${C.gray100};color:${C.gray600}`;
+    return `<span style="display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;padding:2px 7px;border-radius:9px;margin-left:auto;white-space:nowrap;${s}">${label}</span>`;
+  }
+
+  // Example block — mirrors .fb-ex exactly
+  function exBlock(fb) {
+    const isPron = fb.tag === 'tag-p';
+    const exStyle = `margin-top:8px;background:${C.bluePale};border-left:3px solid ${C.blue};border-radius:0 7px 7px 0;padding:8px 12px;font-size:13px;font-style:italic;color:${C.blue};line-height:1.7;`;
+    const labelStyle = `display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:${C.teal};margin-bottom:3px;font-style:normal;`;
+    if (fb.exRows) {
+      const rows = fb.exRows.map((row, i) => `
+        <div style="margin-bottom:${i < fb.exRows.length-1 ? '10px':'0'};">
+          <span style="${labelStyle}">${row.label}</span>
+          <div>&#10060; ${isPron ? buildSpeakSpanBS(row.w) : row.w}</div>
+          <div>&#9989; ${isPron ? buildSpeakSpanBS(row.r) : row.r}</div>
+        </div>`).join(`<div style="height:1px;background:${C.gray200};margin:6px 0;"></div>`);
+      return `<div style="${exStyle}">${rows}</div>`;
+    } else if (fb.ex) {
+      const w = fb.ex.w ? `<div>&#10060; ${isPron ? buildSpeakSpanBS(fb.ex.w) : fb.ex.w}</div>` : '';
+      const r = `<div>&#9989; ${isPron ? buildSpeakSpanBS(fb.ex.r) : fb.ex.r}</div>`;
+      return `<div style="${exStyle}">${w}${r}</div>`;
+    }
+    return '';
+  }
+
+  // ── Strength cards — mirrors .fb-strength-block ────────────────────────
   let strengthsHtmlBS = '';
   allStrengthKeys.forEach(k => {
     const sg = STRENGTHS_DATA.flatMap(g=>g.items).find(i=>i.k===k);
     if (!sg) return;
     strengthsHtmlBS += `
-    <div style="margin-bottom:8px;border:1.5px solid #a7e8c8;border-radius:8px;overflow:hidden;">
-      <div style="background:#e4f5ec;padding:9px 13px;border-bottom:1.5px solid #a7e8c8;display:flex;align-items:center;justify-content:space-between;">
-        <span style="font-size:13px;font-weight:700;color:#1a5c38;">⭐ ${sg.lbl}</span>
-        <span style="font-size:11px;font-weight:700;background:#a7e8c8;color:#1a5c38;padding:2px 8px;border-radius:9px;text-transform:uppercase;letter-spacing:0.06em;">Strength</span>
+    <div style="margin-bottom:10px;border:1.5px solid #a7e8c8;border-radius:7px;overflow:hidden;">
+      <div style="display:flex;align-items:center;gap:8px;padding:9px 13px;background:${C.greenLight};border-bottom:1.5px solid #a7e8c8;">
+        <span style="font-size:13px;font-weight:600;color:${C.navy};flex:1;">&#11088; ${sg.lbl}</span>
+        ${tagPill('Strength','tag-s')}
       </div>
-      <div style="padding:10px 13px;font-size:13px;color:#1a5c38;line-height:1.7;background:#f4fcf7;">${sg.body}</div>
+      <div style="padding:11px 13px;font-size:13px;color:${C.green};line-height:1.7;">${sg.body}</div>
     </div>`;
   });
   if (strengthNote) {
     strengthsHtmlBS += `
-    <div style="margin-bottom:8px;border:1.5px solid #a7e8c8;border-radius:8px;overflow:hidden;">
-      <div style="background:#e4f5ec;padding:9px 13px;border-bottom:1.5px solid #a7e8c8;display:flex;align-items:center;justify-content:space-between;">
-        <span style="font-size:13px;font-weight:700;color:#1a5c38;">⭐ Additional Strength</span>
-        <span style="font-size:11px;font-weight:700;background:#a7e8c8;color:#1a5c38;padding:2px 8px;border-radius:9px;text-transform:uppercase;letter-spacing:0.06em;">Strength</span>
+    <div style="margin-bottom:10px;border:1.5px solid #a7e8c8;border-radius:7px;overflow:hidden;">
+      <div style="display:flex;align-items:center;gap:8px;padding:9px 13px;background:${C.greenLight};border-bottom:1.5px solid #a7e8c8;">
+        <span style="font-size:13px;font-weight:600;color:${C.navy};flex:1;">&#11088; Additional Strength</span>
+        ${tagPill('Strength','tag-s')}
       </div>
-      <div style="padding:10px 13px;font-size:13px;color:#1a5c38;line-height:1.7;background:#f4fcf7;">${strengthNote}</div>
+      <div style="padding:11px 13px;font-size:13px;color:${C.green};line-height:1.7;">${strengthNote}</div>
     </div>`;
   }
   const hasStrengthsBS = showComp || strengthsHtmlBS;
 
-  // ── Improvement blocks
+  // ── Error/improvement cards — mirrors .fb-block ────────────────────────
   let improvHTML = '';
   allKeys.forEach(k => {
     const fb = FB[k]; if(!fb) return;
-    let tagColor = '#5b2d8e'; let tagBg = '#f2eaff';
-    if(fb.tag==='tag-c'){tagColor='#2a5fad';tagBg='#dceeff';}
-    else if(fb.tag==='tag-p'){tagColor='#0a6b5e';tagBg='#e0f7f4';}
-    else if(fb.tag==='tag-d'){tagColor='#9a4d07';tagBg='#fff3e0';}
-    const bsSoundBadge = fb.soundSymbol
-      ? `<span style="font-family:Georgia,serif;font-size:15px;font-weight:700;color:#0a6b5e;background:#e0f7f4;border:1.5px solid #a0ddd4;border-radius:5px;padding:0 8px;margin-right:7px;line-height:1.6;display:inline-block;">${fb.soundSymbol}</span>`
+    // Sound symbol badge — mirrors inline style from generateFeedback
+    const soundBadge = fb.soundSymbol
+      ? `<span style="font-size:1.15em;font-weight:600;color:${C.teal};background:${C.tealLight};border:1.5px solid #a0ddd4;border-radius:6px;padding:1px 8px;margin-right:6px;line-height:1.4;display:inline-block;">${fb.soundSymbol}</span>`
       : '';
-    let exBS = '';
-    if (fb.exRows) {
-      const rows = fb.exRows.map(row => `
-        <div style="margin-bottom:6px;">
-          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#0a6b5e;margin-bottom:2px;">${row.label}</div>
-          <div style="margin-bottom:2px;">❌ <em style="color:#b5302a;">${buildSpeakSpanBS(row.w)}</em></div>
-          <div>✅ <em style="color:#1a5c38;">${buildSpeakSpanBS(row.r)}</em></div>
-        </div>`).join('<hr style="border:none;border-top:1px solid #e2e5ea;margin:5px 0;">');
-      exBS = `<div style="margin-top:8px;background:#f0f6ff;border-left:3px solid #2a5fad;padding:7px 11px;border-radius:0 6px 6px 0;font-size:12px;">${rows}</div>`;
-    } else if (fb.ex) {
-      const isPron = fb.tag === 'tag-p';
-      const wrongHTML = fb.ex.w
-        ? `<div style="margin-bottom:3px;">❌ <em style="color:#b5302a;">${isPron ? buildSpeakSpanBS(fb.ex.w) : fb.ex.w}</em></div>`
-        : '';
-      const rightHTML = `<div>✅ <em style="color:#1a5c38;">${isPron ? buildSpeakSpanBS(fb.ex.r) : fb.ex.r}</em></div>`;
-      exBS = `<div style="margin-top:8px;background:#f0f6ff;border-left:3px solid #2a5fad;padding:7px 11px;border-radius:0 6px 6px 0;font-size:12px;">${wrongHTML}${rightHTML}</div>`;
-    }
-    const bodyBS = fb.body.replace(/\n•/g, '<br>•');
+    const bodyText = fb.body.replace(/\n•/g, '<br>&bull;');
     improvHTML += `
-    <div style="margin-bottom:12px;border:1.5px solid #e2e5ea;border-radius:8px;overflow:hidden;">
-      <div style="background:#f8f9fb;padding:9px 13px;border-bottom:1px solid #e2e5ea;display:flex;align-items:center;justify-content:space-between;">
-        <span style="font-size:13px;font-weight:700;color:#1a3a6b;">${bsSoundBadge}${fb.title}</span>
-        <span style="font-size:11px;font-weight:700;background:${tagBg};color:${tagColor};padding:2px 8px;border-radius:9px;text-transform:uppercase;letter-spacing:0.06em;">${fb.tagLbl}</span>
+    <div style="margin-bottom:12px;border:1.5px solid ${C.gray200};border-radius:7px;overflow:hidden;">
+      <div style="display:flex;align-items:center;gap:7px;padding:9px 13px;background:${C.gray50};border-bottom:1.5px solid ${C.gray100};">
+        <span style="font-size:13px;font-weight:600;color:${C.navy};flex:1;">${soundBadge}${fb.title}</span>
+        ${tagPill(fb.tagLbl, fb.tag)}
       </div>
-      <div style="padding:10px 13px;font-size:13px;color:#5a6070;line-height:1.7;">${bodyBS}${exBS}</div>
+      <div style="padding:11px 13px;font-size:13px;color:${C.gray600};line-height:1.7;">${bodyText}${exBlock(fb)}</div>
     </div>`;
   });
-  Object.entries(notes).forEach(([k,v])=>{
-    if(!v)return;
-    improvHTML+=`
-    <div style="margin-bottom:12px;border:1.5px solid #e2e5ea;border-radius:8px;overflow:hidden;">
-      <div style="background:#f8f9fb;padding:9px 13px;border-bottom:1px solid #e2e5ea;">
-        <span style="font-size:13px;font-weight:700;color:#1a3a6b;">Additional Note — ${noteLabelMap[k]}</span>
+  Object.entries(notes).forEach(([k,v]) => {
+    if(!v) return;
+    improvHTML += `
+    <div style="margin-bottom:12px;border:1.5px solid ${C.gray200};border-radius:7px;overflow:hidden;">
+      <div style="display:flex;align-items:center;gap:7px;padding:9px 13px;background:${C.gray50};border-bottom:1.5px solid ${C.gray100};">
+        <span style="font-size:13px;font-weight:600;color:${C.navy};flex:1;">Additional Note &#8212; ${noteLabelMap[k]}</span>
+        ${tagPill('Note','tag-n')}
       </div>
-      <div style="padding:10px 13px;font-size:13px;color:#5a6070;line-height:1.7;">${v}</div>
+      <div style="padding:11px 13px;font-size:13px;color:${C.gray600};line-height:1.7;">${v}</div>
     </div>`;
   });
 
-  return `<div style="font-family:Arial,Helvetica,sans-serif;max-width:700px;margin:0 auto;color:#1e2228;background:#ffffff;">
+  const labShort = LAB_SUBS[currentLab].split('&#183;')[0].trim() || LAB_SUBS[currentLab].split('·')[0].trim();
 
-  <!-- Header -->
-  <div style="background:#1a3a6b;color:#ffffff;border-radius:8px 8px 0 0;padding:20px 24px 16px;">
-    <div style="font-size:18px;font-weight:700;margin-bottom:3px;">${name}</div>
-    <div style="font-size:12px;opacity:0.65;">${LAB_SUBS[currentLab]} &nbsp;·&nbsp; ${today}</div>
+  // ── Full document ──────────────────────────────────────────────────────
+  return `<div lang="en" style="font-family:Arial,Helvetica,sans-serif;max-width:700px;margin:0 auto;background:#ffffff;color:${C.text};border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.09);">
+
+  <!-- HEADER: navy bg, white text — contrast 12.6:1 -->
+  <div style="background:${C.navy};padding:20px 26px 16px;">
+    <div style="font-size:19px;font-weight:700;color:#ffffff;margin-bottom:3px;">${name}</div>
+    <div style="font-size:12px;color:#c8daf5;">${LAB_SUBS[currentLab]} &nbsp;&middot;&nbsp; ${today}</div>
   </div>
 
-  <div style="border:1.5px solid #dceeff;border-top:none;border-radius:0 0 8px 8px;padding:20px 22px;">
+  <!-- BODY -->
+  <div style="padding:22px 26px;">
 
   ${hasStrengthsBS ? `
-  <!-- Strengths section label -->
-  <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:#636975;margin-bottom:10px;">⭐ Strengths</div>
-  ${showComp ? `
-  <!-- Opener -->
-  <div style="background:linear-gradient(135deg,#e4f5ec,#d8f5ee);border:1.5px solid #a7e8c8;border-radius:8px;padding:14px 16px;margin-bottom:10px;font-size:14px;font-style:italic;color:#1a5c38;line-height:1.75;">
-    ¡Buen trabajo, ${name}! ${comp}
+  <!-- STRENGTHS SECTION -->
+  <div style="margin-bottom:20px;">
+    <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:${C.gray400};margin-bottom:10px;">&#11088; Strengths</div>
+    ${showComp ? `
+    <div style="background:linear-gradient(135deg,${C.greenLight},#d8f5ee);border:1.5px solid #a7e8c8;border-radius:7px;padding:13px 15px;font-size:14px;font-style:italic;color:${C.green};line-height:1.7;margin-bottom:10px;">
+      &#161;Buen trabajo, ${name}! ${comp}
+    </div>` : ''}
+    ${strengthsHtmlBS}
   </div>` : ''}
-  ${strengthsHtmlBS}
-  <div style="height:1px;background:#e2e5ea;margin:18px 0;"></div>` : ''}
 
-  ${improvHTML ? `
-  <!-- Improvement section label -->
-  <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:#636975;margin-bottom:10px;">💡 Areas for Improvement</div>
-  ${improvHTML}` :
-  `<div style="background:#e4f5ec;border:1.5px solid #a7e8c8;border-radius:8px;padding:12px 16px;font-size:13px;color:#1a5c38;">¡Excelente! No specific errors flagged — great submission! 🎉</div>`}
+  <!-- IMPROVEMENT SECTION -->
+  <div>
+    <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:${C.gray400};margin-bottom:10px;">&#128161; Areas for Improvement</div>
+    ${improvHTML || `<div style="background:${C.greenLight};border:1.5px solid #a7e8c8;border-radius:7px;padding:13px 15px;font-size:13px;color:${C.green};">&#161;Excelente! No specific errors flagged &#8212; great submission! &#127881;</div>`}
+  </div>
 
-  <!-- Footer -->
-  <div style="margin-top:20px;padding-top:14px;border-top:1.5px solid #e2e5ea;font-size:11px;color:#636975;text-align:center;">
-    SPAN 1001 · ${LAB_SUBS[currentLab].split('·')[0].trim()} · Spring 2026
+  <!-- FOOTER -->
+  <div style="margin-top:20px;padding-top:14px;border-top:1.5px solid ${C.gray100};font-size:11px;color:${C.gray400};text-align:center;">
+    SPAN 1001 &nbsp;&middot;&nbsp; ${labShort} &nbsp;&middot;&nbsp; Spring 2026
   </div>
 
   </div>
