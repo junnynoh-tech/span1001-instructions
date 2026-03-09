@@ -94,42 +94,6 @@
         .lab-card-title { font-family: 'DM Serif Display', serif; font-size: 1rem; color: var(--navy); margin-bottom: 4px; }
         .lab-card-sub { font-size: 11.5px; color: var(--ink-light); line-height: 1.4; }
 
-        /* ── TA TOOLS ── */
-        .ta-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 14px;
-        }
-        .ta-card {
-            background: var(--white); border: 1px solid var(--rule);
-            border-radius: var(--radius); box-shadow: var(--shadow-sm);
-            text-decoration: none; color: inherit;
-            overflow: hidden; transition: all 0.18s;
-            display: flex; flex-direction: column;
-        }
-        .ta-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
-        .ta-card.gen:hover { border-color: var(--green-border); }
-        .ta-card.ref:hover { border-color: #9ec5f5; }
-        .ta-card-bar { padding: 12px 16px; display: flex; align-items: center; gap: 10px; }
-        .ta-card.gen .ta-card-bar { background: var(--green-light); }
-        .ta-card.ref .ta-card-bar { background: var(--navy-light); }
-        .ta-card-icon { font-size: 20px; }
-        .ta-card-label { font-size: 13px; font-weight: 700; }
-        .ta-card.gen .ta-card-label { color: var(--green); }
-        .ta-card.ref .ta-card-label { color: var(--navy); }
-        .ta-card-body { padding: 12px 16px; flex: 1; }
-        .ta-card-desc { font-size: 12.5px; color: var(--ink-mid); line-height: 1.55; }
-        .ta-card-features { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px; }
-        .ta-feat {
-            font-size: 10px; font-weight: 600; letter-spacing: 0.05em;
-            border-radius: 3px; padding: 2px 8px; border: 1px solid;
-        }
-        .ta-card.gen .ta-feat { background: var(--green-light); color: var(--green); border-color: var(--green-border); }
-        .ta-card.ref .ta-feat { background: var(--navy-light); color: var(--navy); border-color: #9ec5f5; }
-        .ta-card-footer { padding: 10px 16px; border-top: 1px solid var(--rule); }
-        .ta-card-cta { font-size: 12px; font-weight: 600; color: inherit; display: flex; align-items: center; gap: 6px; }
-        .ta-card.gen .ta-card-cta { color: var(--green); }
-        .ta-card.ref .ta-card-cta { color: var(--navy); }
 
         /* ── FOOTER NOTE ── */
         .site-note {
@@ -152,7 +116,7 @@
 <header class="site-header">
     <div class="eyebrow">SPAN1001 · Spring 2026 · UNG</div>
     <h1>Welcome to the Spanish Lab</h1>
-    <p>Video activity instructions for each lab, plus TA grading and feedback tools.</p>
+    <p>Video activity instructions for each lab.</p>
 </header>
 
 <div class="page-wrap">
@@ -207,4 +171,5 @@
 </div>
 </body>
 </html>
+
 
