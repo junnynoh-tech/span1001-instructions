@@ -532,8 +532,10 @@ body {
         <div class="sound-chips">
           <div class="schip" onclick="toggleSound(this)" data-s="h">h</div>
           <div class="schip" onclick="toggleSound(this)" data-s="g">g</div>
+          <div class="schip" onclick="toggleSound(this)" data-s="gu-">gu-</div>
           <div class="schip" onclick="toggleSound(this)" data-s="j">j</div>
           <div class="schip" onclick="toggleSound(this)" data-s="c">c</div>
+          <div class="schip" onclick="toggleSound(this)" data-s="qu-">qu-</div>
           <div class="schip" onclick="toggleSound(this)" data-s="z">z</div>
           <div class="schip" onclick="toggleSound(this)" data-s="ñ">ñ</div>
           <div class="schip" onclick="toggleSound(this)" data-s="rr">rr</div>
@@ -829,9 +831,22 @@ const FB = {
 
   // PRONUNCIATION
   h:            { title:"Silent h",                         tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"h",    body:"The h in Spanish is always silent. Do not pronounce it like an English h.", ex:{w:"hola → [HOH-la]",r:"hola → [OH-la] / hablar → [ah-BLAR]"} },
-  g:            { title:"The letter g",                     tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"g",    body:"G before e or i sounds like a soft English h (gente → [HEN-teh]). Before a, o, u it sounds like English g.", ex:{w:"gente → [GEN-teh]",r:"gente → [HEN-teh] / gusto → [GUS-toh]"} },
+  g:            { title:"The letter g",                     tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"g",    body:"G has two sounds depending on what follows it:\n• g + a, o, u → hard G sound (like English get)\n• g + e, i → soft H sound (like English h)\n• gu + e, i → hard G again (the u is silent: gue, gui)\n• gü + e, i → hard G + W sound (the two dots mean pronounce the u)", exRows:[
+    {label:"g + a/o/u → hard G", w:"gato → [GAY-toh]", r:"gato → [GA-toh]"},
+    {label:"g + e/i → soft H", w:"gente → [GEN-teh]", r:"gente → [HEN-teh]"},
+    {label:"ge → soft H", w:"general → [jeh-neh-RAL]", r:"general → [heh-neh-RAL]"},
+    {label:"gu + e/i → hard G (u silent)", w:"guerra → [goo-EH-ra]", r:"guerra → [GEH-ra] (u silent)"},
+    {label:"gu + e/i → hard G (u silent)", w:"guitarra → [goo-ee-TAH-ra]", r:"guitarra → [gee-TAH-ra] (u silent)"},
+  ]},
   j:            { title:"The letter j",                     tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"j",    body:"The Spanish j is a strong h sound — never the English j sound.", ex:{w:"jueves → [JOO-eh-ves]",r:"jueves → [HWEH-bes]"} },
-  c:            { title:"The letter c",                     tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"c",    body:"C before e or i = s sound (Latin American). Before a, o, u = hard k sound.", ex:{w:"ciudad → [chi-u-dad]",r:"ciudad → [syoo-DAD] / casa → [KA-sa]"} },
+  c:            { title:"The letter c",                     tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"c",    body:"C has two sounds depending on what follows it:\n• c + a, o, u → hard K sound\n• c + e, i → S sound (Latin American Spanish)\n• qu + e, i → hard K sound (the u is silent: que, qui)\n• Note: English speakers often say an English K or CH — avoid both for ce/ci", exRows:[
+    {label:"c + a/o/u → K sound", w:"casa → [CHA-sa]", r:"casa → [KA-sa]"},
+    {label:"c + o → K sound", w:"como → [CHOH-moh]", r:"como → [KOH-moh]"},
+    {label:"c + e → S sound", w:"ciudad → [choo-DAD]", r:"ciudad → [syoo-DAD]"},
+    {label:"c + i → S sound", w:"cine → [CHEE-neh]", r:"cine → [SEE-neh]"},
+    {label:"qu + e → K sound (u silent)", w:"que → [KWEH]", r:"que → [KEH] (u silent)"},
+    {label:"qu + i → K sound (u silent)", w:"quiero → [KWEE-EH-ro]", r:"quiero → [KYEH-ro] (u silent)"},
+  ]},
   z:            { title:"The letter z",                     tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"z",    body:"In Latin American Spanish, z is pronounced like s — not like English z.", ex:{w:"taza → [TAY-za]",r:"taza → [TA-sa]"} },
   "ñ":          { title:"The letter ñ",                     tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"ñ",    body:"Ñ sounds like ny in canyon. It is completely different from plain n.", ex:{w:"año → [A-no]",r:"año → [A-nyo] / español → [es-pa-NYOL]"} },
   rr:           { title:"The trilled rr",                   tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"rr",   body:"The double r (rr) and word-initial r require a trill or tap. Practice this sound separately.", ex:{w:"perro (English r)",r:"perro → trilled/tapped Spanish r"} },
@@ -842,7 +857,23 @@ const FB = {
   i:            { title:"Vowel: i",                         tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"i",    body:"The Spanish i is a pure ee — shorter and crisper than English.", ex:{w:"sí → [sigh]",r:"sí → [see]"} },
   o:            { title:"Vowel: o",                         tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"o",    body:"The Spanish o is a clean oh — no ow glide at the end.", ex:{w:"no → [now]",r:"no → [noh]"} },
   u:            { title:"Vowel: u",                         tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"u",    body:"The Spanish u is a pure oo — shorter than English. Note: u is silent in que, qui, gue, gui.", ex:{w:"mucho → [MYOO-choh]",r:"mucho → [MOO-choh]"} },
-  accent:       { title:"Accent Mark Stress",               tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"á/é/í",body:"Accent marks indicate where to stress a syllable. Don't omit them in writing either.", ex:{w:"esta (this) vs. está (is)",r:"está → stress on last syllable [es-TAH]"} },
+  "qu-":        { title:"qu- spelling (K sound, u silent)", tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"qu-",  body:"In Spanish, qu only appears before e and i. The u is always silent — it exists only to keep the hard K sound before those vowels. Never say the u.", exRows:[
+    {label:"que → K + E (u silent)", w:"que → [KWEH]",          r:"que → [KEH]"},
+    {label:"quien → K + IEN (u silent)", w:"quién → [KWYEN]",   r:"quién → [KYEN]"},
+    {label:"quiero → K + IERO", w:"quiero → [KWYE-ro]",        r:"quiero → [KYEH-ro]"},
+    {label:"queso → K + ESO", w:"queso → [KWEH-so]",           r:"queso → [KEH-so]"},
+  ]},
+  "gu-":        { title:"gu- spelling (G sound, u silent)", tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"gu-",  body:"Like qu-, the spelling gu before e and i keeps the hard G sound. The u is silent. Without the u, ge/gi would make a soft H sound instead.", exRows:[
+    {label:"gue → hard G + E (u silent)", w:"guerra → [goo-EH-ra]",     r:"guerra → [GEH-ra]"},
+    {label:"gui → hard G + I (u silent)", w:"guitarra → [goo-ee-TAH-ra]",r:"guitarra → [gee-TAH-ra]"},
+    {label:"gustar → G + USTAR (u spoken here!)", w:"gustar → [GOO-star] ✓ — u IS pronounced here",r:"gustar → [goos-TAR] — gu before a/o/u: u is spoken"},
+  ]},
+  accent:       { title:"Accent marks — stressed syllable",  tag:"tag-p", tagLbl:"Pronunciation", soundSymbol:"á/é/í",body:"An accent mark shows which syllable to stress. Without it, stress falls on the second-to-last syllable (if the word ends in a vowel, n, or s) or the last syllable otherwise. The accent overrides both rules.", exRows:[
+    {label:"á — stress on marked syllable", w:"lapiz → [LA-pees] (wrong stress)", r:"lápiz → [LA-pees] ✓ stress on LA"},
+    {label:"í — stress on marked syllable", w:"dificil → [dee-FEE-seel] (wrong stress)", r:"difícil → [dee-FEE-seel] ✓ stress on FEE"},
+    {label:"ó — stress on marked syllable", w:"dolar → [do-LAR] (wrong stress)",  r:"dólar → [DOH-lar] ✓ stress on DOH"},
+    {label:"é — changes meaning (está vs esta)", w:"esta → [ES-ta] this (no accent)", r:"está → [es-TAH] is/it is (accent = stress shift)"},
+  ]},
   pron_pauses:  { title:"Long Pauses",                      tag:"tag-p", tagLbl:"Pronunciation", body:"Try to reduce long pauses. Practice speaking sentences aloud before recording to build fluency.", ex:null },
   pron_robotic: { title:"Robotic / Flat Tone",              tag:"tag-p", tagLbl:"Pronunciation", body:"Spanish has natural melodic rises and falls. Practice reading sentences with more expressive intonation.", ex:null },
   pron_rehearsed:{ title:"Response Appears Rehearsed",      tag:"tag-p", tagLbl:"Pronunciation", body:"Your response sounds memorized rather than spontaneous. Try to internalize ideas and speak naturally from memory.", ex:null },
@@ -988,18 +1019,29 @@ function generateFeedback() {
       : '';
     // Make examples speakable for pronunciation items
     let exHTML = '';
-    if (fb.ex) {
+    if (fb.exRows) {
+      // Multi-row examples (c, g)
+      exHTML = `<div class="fb-ex">${fb.exRows.map(row => `
+        <div style="margin-bottom:5px;">
+          <span style="font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--teal);display:block;margin-bottom:2px;">${row.label}</span>
+          <div>❌ ${buildSpeakSpan(row.w,'es-US')}</div>
+          <div>✅ ${buildSpeakSpan(row.r,'es-US')}</div>
+        </div>`).join('<hr style="border:none;border-top:1px solid var(--gray-200);margin:5px 0;">')}</div>`;
+    } else if (fb.ex) {
       const wrongSpeak = fb.ex.w ? buildSpeakSpan(fb.ex.w, 'es-US') : null;
       const rightSpeak = buildSpeakSpan(fb.ex.r, 'es-US');
       exHTML = `<div class="fb-ex">${wrongSpeak?`<div>❌ ${wrongSpeak}</div>`:''}<div>✅ ${rightSpeak}</div></div>`;
     }
+    // Format body: convert \n• to line breaks
+    const bodyHTML = fb.body.replace(/\n•/g, '<br>•');
     blocksHTML += `
       <div class="fb-block">
-        <div class="fb-block-hdr">${soundBadge}${fb.tag==='tag-p'&&fb.soundSymbol?`<span class="schip-speak" style="cursor:pointer;text-decoration:underline dotted var(--teal);color:var(--teal);" onclick="speak('${escQ(fb.soundSymbol)}','es-US')" title="Click to hear this sound">${fb.title}</span>`:fb.title}<span class="fb-tag ${fb.tag}">${fb.tagLbl}</span></div>
-        <div class="fb-block-body">${fb.body}${exHTML}</div>
+        <div class="fb-block-hdr">${soundBadge}${fb.title}<span class="fb-tag ${fb.tag}">${fb.tagLbl}</span></div>
+        <div class="fb-block-body">${bodyHTML}${exHTML}</div>
       </div>`;
     blocksText += `\n• ${fb.title} (${fb.tagLbl})\n  ${fb.body}`;
-    if(fb.ex){ if(fb.ex.w) blocksText+=`\n  ❌ ${fb.ex.w}`; blocksText+=`\n  ✅ ${fb.ex.r}`; }
+    if(fb.exRows){ fb.exRows.forEach(row => { blocksText+=`\n  [${row.label}] ❌ ${row.w} → ✅ ${row.r}`; }); }
+    else if(fb.ex){ if(fb.ex.w) blocksText+=`\n  ❌ ${fb.ex.w}`; blocksText+=`\n  ✅ ${fb.ex.r}`; }
     blocksText += '\n';
   });
 
@@ -1127,7 +1169,15 @@ function buildBrightspaceHTML(name, today, showComp, comp, allKeys, allStrengthK
       ? `<span style="font-family:Georgia,serif;font-size:15px;font-weight:700;color:#0a6b5e;background:#e0f7f4;border:1.5px solid #a0ddd4;border-radius:5px;padding:0 8px;margin-right:7px;line-height:1.6;display:inline-block;">${fb.soundSymbol}</span>`
       : '';
     let exBS = '';
-    if (fb.ex) {
+    if (fb.exRows) {
+      const rows = fb.exRows.map(row => `
+        <div style="margin-bottom:6px;">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#0a6b5e;margin-bottom:2px;">${row.label}</div>
+          <div style="margin-bottom:2px;">❌ <em style="color:#b5302a;">${buildSpeakSpanBS(row.w)}</em></div>
+          <div>✅ <em style="color:#1a5c38;">${buildSpeakSpanBS(row.r)}</em></div>
+        </div>`).join('<hr style="border:none;border-top:1px solid #e2e5ea;margin:5px 0;">');
+      exBS = `<div style="margin-top:8px;background:#f0f6ff;border-left:3px solid #2a5fad;padding:7px 11px;border-radius:0 6px 6px 0;font-size:12px;">${rows}</div>`;
+    } else if (fb.ex) {
       const isPron = fb.tag === 'tag-p';
       const wrongHTML = fb.ex.w
         ? `<div style="margin-bottom:3px;">❌ <em style="color:#b5302a;">${isPron ? buildSpeakSpanBS(fb.ex.w) : fb.ex.w}</em></div>`
@@ -1135,13 +1185,14 @@ function buildBrightspaceHTML(name, today, showComp, comp, allKeys, allStrengthK
       const rightHTML = `<div>✅ <em style="color:#1a5c38;">${isPron ? buildSpeakSpanBS(fb.ex.r) : fb.ex.r}</em></div>`;
       exBS = `<div style="margin-top:8px;background:#f0f6ff;border-left:3px solid #2a5fad;padding:7px 11px;border-radius:0 6px 6px 0;font-size:12px;">${wrongHTML}${rightHTML}</div>`;
     }
+    const bodyBS = fb.body.replace(/\n•/g, '<br>•');
     improvHTML += `
     <div style="margin-bottom:12px;border:1.5px solid #e2e5ea;border-radius:8px;overflow:hidden;">
       <div style="background:#f8f9fb;padding:9px 13px;border-bottom:1px solid #e2e5ea;display:flex;align-items:center;justify-content:space-between;">
         <span style="font-size:13px;font-weight:700;color:#1a3a6b;">${bsSoundBadge}${fb.title}</span>
         <span style="font-size:11px;font-weight:700;background:${tagBg};color:${tagColor};padding:2px 8px;border-radius:9px;text-transform:uppercase;letter-spacing:0.06em;">${fb.tagLbl}</span>
       </div>
-      <div style="padding:10px 13px;font-size:13px;color:#5a6070;line-height:1.7;">${fb.body}${exBS}</div>
+      <div style="padding:10px 13px;font-size:13px;color:#5a6070;line-height:1.7;">${bodyBS}${exBS}</div>
     </div>`;
   });
   Object.entries(notes).forEach(([k,v])=>{
