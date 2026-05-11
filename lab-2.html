@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>SPAN 1001 — Lab 2: La universidad</title>
+<title>SPAN 1001 — Summer Lab 2: La universidad</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--red:#c8102e;--gold:#b8952a;--navy:#002147;--blue:#005fa3;--skylt:#e8f3ff;--ink:#0d1525;--soft:#1e3a5f;--muted:#4a5f75;--cream:#f7f9fc;--white:#ffffff;--parch:#dce8f5;--shadow:0 8px 40px rgba(0,33,71,0.13);--shadow-sm:0 2px 12px rgba(0,33,71,0.08);--red-lt:#fff0f2;--gold-lt:#fffbf0;--green:#1a5c1a;--green-lt:#f0f9f0;}
+:root{--red:#c8102e;--gold:#b8952a;--navy:#002147;--blue:#005fa3;--skylt:#e8f3ff;--ink:#0d1525;--soft:#1e3a5f;--muted:#4a5f75;--cream:#f7f9fc;--white:#ffffff;--parch:#dce8f5;--shadow:0 4px 24px rgba(0,33,71,0.10),0 1px 4px rgba(0,33,71,0.06);--shadow-sm:0 2px 8px rgba(0,33,71,0.07);--red-lt:#fff0f2;--gold-lt:#fffbf0;--green:#1a5c1a;--green-lt:#f0f9f0;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 5% 10%,rgba(200,16,46,0.05) 0%,transparent 50%),radial-gradient(ellipse at 95% 90%,rgba(0,95,163,0.05) 0%,transparent 50%);pointer-events:none;z-index:0;}
 .skip-link{position:absolute;top:-40px;left:0;background:var(--gold);color:var(--ink);padding:8px 16px;font-weight:700;z-index:10000;border-radius:0 0 8px 0;transition:top .2s;}.skip-link:focus{top:0;}
 a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:3px;}
@@ -22,14 +22,14 @@ header::after{content:'DOS';position:absolute;right:-10px;top:50%;transform:tran
 .mode-pill{display:inline-flex;align-items:center;gap:5px;padding:4px 13px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;background:rgba(184,149,42,0.2);color:#e8d080;border:1px solid rgba(184,149,42,0.35);}
 @media(max-width:640px){header{padding:20px;}.htext h1{font-size:28px;}.lab-num{font-size:50px;}}
 .page{max-width:980px;margin:0 auto;padding:40px 24px 60px;position:relative;z-index:1;}
-.slabel{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;margin-top:28px;}
+.slabel{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;margin-top:28px;padding-left:2px;}
 .slabel:first-child{margin-top:0;}.slabel::after{content:'';flex:1;height:1px;background:var(--parch);}
-.card{background:var(--white);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:20px;}
+.card{background:var(--white);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:20px;border-top:1px solid rgba(255,255,255,0.9);}
 .card-inner{padding:28px 32px;}
 @media(max-width:640px){.card-inner{padding:20px 18px;}}
 .hero-card{display:grid;grid-template-columns:1fr 1fr;gap:0;overflow:hidden;border-radius:16px;box-shadow:var(--shadow);margin-bottom:20px;}
 @media(max-width:680px){.hero-card{grid-template-columns:1fr;}}
-.hero-img{position:relative;overflow:hidden;min-height:200px;}
+.hero-img{position:relative;overflow:hidden;min-height:240px;}
 .hero-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease;}.hero-img:hover img{transform:scale(1.04);}
 .hero-img-cap{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,20,50,0.7));padding:20px 16px 12px;font-size:9px;color:rgba(255,255,255,0.6);}
 .hero-body{background:var(--white);padding:28px 32px;display:flex;flex-direction:column;justify-content:center;}
@@ -43,7 +43,65 @@ header::after{content:'DOS';position:absolute;right:-10px;top:50%;transform:tran
 @media(max-width:640px){.two-col{grid-template-columns:1fr;}}
 .steps{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:4px;}
 .steps li{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;line-height:1.7;color:var(--soft);}
-.sn{width:26px;height:26px;min-width:26px;border-radius:50%;background:var(--blue);color:white;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.sn{width:26px;height:26px;min-width:26px;border-radius:50%;background:linear-gradient(135deg,var(--blue),#1a7fd4);color:white;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;box-shadow:0 2px 6px rgba(0,95,163,0.3);}
+/* Step track */
+.step-track{display:flex;align-items:flex-start;margin-bottom:18px;}
+.st-item{flex:1;text-align:center;position:relative;}
+.st-item::before{content:'';position:absolute;top:18px;left:calc(-50% + 20px);right:calc(50% + 20px);height:2px;background:var(--parch);z-index:0;}
+.st-item:first-child::before{display:none;}
+.st-circle{width:36px;height:36px;border-radius:50%;background:var(--parch);color:var(--muted);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;margin:0 auto 6px;position:relative;z-index:1;}
+.st-item.act .st-circle{background:var(--blue);color:white;}
+.st-label{font-size:11px;color:var(--muted);line-height:1.3;}
+.st-item.act .st-label{color:var(--blue);font-weight:600;}
+/* Part badge */
+.part-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 14px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin-bottom:10px;}
+.pb-blue{background:var(--skylt);color:var(--blue);border:1.5px solid var(--blue);}
+.pb-green{background:var(--green-lt);color:var(--green);border:1.5px solid var(--green);}
+/* Checklist */
+.cklist{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px;}
+.cklist li{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;line-height:1.65;color:var(--soft);padding:10px 14px;background:var(--cream);border-radius:9px;border:1px solid var(--parch);}
+.ckn{width:24px;height:24px;min-width:24px;border-radius:50%;border:2px solid var(--blue);color:var(--blue);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.cklist.green li{border-color:#b8ddb8;background:var(--green-lt);}
+.cklist.green .ckn{border-color:var(--green);color:var(--green);}
+/* Example block */
+.example{background:var(--cream);border:1px solid var(--parch);border-radius:10px;padding:16px 20px;margin:14px 0;position:relative;}
+.example::before{content:'EJEMPLO';position:absolute;top:-9px;left:14px;background:white;padding:2px 8px;border-radius:20px;border:1px solid var(--parch);font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--muted);}
+.example p{font-size:14px;color:var(--soft);margin-bottom:3px;line-height:1.55;}
+.example .hl{color:var(--blue);font-weight:700;}
+/* Grammar box */
+.gram-box{background:linear-gradient(135deg,#f4f0ff 0%,#ede8ff 100%);border:1.5px solid #c4b5fd;border-radius:12px;padding:16px 20px;margin:14px 0;border-left:4px solid #7c3aed;}
+.gram-box h4{font-family:'Fraunces',serif;font-size:15px;color:#5b21b6;margin-bottom:8px;}
+.gram-box ul{padding-left:18px;font-size:13px;color:#4c1d95;line-height:1.8;}
+.gram-box code{background:rgba(91,46,138,.1);color:#5b21b6;padding:2px 6px;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;}
+/* Vocab table */
+.vtable{width:100%;border-collapse:collapse;border-radius:10px;overflow:hidden;border:1.5px solid var(--parch);font-size:13px;margin-top:8px;margin-bottom:14px;}
+.vtable thead tr{background:var(--blue);}
+.vtable thead th{padding:8px 12px;color:white;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-align:left;border:none;}
+.vtable tbody tr{border-bottom:1px solid var(--parch);}.vtable tbody tr:last-child{border-bottom:none;}
+.vtable tbody tr:nth-child(even){background:#f5f9ff;}
+.vtable td{padding:9px 12px;vertical-align:middle;}
+.es-cell{font-weight:700;color:var(--ink);font-size:13.5px;}
+.en-cell{color:var(--muted);font-size:12.5px;}
+.pron-cell{color:var(--blue);font-style:italic;font-size:12px;}
+.pron-cell button{background:none;border:none;cursor:pointer;font-size:14px;padding:0 4px;opacity:.7;transition:opacity .15s;vertical-align:middle;}
+.pron-cell button:hover{opacity:1;}
+/* Alerts */
+.alert{border-radius:10px;padding:12px 16px;font-size:13px;line-height:1.65;margin-top:12px;}
+.alert.warn{background:var(--red-lt);border:1.5px solid #f5c4cc;color:#8a1020;}
+.alert.info{background:var(--skylt);border:1.5px solid #b8d4ef;color:var(--soft);}
+.alert.gold{background:var(--gold-lt);border:1.5px solid #e8d080;color:#6b5a10;}
+.alert strong{font-weight:700;}
+/* Resource buttons */
+.resource-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;}
+.resource-btn{display:inline-flex;align-items:center;gap:7px;color:white;border:none;border-radius:10px;padding:10px 18px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;box-shadow:var(--shadow-sm);text-decoration:none;white-space:nowrap;}
+.resource-btn:hover{filter:brightness(.88);transform:translateY(-1px);}
+.resource-btn.blue{background:var(--blue);}.resource-btn.teal{background:#0f766e;}
+/* Lab option */
+.lab-option{background:var(--green-lt);border:1.5px solid #b8ddb8;border-radius:12px;padding:20px 24px;margin-top:16px;}
+.lab-option-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.lab-option-header h3{font-size:14px;font-weight:700;color:var(--green);margin:0;}
+.lab-badge{background:var(--green);color:white;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:3px 9px;border-radius:10px;}
+/* Req accordion */
 .req-acc{border:1.5px solid var(--parch);border-radius:12px;overflow:hidden;margin-top:4px;}
 .req-item{border-bottom:1px solid var(--parch);}.req-item:last-child{border-bottom:none;}
 .req-toggle{width:100%;background:none;border:none;cursor:pointer;padding:12px 16px;display:flex;align-items:center;gap:10px;text-align:left;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--ink);transition:background .15s;}
@@ -53,60 +111,8 @@ header::after{content:'DOS';position:absolute;right:-10px;top:50%;transform:tran
 .req-body{display:none;padding:4px 16px 14px 42px;font-size:13px;line-height:1.75;color:var(--soft);}
 .req-body.open{display:block;}
 .req-body ul{padding-left:18px;}.req-body li{margin-bottom:4px;}
-.alert{border-radius:10px;padding:12px 16px;font-size:13px;line-height:1.65;margin-top:12px;}
-.alert.warn{background:var(--red-lt);border:1.5px solid #f5c4cc;color:#8a1020;}
-.alert.info{background:var(--skylt);border:1.5px solid #b8d4ef;color:var(--soft);}
-.alert.gold{background:var(--gold-lt);border:1.5px solid #e8d080;color:#6b5a10;}
-.alert strong{font-weight:700;}
-.resource-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;}
-.resource-btn{display:inline-flex;align-items:center;gap:7px;color:white;border:none;border-radius:10px;padding:10px 18px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;box-shadow:var(--shadow-sm);text-decoration:none;white-space:nowrap;}
-.resource-btn:hover{filter:brightness(.88);transform:translateY(-1px);}
-.resource-btn.blue{background:var(--blue);}.resource-btn.teal{background:#0f766e;}.resource-btn.gold{background:#a07820;}
-.lab-option{background:var(--green-lt);border:1.5px solid #b8ddb8;border-radius:12px;padding:20px 24px;margin-top:16px;}
-.lab-option-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
-.lab-option-header h3{font-size:14px;font-weight:700;color:var(--green);margin:0;}
-.lab-badge{background:var(--green);color:white;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:3px 9px;border-radius:10px;}
-
-/* Slide model */
-.slide-model{background:white;border:2px solid var(--blue);border-radius:12px;overflow:hidden;margin:14px 0;max-width:420px;}
-.slide-model-header{background:var(--blue);padding:8px 16px;font-size:11px;font-weight:700;color:white;letter-spacing:1px;text-transform:uppercase;display:flex;align-items:center;gap:6px;}
-.slide-model-body{padding:18px 20px;}
-.slide-place-name{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--navy);margin-bottom:8px;}
-.slide-keywords{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
-.kw{background:var(--skylt);border:1px solid var(--parch);border-radius:20px;padding:3px 11px;font-size:12.5px;font-weight:600;color:var(--navy);}
-.slide-example-speech{background:var(--cream);border-left:3px solid var(--blue);padding:10px 14px;border-radius:0 8px 8px 0;font-size:13px;color:var(--soft);margin-top:8px;}
-.slide-example-speech .pron-play{display:flex;align-items:center;gap:6px;margin-top:6px;font-size:12px;color:var(--blue);font-style:italic;}
-.pron-play button{background:none;border:none;cursor:pointer;font-size:15px;padding:0;opacity:.8;transition:opacity .15s;vertical-align:middle;}
-.pron-play button:hover{opacity:1;}
-.slide-do-dont{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0;}
-@media(max-width:500px){.slide-do-dont{grid-template-columns:1fr;}}
-.do-card{background:var(--green-lt);border:1.5px solid #b8ddb8;border-radius:8px;padding:10px 13px;}
-.dont-card{background:var(--red-lt);border:1.5px solid #f5c4cc;border-radius:8px;padding:10px 13px;}
-.do-card .dlabel{font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;}
-.dont-card .dlabel{font-size:11px;font-weight:700;color:#8a1020;text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;}
-.do-card p{font-size:12.5px;color:#2a4a2a;line-height:1.5;}
-.dont-card p{font-size:12.5px;color:#8a1020;line-height:1.5;}
-
-/* Vocab table */
-.vtable{width:100%;border-collapse:collapse;border-radius:10px;overflow:hidden;border:1.5px solid var(--parch);font-size:13px;margin-top:8px;margin-bottom:14px;}
-.vtable thead tr{background:var(--blue);}
-.vtable thead th{padding:8px 12px;color:white;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-align:left;border:none;}
-.vtable tbody tr{border-bottom:1px solid var(--parch);}.vtable tbody tr:last-child{border-bottom:none;}
-.vtable tbody tr:nth-child(even){background:#f5f9ff;}
-.vtable td{padding:9px 12px;vertical-align:middle;}
-.es-cell{font-weight:700;color:var(--ink);font-size:13.5px;}.en-cell{color:var(--muted);font-size:12.5px;}
-.pron-cell{color:var(--blue);font-style:italic;font-size:12px;}
-.pron-cell button{background:none;border:none;cursor:pointer;font-size:14px;padding:0 4px;opacity:.7;transition:opacity .15s;vertical-align:middle;}.pron-cell button:hover{opacity:1;}
-.vsec-title{font-family:'Fraunces',serif;font-size:14px;font-weight:700;color:var(--blue);margin-bottom:6px;padding-bottom:5px;border-bottom:2px solid var(--skylt);margin-top:16px;}
-.vsec-title:first-child{margin-top:0;}
-
-/* Content specs */
-.spec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-top:10px;}
-.spec-card{background:var(--skylt);border:1.5px solid var(--parch);border-radius:10px;padding:12px 14px;}
-.spec-card .sc-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-bottom:4px;}
-.spec-card p{font-size:13px;color:var(--soft);line-height:1.5;}
-.spec-card .sc-min{font-family:'Fraunces',serif;font-size:22px;font-weight:900;color:var(--blue);line-height:1;}
-
+.submit-note{background:var(--gold-lt);border:1.5px solid #e8d080;border-radius:8px;padding:10px 14px;font-size:13px;color:#6b5a10;margin-top:16px;line-height:1.6;}
+/* Bongo modal */
 .modal{position:fixed;inset:0;background:rgba(0,21,71,0.85);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px);}
 .modal.open{display:flex;animation:mIn .22s ease;}
 @keyframes mIn{from{opacity:0}to{opacity:1}}
@@ -116,14 +122,12 @@ header::after{content:'DOS';position:absolute;right:-10px;top:50%;transform:tran
 .modal-close:hover{background:var(--red);color:white;border-color:var(--red);}
 .modal-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--navy);margin-bottom:4px;}
 .modal-sub{font-size:12px;color:var(--muted);margin-bottom:16px;}
+.vsec-title{font-family:'Fraunces',serif;font-size:14px;font-weight:700;color:var(--blue);margin-bottom:6px;padding-bottom:5px;border-bottom:2px solid var(--skylt);margin-top:16px;}
+.vsec-title:first-child{margin-top:0;}
 .bongo-tip{display:flex;align-items:flex-start;gap:10px;background:#f0faf9;border:1.5px solid #99d6cc;border-radius:10px;padding:10px 14px;margin-bottom:7px;font-size:13px;line-height:1.65;color:var(--navy);}
 .bt-icon{font-size:15px;flex-shrink:0;margin-top:1px;}
 .bongo-s-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#0f766e;margin:12px 0 7px;}
-.canva-steps{display:flex;flex-direction:column;gap:7px;margin-top:8px;}
-.canva-step{display:flex;align-items:flex-start;gap:9px;font-size:13px;line-height:1.6;color:var(--soft);}
-.cs-num{background:var(--blue);color:white;border-radius:50%;width:20px;height:20px;min-width:20px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:2px;}
-.submit-note{background:var(--gold-lt);border:1.5px solid #e8d080;border-radius:8px;padding:10px 14px;font-size:13px;color:#6b5a10;margin-top:16px;line-height:1.6;}
-footer{text-align:center;padding:20px;font-size:11px;color:var(--muted);}
+footer{text-align:center;padding:20px;font-size:11px;color:var(--muted);position:relative;z-index:1;}
 
 /* Lightbox */
 .lab-img-wrap{position:relative;overflow:hidden;border-radius:12px;cursor:zoom-in;display:block;}
@@ -140,6 +144,69 @@ footer{text-align:center;padding:20px;font-size:11px;color:var(--muted);}
 .lightbox-close{position:absolute;top:-14px;right:-14px;background:var(--red);color:white;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:background .15s;z-index:1;}
 .lightbox-close:hover{background:#a00020;}
 
+/* Attribution tooltip on hover */
+.lab-img-wrap[data-caption]::after{
+  content:attr(data-caption);
+  position:absolute;bottom:0;left:0;right:0;
+  background:rgba(0,15,45,0.88);
+  color:rgba(255,255,255,0.9);
+  font-size:10px;line-height:1.4;
+  padding:7px 10px;
+  transform:translateY(100%);
+  transition:transform .22s ease;
+  pointer-events:none;
+  z-index:2;
+}
+.lab-img-wrap:hover[data-caption]::after,
+.lab-img-wrap:focus[data-caption]::after{
+  transform:translateY(0);
+}
+
+
+
+/* Summer badge */
+.summer-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 13px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;background:rgba(232,130,94,0.2);color:#e8825e;border:1px solid rgba(232,130,94,0.35);margin-right:6px;}
+
+/* Slide model */
+.slide-model{background:white;border:2px solid var(--blue);border-radius:12px;overflow:hidden;margin:14px 0;max-width:420px;}
+.slide-model-header{background:var(--blue);padding:8px 16px;font-size:11px;font-weight:700;color:white;letter-spacing:1px;text-transform:uppercase;display:flex;align-items:center;gap:6px;}
+.slide-model-body{padding:18px 20px;}
+.slide-place-name{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--navy);margin-bottom:8px;}
+.slide-person-name{font-family:'Fraunces',serif;font-size:20px;font-weight:700;color:var(--navy);margin-bottom:8px;}
+.slide-keywords{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+.kw{background:var(--skylt);border:1px solid var(--parch);border-radius:20px;padding:3px 11px;font-size:12.5px;font-weight:600;color:var(--navy);}
+.slide-example-speech{background:var(--cream);border-left:3px solid var(--blue);padding:10px 14px;border-radius:0 8px 8px 0;font-size:13px;color:var(--soft);margin-top:8px;}
+.slide-example-speech .pron-play{display:flex;align-items:center;gap:6px;margin-top:6px;font-size:12px;color:var(--blue);font-style:italic;}
+.pron-play button{background:none;border:none;cursor:pointer;font-size:15px;padding:0;opacity:.8;transition:opacity .15s;vertical-align:middle;}
+.pron-play button:hover{opacity:1;}
+.slide-do-dont{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0;}
+@media(max-width:500px){.slide-do-dont{grid-template-columns:1fr;}}
+.do-card{background:var(--green-lt);border:1.5px solid #b8ddb8;border-radius:8px;padding:10px 13px;}
+.dont-card{background:var(--red-lt);border:1.5px solid #f5c4cc;border-radius:8px;padding:10px 13px;}
+.do-card .dlabel{font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;}
+.dont-card .dlabel{font-size:11px;font-weight:700;color:#8a1020;text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;}
+.do-card p{font-size:12.5px;color:#2a4a2a;line-height:1.5;}
+.dont-card p{font-size:12.5px;color:#8a1020;line-height:1.5;}
+/* Content specs */
+.spec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-top:10px;}
+.spec-card{background:var(--skylt);border:1.5px solid var(--parch);border-radius:10px;padding:12px 14px;}
+.spec-card .sc-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-bottom:4px;}
+.spec-card p{font-size:13px;color:var(--soft);line-height:1.5;}
+.spec-card .sc-min{font-family:'Fraunces',serif;font-size:22px;font-weight:900;color:var(--blue);line-height:1;}
+/* Relative cards (Lab 3) */
+.rel-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-top:10px;}
+.rel-card{background:var(--skylt);border:1.5px solid var(--parch);border-radius:10px;padding:12px 14px;}
+.rel-card h5{font-size:12px;font-weight:700;color:var(--blue);margin-bottom:7px;font-family:'Fraunces',serif;}
+.rel-card ul{padding-left:16px;font-size:12.5px;color:var(--soft);line-height:1.7;}
+
+
+
+/* ── Inline image integration ── */
+.inline-img-block{float:right;margin:0 0 14px 20px;width:240px;}
+@media(max-width:640px){.inline-img-block{float:none;width:100%;margin:14px 0;}}
+.inline-img-block .lab-img-wrap{display:block;border-radius:10px;overflow:hidden;}
+.inline-img-block img{width:100%;height:170px;object-fit:cover;display:block;}
+
 </style>
 </head>
 <body>
@@ -147,28 +214,32 @@ footer{text-align:center;padding:20px;font-size:11px;color:var(--muted);}
 <header role="banner">
   <div class="flag" role="img" aria-label="Spanish flag"><div class="fbar r"></div><div class="fbar y"></div><div class="fbar r"></div></div>
   <div class="htext"><h1>SPAN <em>1001</em></h1><p>Introductory Spanish — Language Lab</p></div>
-  <div class="hbadge" aria-label="Lab 2"><div class="lab-num" aria-hidden="true">2</div><span class="mode-pill">🏫 La universidad</span></div>
+  <div class="hbadge">
+    <div class="lab-num">2</div>
+    <span class="summer-badge">☀️ Summer</span>
+    <span class="mode-pill">🙋 La universidad</span>
+  </div>
 </header>
 
 <main class="page" id="main-content">
 
   <div class="hero-card">
     <div class="hero-img">
-      <a class="lab-img-wrap" data-full="https://junnynoh-tech.github.io/span1001-instructions/span1001-images/lab-2-image-1.jpg" data-caption=""Now That's An Admissions Building!" by Chris Pesotski · Flickr · CC BY-NC-ND 2.0"Now That's An Admissions Building!" by Chris Pesotski · CC BY-NC-ND 2.0" role="button" tabindex="0" aria-label="Expand image: University campus building">
+            <a class="lab-img-wrap" data-full="https://junnynoh-tech.github.io/span1001-instructions/span1001-images/lab-2-image-1.jpg" data-caption=""Now That's An Admissions Building!" by Chris Pesotski · Flickr · CC BY-NC-ND 2.0" role="button" tabindex="0" aria-label="Expand image: University campus building">
       <img src="https://junnynoh-tech.github.io/span1001-instructions/span1001-images/lab-2-image-1.jpg" alt="University campus building" loading="lazy">
       <span class="img-expand-hint" aria-hidden="true">🔍 Expand</span>
     </a>
-    <div class="img-caption"><a href="https://www.flickr.com/photos/cavalier92/328278300/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">"Now That's An Admissions Building!" by Chris Pesotski</a> · Flickr · CC BY-NC-ND 2.0</div>
+    <div class="img-caption"><a href="https://junnynoh-tech.github.io/span1001-instructions/span1001-images/lab-2-image-1.jpg" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">"Now That's An Admissions Building!" by Chris Pesotski</a> · Flickr · CC BY-NC-ND 2.0</div>
     </div>
     <div class="hero-body">
-      <div class="chapter-tag">Capítulos 1–2 · verbos -AR · estar · lugares</div>
-      <h2>La universidad</h2>
-      <p class="desc">Give your Colombian friend Andrea a campus tour! Present slides of different places, describe what people do there, and speak over them using -AR verbs and campus vocabulary from Chapters 1 and 2.</p>
+      <div class="chapter-tag">Capítulos 1–2 · verbos -AR · estar + location · lugares del campus</div>
+      <h2>Un recorrido por el campus</h2>
+      <p class="desc">Give your Colombian friend Andrea a campus tour! Present 4–5 places, describe what people do there, and speak over your slides using -AR verbs and campus vocabulary.</p>
+
       <div class="chips">
-        <span class="chip">📋 Mini-quiz first</span>
-        <span class="chip">🎬 Camera + Screen in Bongo</span>
-        <span class="chip">⏱️ 1.5–2 min</span>
-        <span class="chip">🖼️ Min 5 slides · 3+ places</span>
+        <span class="chip">☀️ Summer Session</span>
+        <span class="chip">🙋 Individual video</span>
+        <span class="chip">🎬 Camera + Screen</span><span class="chip">🖼️ Min 5 slides · 4–5 places</span>
       </div>
     </div>
   </div>
@@ -177,40 +248,53 @@ footer{text-align:center;padding:20px;font-size:11px;color:var(--muted);}
     <div class="card">
       <div class="card-inner">
         <div class="slabel" style="margin-top:0;"><span>🚦</span>How to complete this lab</div>
-        <ol class="steps">
-          <li><span class="sn">1</span><span>Complete the <a href="https://ung.view.usg.edu/d2l/common/dialogs/quickLink/quickLink.d2l?ou=830130&type=quiz&rcode=usgx-40457864" target="_blank" rel="noopener" style="color:var(--blue);font-weight:700;">Preparation Mini-Quiz</a> in D2L.</span></li>
-          <li><span class="sn">2</span><span>Build your <strong>slide deck</strong> (minimum 5 slides, 1 per place).</span></li>
-          <li><span class="sn">3</span><span>Open the <a href="https://ung.view.usg.edu/d2l/common/dialogs/quickLink/quickLink.d2l?ou={orgUnitId}&type=content&rcode=usgx-42692250" target="_blank" rel="noopener" style="color:var(--blue);font-weight:700;">Lab 2: Bongo Activity</a> in D2L via Bongo.</span></li>
-          <li><span class="sn">4</span><span>In Bongo, select <strong>Camera and Screen</strong> to share your slides while recording with your face visible.</span></li>
-          
-        </ol>
-
-        <div class="alert info" style="margin-top:12px;">🖥️ <strong>Camera and Screen</strong> is the primary recording method — it lets Bongo capture both your face and your slides simultaneously. No download or upload required.</div>
-
-        <div class="lab-option">
-          <div class="lab-option-header"><span style="font-size:18px;">🏫</span><h3>Want help? Do it in the Lab</h3><span class="lab-badge">Optional</span></div>
-          <p style="font-size:13px;color:#2a4a2a;line-height:1.6;margin-bottom:10px;">A Language Lab TA can help you organize your slides and practice your vocabulary. Book via WCONLINE.</p>
-          <a href="https://unglanglab.mywconline.com/schedule/calendar?scheduleid=sc6655efb977156" target="_blank" rel="noopener" class="resource-btn" style="background:var(--green);font-size:12px;padding:8px 16px;">🗓️ Reserve a Lab Spot</a>
+        <div class="step-track" role="list">
+          <div class="st-item act"><div class="st-circle">1</div><div class="st-label">Quiz</div></div>
+          <div class="st-item"><div class="st-circle">2</div><div class="st-label">Make<br>slides</div></div>
+          <div class="st-item"><div class="st-circle">3</div><div class="st-label">Record</div></div>
+          <div class="st-item"><div class="st-circle">✓</div><div class="st-label">Done</div></div>
         </div>
-
+        <ol class="steps">
+          <li><span class="sn">1</span><span>Complete the <a href="https://ung.view.usg.edu/d2l/common/dialogs/quickLink/quickLink.d2l?ou={orgUnitId}&type=quiz&rcode=usgx-SQUIZ2-REPLACE" target="_blank" rel="noopener" style="color:var(--blue);font-weight:700;">mini-quiz</a> — it is part of this lab grade.</span></li>
+          <li><span class="sn">2</span><span>Build your slides (5 minimum, keywords only — see slide model below).</span></li>
+          <li><span class="sn">3</span><span>Click the <strong>Summer Lab 2: Bongo Activity</strong> link above, select <strong>Camera and Screen</strong>, and record.</span></li>
+        </ol>
         <div class="resource-row">
           <button class="resource-btn blue" onclick="openModal('modal-vocab')">📋 Key Vocabulary</button>
           <button class="resource-btn teal" onclick="openModal('modal-bongo')">🔧 Bongo Help</button>
-          <button class="resource-btn gold" onclick="openModal('modal-alt')">🎬 Alternative Recording</button>
         </div>
+<div class="alert gold" style="margin-top:14px;">📅 <strong>Due Tuesday at 5:00 PM.</strong> Contact the Language Lab before the deadline if you have any Camera and Screen issues.</div>
       </div>
     </div>
 
-    <div class="card">
-      <div class="card-inner">
+    <div class="card" style="overflow:hidden;">
+      <a class="lab-img-wrap" data-full="https://junnynoh-tech.github.io/span1001-instructions/span1001-images/lab-2-image-2.jpg" data-caption=""Dahlonega Town Center" by Chris Pesotski · Flickr · CC BY-NC-ND 2.0"
+         role="button" tabindex="0" aria-label="Expand image: Dahlonega town center"
+         style="display:block;overflow:hidden;height:200px;border-radius:0;">
+        <img src="https://junnynoh-tech.github.io/span1001-instructions/span1001-images/lab-2-image-2.jpg" alt="Dahlonega town center" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <span class="img-expand-hint" aria-hidden="true">🔍 Expand</span>
+      </a>
+      <div style="padding:6px 10px 4px;text-align:center;">
+        <p style="font-size:10px;color:var(--muted);font-style:italic;"><a href="https://www.flickr.com/photos/cavalier92/328278091/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">"Dahlonega Town Center" by Chris Pesotski</a> · Flickr · CC BY-NC-ND 2.0</p>
+      </div>
+      <div class="card-inner" style="padding-top:8px;">
         <div class="slabel" style="margin-top:0;"><span>✅</span>Requirements</div>
         <div class="req-acc">
           <div class="req-item">
             <button class="req-toggle" aria-expanded="false" onclick="tog(this)"><span>🎥</span>Video basics<span class="arr">▼</span></button>
             <div class="req-body"><ul>
-              <li><strong>1.5–2 minutes</strong> of speech</li>
-              <li><strong>Face visible</strong> throughout — use Camera and Screen mode</li>
-              <li>Slides must be visible while you are speaking</li>
+              <li><strong>1.5–2 minutes</strong> of spoken Spanish</li>
+              <li><strong>Face visible</strong> — use Camera and Screen mode</li>
+              <li>Minimum <strong>5 slides</strong>, one per place</li>
+            </ul></div>
+          </div>
+          <div class="req-item">
+            <button class="req-toggle" aria-expanded="false" onclick="tog(this)"><span>📋</span>Content checklist<span class="arr">▼</span></button>
+            <div class="req-body"><ul>
+              <li>Cover <strong>4–5 campus or community places</strong></li>
+              <li>Name each place in Spanish, use <strong>estar</strong> for location</li>
+              <li>Describe what people do there with <strong>-AR verbs</strong> (at least 2 per place)</li>
+              <li>Slides contain <strong>keywords only</strong> — you speak the sentences</li>
             </ul></div>
           </div>
           <div class="req-item">
@@ -218,201 +302,157 @@ footer{text-align:center;padding:20px;font-size:11px;color:var(--muted);}
             <div class="req-body"><ul>
               <li>Speak <strong>only in Spanish</strong></li>
               <li>Use <strong>complete sentences</strong> — subject + verb</li>
-              <li>One notecard, up to <strong>15 words</strong> allowed — no scripts</li>
+              <li>One notecard, up to <strong>15 words</strong> — no scripts</li>
             </ul></div>
           </div>
           <div class="req-item">
-            <button class="req-toggle" aria-expanded="false" onclick="tog(this)"><span>🖼️</span>Slide rules<span class="arr">▼</span></button>
-            <div class="req-body">
-              <ul>
-                <li>Minimum <strong>5 slides</strong>, one per place</li>
-                <li>Each slide: <strong>place name + image + 3–5 keyword labels only</strong></li>
-                <li><strong>No full sentences on slides</strong> — you say the sentences</li>
-                <li>Labels must come from Chapter 1–2 vocabulary</li>
-              </ul>
-            </div>
-          </div>
-          <div class="req-item">
-            <button class="req-toggle" aria-expanded="false" onclick="tog(this)"><span>📍</span>Content requirements<span class="arr">▼</span></button>
-            <div class="req-body"><ul>
-              <li>Cover at least <strong>3 different campus or community places</strong></li>
-              <li>Use at least <strong>5 different -AR verbs</strong></li>
-              <li>For each place, describe: what people do, when it's busy, why it's popular</li>
-              <li>Use <strong>estar</strong> for at least one location: <em>La biblioteca está en…</em></li>
-            </ul></div>
-          </div>
-          <div class="req-item">
-            <button class="req-toggle" aria-expanded="false" onclick="tog(this)"><span>⚠️</span>Incomplete submissions<span class="arr">▼</span></button>
-            <div class="req-body"><ul>
-              <li><strong>First occurrence</strong> (no face / no audio): Incomplete — resubmit</li>
-              <li><strong>Subsequent:</strong> Score of 0</li>
-            </ul></div>
+            <button class="req-toggle" aria-expanded="false" onclick="tog(this)"><span>📊</span>Rubric<span class="arr">▼</span></button>
+            <div class="req-body"><p>A rubric is available inside Bongo when you open the assignment. Review it before recording.</p></div>
           </div>
         </div>
-        <div class="alert warn" style="margin-top:14px;">🚫 No online translators or AI tools. Slides show <strong>keywords only</strong> from Ch. 1–2 — your speech provides the sentences.</div>
+        <div class="alert warn" style="margin-top:14px;">🚫 No online translators or AI writing tools allowed.</div>
       </div>
     </div>
   </div>
 
-  <!-- Assignment + Slide Model -->
-  <div class="card">
+    <div class="card">
     <div class="card-inner">
-      <div style="display:grid;grid-template-columns:1fr 220px;gap:24px;align-items:start;">
-        <div>
-          <div class="slabel" style="margin-top:0;"><span>🎬</span>Video Assignment — Campus Tour for Andrea</div>
-          <p style="font-size:14px;line-height:1.75;color:var(--soft);margin-bottom:14px;">Your friend <strong>Andrea from Colombia</strong> is visiting your university for the first time. You are her tour guide! Share your slides in Bongo using <strong>Camera and Screen</strong> and describe each place in Spanish as you advance through them.</p>
+      <div class="part-badge pb-blue">🎥 Your video — Campus Tour for Andrea</div>
+      <div class="slabel" style="margin-top:0;"><span>🎬</span>Camera and Screen mode in Bongo</div>
+      <p style="font-size:14px;line-height:1.75;color:var(--soft);margin-bottom:14px;">Your friend <strong>Andrea from Colombia</strong> is visiting your university for the first time. You are her tour guide! Create slides and present in Bongo using <strong>Camera and Screen</strong> mode.</p>
 
-          <!-- Slide model -->
-          <div class="slabel" style="margin-top:0;"><span>🖼️</span>What a good slide looks like</div>
+      <div class="alert info" style="margin-bottom:14px;">🖥️ <strong>Camera and Screen</strong> mode captures both your face and your slides simultaneously. In Bongo, choose this option before recording — it requires Google Chrome on a laptop or desktop.</div>
 
-          <div style="display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;margin-bottom:14px;">
-            <div class="slide-model">
-              <div class="slide-model-header">📷 Slide Example</div>
-              <div class="slide-model-body">
-                <div class="slide-place-name">La biblioteca</div>
-                <div class="slide-keywords">
-                  <span class="kw">estudiar</span>
-                  <span class="kw">leer</span>
-                  <span class="kw">tranquilo</span>
-                </div>
-                <div class="slide-example-speech">
-                  <em>"Aquí está la biblioteca. En la biblioteca, los estudiantes <strong>estudian</strong> y <strong>leen</strong> libros."</em>
-                  <div class="pron-play">🔊 <button onclick="speak('Aquí está la biblioteca. En la biblioteca, los estudiantes estudian y leen libros.')" aria-label="Listen to example">Listen to pronunciation</button></div>
-                </div>
-              </div>
+      <div class="slabel" style="margin-top:0;"><span>🖼️</span>What a good slide looks like</div>
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;margin-bottom:14px;">
+        <div class="slide-model">
+          <div class="slide-model-header">📷 Slide Example</div>
+          <div class="slide-model-body">
+            <div class="slide-place-name">La biblioteca</div>
+            <div class="slide-keywords">
+              <span class="kw">estudiar</span>
+              <span class="kw">leer</span>
+              <span class="kw">tranquilo</span>
             </div>
-            <div>
-              <div class="slide-do-dont">
-                <div class="do-card">
-                  <div class="dlabel">✅ Good slide</div>
-                  <p><strong>la cafetería</strong><br>caminar · almorzar · conversar</p>
-                  <p style="font-size:11.5px;margin-top:6px;font-style:italic;">Keywords only — you speak the sentences</p>
-                </div>
-                <div class="dont-card">
-                  <div class="dlabel">❌ Not this</div>
-                  <p>"En la cafetería los estudiantes caminan y almuerzan juntos todos los días."</p>
-                  <p style="font-size:11.5px;margin-top:6px;font-style:italic;">Full sentences on slides = reading, not presenting</p>
-                </div>
-              </div>
+            <div class="slide-example-speech">
+              <em>"Aquí está la biblioteca. En la biblioteca, los estudiantes <strong>estudian</strong> y <strong>leen</strong> libros."</em>
+              <div class="pron-play">🔊 <button onclick="speak('Aquí está la biblioteca. En la biblioteca, los estudiantes estudian y leen libros.')" aria-label="Listen to example">Listen to pronunciation</button></div>
             </div>
           </div>
-
-          <!-- Content specs -->
-          <div class="slabel"><span>📌</span>Minimum content per video</div>
-          <div class="spec-grid">
-            <div class="spec-card"><div class="sc-label">Slides</div><div class="sc-min">5</div><p>minimum — one per place</p></div>
-            <div class="spec-card"><div class="sc-label">Places</div><div class="sc-min">3</div><p>campus or community locations</p></div>
-            <div class="spec-card"><div class="sc-label">-AR verbs</div><div class="sc-min">5</div><p>different verbs used in speech</p></div>
-            <div class="spec-card"><div class="sc-label">Speech</div><div class="sc-min">1.5–2</div><p>minutes of spoken Spanish</p></div>
-          </div>
-
-          <div class="alert info" style="margin-top:14px;">🌐 <strong>Online students:</strong> You don't need to be on campus. Use UNG website photos or Google Maps Street View images for your slides — your spoken descriptions are what matter.</div>
         </div>
         <div>
-          <a class="lab-img-wrap" data-full="https://junnynoh-tech.github.io/span1001-instructions/span1001-images/lab-2-image-1.jpg" data-caption=""Now That's An Admissions Building!" by Chris Pesotski · Flickr · CC BY-NC-ND 2.0"Now That's An Admissions Building!" by Chris Pesotski · CC BY-NC-ND 2.0" role="button" tabindex="0" aria-label="Expand image: University campus building">
-      <img src="https://junnynoh-tech.github.io/span1001-instructions/span1001-images/lab-2-image-1.jpg" alt="University campus building" loading="lazy">
-      <span class="img-expand-hint" aria-hidden="true">🔍 Expand</span>
-    </a>
-    <div class="img-caption"><a href="https://www.flickr.com/photos/cavalier92/328278091/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">&quot;Dahlonega Town Center&quot; by Chris Pesotski</a> · Flickr · CC BY-NC-ND 2.0</div>
+          <div class="slide-do-dont">
+            <div class="do-card">
+              <div class="dlabel">✅ Good slide</div>
+              <p><strong>la cafetería</strong><br>caminar · almorzar · conversar</p>
+              <p style="font-size:11.5px;margin-top:6px;font-style:italic;">Keywords only — you speak the sentences</p>
+            </div>
+            <div class="dont-card">
+              <div class="dlabel">❌ Not this</div>
+              <p>"En la cafetería los estudiantes caminan y almuerzan juntos todos los días."</p>
+              <p style="font-size:11.5px;margin-top:6px;font-style:italic;">Full sentences on slides = reading, not presenting</p>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <div class="slabel"><span>✅</span>Requirements</div>
+      <ul class="cklist" style="margin-bottom:16px;">
+        <li><div class="ckn">1</div><span><strong>4–5 campus or community places</strong> — each on its own slide with a photo</span></li>
+        <li><div class="ckn">2</div><span>For each place: name it in Spanish, use <strong>estar</strong> for location, and describe what people do there with at least <strong>two -AR verbs</strong></span></li>
+        <li><div class="ckn">3</div><span>Minimum <strong>5 slides</strong> total (title slide + places)</span></li>
+        <li><div class="ckn">4</div><span>Slides contain <strong>keywords only</strong> — your spoken sentences provide the full description</span></li>
+        <li><div class="ckn">5</div><span><strong>Face visible</strong> throughout — Camera and Screen captures both your face and your slides</span></li>
+      </ul>
+
+      <div class="slabel"><span>📌</span>Minimum content per video</div>
+      <div class="spec-grid">
+        <div class="spec-card"><div class="sc-label">Slides</div><div class="sc-min">5</div><p>minimum — one per place</p></div>
+        <div class="spec-card"><div class="sc-label">Places</div><div class="sc-min">4–5</div><p>campus or community locations</p></div>
+        <div class="spec-card"><div class="sc-label">-AR verbs</div><div class="sc-min">5</div><p>different verbs used in speech</p></div>
+        <div class="spec-card"><div class="sc-label">Speech</div><div class="sc-min">1.5–2</div><p>minutes of spoken Spanish</p></div>
+      </div>
+
+      <div class="alert info" style="margin-top:14px;">📸 <strong>Finding pictures for your slides:</strong> The <a href="https://ung.edu" target="_blank" rel="noopener" style="color:var(--blue);font-weight:700;">UNG website</a> has photos of nearly every building. Google Maps Street View lets you screenshot specific spots. UNG also has official Flickr albums for each campus.
+            <div style="margin-top:10px;">
+              <button onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'flex':'none';this.querySelector('.arr').textContent=this.nextElementSibling.style.display==='flex'?'▲':'▼';" style="display:flex;align-items:center;gap:7px;background:#005fa3;color:white;border:none;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.3px;">
+                <span>📷</span><span>UNG Campus Photos on Flickr</span><span class="arr" style="font-size:9px;">▼</span>
+              </button>
+              <div style="display:none;flex-wrap:wrap;gap:8px;margin-top:10px;">
+                <a href="https://ung.edu/university-relations/photo-gallery/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;background:#e8f3ff;border:1.5px solid #b0ccdf;border-radius:8px;padding:6px 13px;font-size:12px;font-weight:700;color:#005fa3;text-decoration:none;">🌐 UNG Photo Gallery</a>
+                <a href="https://www.flickr.com/photos/uofnorthgeorgia/albums/72177720310327684/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;background:#e8f3ff;border:1.5px solid #b0ccdf;border-radius:8px;padding:6px 13px;font-size:12px;font-weight:700;color:#005fa3;text-decoration:none;">📍 Gainesville</a>
+                <a href="https://www.flickr.com/photos/uofnorthgeorgia/albums/72177720311185488/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;background:#e8f3ff;border:1.5px solid #b0ccdf;border-radius:8px;padding:6px 13px;font-size:12px;font-weight:700;color:#005fa3;text-decoration:none;">📍 Dahlonega</a>
+                <a href="https://www.flickr.com/photos/uofnorthgeorgia/albums/72177720310699830/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;background:#e8f3ff;border:1.5px solid #b0ccdf;border-radius:8px;padding:6px 13px;font-size:12px;font-weight:700;color:#005fa3;text-decoration:none;">📍 Oconee</a>
+                <a href="https://www.flickr.com/photos/uofnorthgeorgia/albums/72177720327464736/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;background:#e8f3ff;border:1.5px solid #b0ccdf;border-radius:8px;padding:6px 13px;font-size:12px;font-weight:700;color:#005fa3;text-decoration:none;">📍 Cumming</a>
+              </div>
+            </div>
       </div>
     </div>
   </div>
+
 
 </main>
-<footer>SPAN 1001 — Lab 2: La universidad · University of North Georgia · Capítulos 1–2</footer>
+<footer>SPAN 1001 — Summer Lab 2: La universidad · University of North Georgia · Capítulos 1–2</footer>
 
 <!-- Vocab Modal -->
 <div id="modal-vocab" class="modal" role="dialog" aria-modal="true" aria-label="Key Vocabulary" aria-hidden="true">
   <div class="modal-panel">
     <button class="modal-close" onclick="closeModal('modal-vocab')" aria-label="Close">✕</button>
-    <div class="modal-title">Key Vocabulary — Lab 2</div>
-    <div class="modal-sub">Chapters 1–2 essentials · click 🔊 to hear pronunciation · use as slide keywords</div>
-
+    <div class="modal-title">Key Vocabulary — Summer Lab 2</div>
+    <div class="modal-sub">Chapters covered · click 🔊 to hear the pronunciation</div>
+    
     <div class="vsec-title">Campus Places — Lugares del campus</div>
-    <table class="vtable">
-      <thead><tr><th>Español</th><th>English</th><th>Pronunciation</th></tr></thead>
-      <tbody>
-        <tr><td class="es-cell">la biblioteca</td><td class="en-cell">library</td><td class="pron-cell"><em>bee-blyoh-TEH-kah</em> <button onclick="speak('la biblioteca')" aria-label="Listen">🔊</button></td></tr>
-        <tr><td class="es-cell">la cafetería</td><td class="en-cell">cafeteria</td><td class="pron-cell"><em>kah-feh-teh-REE-ah</em> <button onclick="speak('la cafetería')" aria-label="Listen">🔊</button></td></tr>
-        <tr><td class="es-cell">el gimnasio</td><td class="en-cell">gym</td><td class="pron-cell"><em>heem-NAH-syoh</em> <button onclick="speak('el gimnasio')" aria-label="Listen">🔊</button></td></tr>
-        <tr><td class="es-cell">el laboratorio</td><td class="en-cell">lab</td><td class="pron-cell"><em>lah-boh-rah-TOH-ryoh</em> <button onclick="speak('el laboratorio')" aria-label="Listen">🔊</button></td></tr>
-        <tr><td class="es-cell">la residencia estudiantil</td><td class="en-cell">residence hall / dorm</td><td class="pron-cell"><em>reh-see-DEN-syah</em> <button onclick="speak('la residencia estudiantil')" aria-label="Listen">🔊</button></td></tr>
-        <tr><td class="es-cell">el estadio</td><td class="en-cell">stadium</td><td class="pron-cell"><em>es-TAH-dyoh</em> <button onclick="speak('el estadio')" aria-label="Listen">🔊</button></td></tr>
-        <tr><td class="es-cell">la librería</td><td class="en-cell">bookstore</td><td class="pron-cell"><em>lee-breh-REE-ah</em> <button onclick="speak('la librería')" aria-label="Listen">🔊</button></td></tr>
-      </tbody>
-    </table>
-
-    <div class="vsec-title">Key -AR Verbs (Ch. 2)</div>
-    <table class="vtable">
-      <thead><tr><th>Infinitivo</th><th>English</th><th>Example sentence</th></tr></thead>
-      <tbody>
-        <tr><td class="es-cell">estudiar</td><td class="en-cell">to study</td><td class="pron-cell"><em>Los estudiantes estudian.</em> <button onclick="speak('Los estudiantes estudian')" aria-label="Listen">🔊</button></td></tr>
-        <tr><td class="es-cell">trabajar</td><td class="en-cell">to work</td><td class="pron-cell"><em>Los empleados trabajan.</em> <button onclick="speak('Los empleados trabajan')" aria-label="Listen">🔊</button></td></tr>
-        <tr><td class="es-cell">caminar</td><td class="en-cell">to walk</td><td class="pron-cell"><em>Los estudiantes caminan.</em> <button onclick="speak('Los estudiantes caminan')" aria-label="Listen">🔊</button></td></tr>
-        <tr><td class="es-cell">conversar</td><td class="en-cell">to chat</td><td class="pron-cell"><em>Los amigos conversan.</em> <button onclick="speak('Los amigos conversan')" aria-label="Listen">🔊</button></td></tr>
-        <tr><td class="es-cell">practicar</td><td class="en-cell">to practice</td><td class="pron-cell"><em>Los atletas practican.</em> <button onclick="speak('Los atletas practican')" aria-label="Listen">🔊</button></td></tr>
-        <tr><td class="es-cell">escuchar música</td><td class="en-cell">to listen to music</td><td class="pron-cell"><em>Los estudiantes escuchan música.</em> <button onclick="speak('Los estudiantes escuchan música')" aria-label="Listen">🔊</button></td></tr>
-        <tr><td class="es-cell">descansar</td><td class="en-cell">to rest</td><td class="pron-cell"><em>Los estudiantes descansan.</em> <button onclick="speak('Los estudiantes descansan')" aria-label="Listen">🔊</button></td></tr>
-      </tbody>
-    </table>
-
-    <div class="vsec-title">Estar — Location (Ch. 2)</div>
-    <table class="vtable">
-      <thead><tr><th>Español</th><th>English</th><th>Example</th></tr></thead>
-      <tbody>
-        <tr><td class="es-cell">está</td><td class="en-cell">is (location)</td><td class="pron-cell"><em>La biblioteca está aquí.</em> <button onclick="speak('La biblioteca está aquí')" aria-label="Listen">🔊</button></td></tr>
-        <tr><td class="es-cell">Aquí está…</td><td class="en-cell">Here is…</td><td class="pron-cell"><em>Aquí está la cafetería.</em> <button onclick="speak('Aquí está la cafetería')" aria-label="Listen">🔊</button></td></tr>
-      </tbody>
-    </table>
-    <div class="alert gold" style="margin-top:10px;">📚 Refer to your <strong>Vistas textbook, Capítulos 1–2</strong> for the complete vocabulary lists.</div>
+    <table class="vtable"><thead><tr><th>Español</th><th>English</th><th>Pronunciation</th></tr></thead><tbody>
+      <tr><td class="es-cell">la biblioteca</td><td class="en-cell">library</td><td class="pron-cell"><em>byb-lyoh-TEH-kah</em> <button onclick="speak('la biblioteca')">🔊</button></td></tr>
+      <tr><td class="es-cell">la cafetería</td><td class="en-cell">cafeteria</td><td class="pron-cell"><em>kah-feh-teh-REE-ah</em> <button onclick="speak('la cafetería')">🔊</button></td></tr>
+      <tr><td class="es-cell">la residencia estudiantil</td><td class="en-cell">dorm / residence hall</td><td class="pron-cell"><em>reh-see-DEN-syah</em> <button onclick="speak('la residencia estudiantil')">🔊</button></td></tr>
+      <tr><td class="es-cell">el gimnasio</td><td class="en-cell">gym</td><td class="pron-cell"><em>heem-NAH-syoh</em> <button onclick="speak('el gimnasio')">🔊</button></td></tr>
+      <tr><td class="es-cell">la librería</td><td class="en-cell">bookstore</td><td class="pron-cell"><em>lee-breh-REE-ah</em> <button onclick="speak('la librería')">🔊</button></td></tr>
+      <tr><td class="es-cell">el laboratorio</td><td class="en-cell">lab</td><td class="pron-cell"><em>lah-boh-rah-TOH-ryoh</em> <button onclick="speak('el laboratorio')">🔊</button></td></tr>
+      <tr><td class="es-cell">el estadio</td><td class="en-cell">stadium</td><td class="pron-cell"><em>es-TAH-dyoh</em> <button onclick="speak('el estadio')">🔊</button></td></tr>
+      <tr><td class="es-cell">la oficina</td><td class="en-cell">office</td><td class="pron-cell"><em>oh-fee-SEE-nah</em> <button onclick="speak('la oficina')">🔊</button></td></tr>
+      <tr><td class="es-cell">el estacionamiento</td><td class="en-cell">parking lot</td><td class="pron-cell"><em>es-tah-syoh-nah-MYEN-toh</em> <button onclick="speak('el estacionamiento')">🔊</button></td></tr>
+    </tbody></table>
+    <div class="vsec-title">-AR Verbs (people do at these places)</div>
+    <table class="vtable"><thead><tr><th>Infinitive</th><th>Meaning</th><th>Example</th></tr></thead><tbody>
+      <tr><td class="es-cell">estudiar</td><td class="en-cell">to study</td><td class="pron-cell"><em>Los estudiantes estudian.</em> <button onclick="speak('Los estudiantes estudian')">🔊</button></td></tr>
+      <tr><td class="es-cell">trabajar</td><td class="en-cell">to work</td><td class="pron-cell"><em>Los profesores trabajan.</em> <button onclick="speak('Los profesores trabajan')">🔊</button></td></tr>
+      <tr><td class="es-cell">caminar</td><td class="en-cell">to walk</td><td class="pron-cell"><em>Caminamos al gimnasio.</em> <button onclick="speak('Caminamos al gimnasio')">🔊</button></td></tr>
+      <tr><td class="es-cell">practicar</td><td class="en-cell">to practice</td><td class="pron-cell"><em>Practicamos deportes.</em> <button onclick="speak('Practicamos deportes')">🔊</button></td></tr>
+      <tr><td class="es-cell">comprar</td><td class="en-cell">to buy</td><td class="pron-cell"><em>Compro libros.</em> <button onclick="speak('Compro libros')">🔊</button></td></tr>
+      <tr><td class="es-cell">escuchar</td><td class="en-cell">to listen</td><td class="pron-cell"><em>Escuchamos música.</em> <button onclick="speak('Escuchamos música')">🔊</button></td></tr>
+      <tr><td class="es-cell">hablar</td><td class="en-cell">to speak</td><td class="pron-cell"><em>Hablamos español.</em> <button onclick="speak('Hablamos español')">🔊</button></td></tr>
+    </tbody></table>
+    <div class="vsec-title">Estar — Location</div>
+    <table class="vtable"><thead><tr><th>Form</th><th>Meaning</th><th>Example</th></tr></thead><tbody>
+      <tr><td class="es-cell">estoy</td><td class="en-cell">I am (located)</td><td class="pron-cell"><em>Estoy en la biblioteca.</em> <button onclick="speak('Estoy en la biblioteca')">🔊</button></td></tr>
+      <tr><td class="es-cell">está</td><td class="en-cell">it is (located)</td><td class="pron-cell"><em>La cafetería está aquí.</em> <button onclick="speak('La cafetería está aquí')">🔊</button></td></tr>
+    </tbody></table>
+    <div class="alert gold" style="margin-top:10px;">📚 For the full vocabulary list, refer to your <strong>Vistas textbook</strong>.</div>
   </div>
 </div>
-
 <!-- Bongo Help Modal -->
 <div id="modal-bongo" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
   <div class="modal-panel">
     <button class="modal-close" onclick="closeModal('modal-bongo')" aria-label="Close">✕</button>
     <div class="modal-title">🔧 Bongo Troubleshooting</div>
-    <div class="modal-sub">Camera and Screen recording tips</div>
-    <div class="bongo-tip"><span class="bt-icon">💻</span><div><strong>Use Google Chrome on a laptop or desktop.</strong> Camera and Screen requires Chrome.</div></div>
-    <div class="bongo-tip"><span class="bt-icon">🔓</span><div>Allow <strong>camera, microphone, and screen sharing</strong> when prompted by Chrome.</div></div>
-    <div class="bongo-tip"><span class="bt-icon">🖥️</span><div>In Bongo, select <strong>Camera and Screen</strong> (not just Camera) — this captures both your face and your slides window.</div></div>
-    <div class="bongo-tip"><span class="bt-icon">📋</span><div>Have your slides open and ready to share <strong>before</strong> you start recording.</div></div>
+    <div class="modal-sub">Try these before contacting the Language Lab</div>
+    <div class="bongo-tip"><span class="bt-icon">💻</span><div><strong>Use Google Chrome on a laptop or desktop.</strong> iPads are not fully supported.</div></div>
+    <div class="bongo-tip"><span class="bt-icon">🔓</span><div>Allow <strong>camera and microphone</strong> in Chrome for D2L.</div></div>
     <div class="bongo-tip"><span class="bt-icon">🗑️</span><div>Stuck on "Activating recorder"? Clear <strong>cache and cookies</strong>, then refresh.</div></div>
+    <div class="bongo-tip"><span class="bt-icon">🕵️</span><div>Try <strong>Chrome Incognito</strong>. Close other apps using the mic/camera.</div></div>
     <div class="bongo-s-title">Still not working?</div>
     <div class="bongo-tip"><span class="bt-icon">❓</span><div>Visit the <a href="https://bongolearn.zendesk.com/hc/en-us/articles/360009373374" target="_blank" rel="noopener" style="color:#0f766e;font-weight:700;">Bongo Help Center</a>.</div></div>
-    <div class="bongo-tip" style="background:var(--red-lt);border-color:#f5c4cc;"><span class="bt-icon">📧</span><div>Contact the Language Lab <strong>before the deadline</strong>. If Camera and Screen doesn't work, use the <strong>Alternative Recording</strong> option.</div></div>
+    <div class="bongo-tip" style="background:var(--red-lt);border-color:#f5c4cc;"><span class="bt-icon">📧</span><div>Contact the Language Lab <strong>before the deadline</strong>.</div></div>
   </div>
 </div>
 
-<!-- Alternative Recording Modal -->
-<div id="modal-alt" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
-  <div class="modal-panel">
-    <button class="modal-close" onclick="closeModal('modal-alt')" aria-label="Close">✕</button>
-    <div class="modal-title">🎬 Alternative Recording Methods</div>
-    <div class="modal-sub">If Bongo's Camera and Screen doesn't work, use one of these options</div>
-
-    <div class="bongo-s-title">Option A — PowerPoint with Camera (recommended)</div>
-    <p style="font-size:12.5px;color:var(--soft);margin-bottom:8px;">Your UNG Microsoft 365 account includes PowerPoint — no extra sign-up needed.</p>
-    <div class="canva-steps">
-      <div class="canva-step"><span class="cs-num">1</span><span>Build your slides in <strong>PowerPoint</strong> (available via UNG Microsoft 365)</span></div>
-      <div class="canva-step"><span class="cs-num">2</span><span>Go to <strong>Slide Show → Record Slide Show</strong></span></div>
-      <div class="canva-step"><span class="cs-num">3</span><span>Click the camera icon in the top-right corner — your face appears as a floating window</span></div>
-      <div class="canva-step"><span class="cs-num">4</span><span>Advance slides as you narrate; click <strong>Stop</strong> when done</span></div>
-      <div class="canva-step"><span class="cs-num">5</span><span>Export: <strong>File → Export → Create a Video</strong> → save as <strong>MP4</strong></span></div>
-      <div class="canva-step"><span class="cs-num">6</span><span>Upload the MP4 via Bongo's <strong>Upload</strong> option</span></div>
-    </div>
-
-    <div class="bongo-s-title" style="margin-top:18px;">Option B — Canva Present and Record</div>
-    <div class="canva-steps">
-      <div class="canva-step"><span class="cs-num">1</span><span>Create slides at <strong>canva.com</strong> (free account)</span></div>
-      <div class="canva-step"><span class="cs-num">2</span><span>Click <strong>Present → Present and Record</strong> — face appears in corner</span></div>
-      <div class="canva-step"><span class="cs-num">3</span><span>Speak through each slide, then click <strong>"End recording"</strong></span></div>
-      <div class="canva-step"><span class="cs-num">4</span><span>Download as <strong>MP4</strong> and upload via Bongo's <strong>Upload</strong> option</span></div>
-    </div>
-    <a href="https://www.canva.com" target="_blank" rel="noopener" class="resource-btn" style="background:#00c4cc;margin-top:10px;display:inline-flex;">🎨 Go to Canva</a>
-    <div class="alert" style="background:var(--gold-lt);border:1.5px solid #e8d080;color:#6b5a10;margin-top:12px;">💡 Both options produce an MP4 file you upload through Bongo. Your face must be visible in the recording.</div>
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" aria-hidden="true">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" aria-label="Close image">✕</button>
+    <img id="lb-img" src="" alt="">
+    <div id="lb-cap" class="lightbox-caption"></div>
   </div>
 </div>
 
@@ -424,38 +464,107 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){document.qu
 function speak(text){if(!window.speechSynthesis)return;window.speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(text);u.lang='es-MX';u.rate=0.82;window.speechSynthesis.speak(u);}
 
 // Lightbox
-(function(){
+document.addEventListener('DOMContentLoaded',function(){
   var lb=document.getElementById('lightbox'),lbImg=document.getElementById('lb-img'),lbCap=document.getElementById('lb-cap');
   if(!lb)return;
   document.querySelectorAll('.lab-img-wrap').forEach(function(el){
-    el.addEventListener('click',function(){
-      var src=el.getAttribute('data-full')||el.querySelector('img').src;
+    el.addEventListener('click',function(e){
+      e.preventDefault();
+      if(!lb||!lbImg)return;
+      var imgEl=el.querySelector('img');
+      var src=el.getAttribute('data-full')||(imgEl?imgEl.src:'');
       var cap=el.getAttribute('data-caption')||'';
-      lbImg.src=src;lbCap.textContent=cap;
+      lbImg.src=src;
+      lbImg.alt=imgEl?imgEl.alt:'';
+      lbCap.innerHTML=cap;
       lb.classList.add('open');lb.removeAttribute('aria-hidden');
       document.body.style.overflow='hidden';
       lb.querySelector('.lightbox-close').focus();
     });
-    el.setAttribute('tabindex','0');
-    el.setAttribute('role','button');
-    el.setAttribute('aria-label','Expand image');
-    el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' ')el.click();});
+    el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click();}}); 
   });
   function closeLb(){lb.classList.remove('open');lb.setAttribute('aria-hidden','true');document.body.style.overflow='';}
   lb.querySelector('.lightbox-close').addEventListener('click',closeLb);
   lb.addEventListener('click',function(e){if(e.target===lb)closeLb();});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&lb.classList.contains('open'))closeLb();});
-})();
+});
 </script>
 
-<!-- Lightbox -->
-<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" aria-hidden="true">
-  <div class="lightbox-inner">
-    <button class="lightbox-close" aria-label="Close image">✕</button>
-    <img id="lb-img" src="" alt="">
-    <div id="lb-cap" class="lightbox-caption"></div>
-  </div>
-</div>
+<script>
+(function(){
+  var flags = [
+  {name:"España",b:["#c8102e","#b8952a","#c8102e"],accent:"#7ab8e8"},
+  {name:"México",b:["#006847","#ffffff","#ce1126"],accent:"#7ab8e8"},
+  {name:"Argentina",b:["#74acdf","#ffffff","#74acdf"],accent:"#7ab8e8"},
+  {name:"Colombia",b:["#fcd116","#003087","#ce1126"],accent:"#fcd116"},
+  {name:"Chile",b:["#d52b1e","#ffffff","#002d62"],accent:"#7ab8e8"},
+  {name:"Perú",b:["#d91023","#ffffff","#d91023"],accent:"#7ab8e8"},
+  {name:"Venezuela",b:["#cf142b","#00247d","#cf9a00"],accent:"#cf9a00"},
+  {name:"Cuba",b:["#002a8f","#ffffff","#002a8f"],accent:"#7ab8e8"},
+  {name:"Ecuador",b:["#ffd100","#003893","#ef3340"],accent:"#ffd100"},
+  {name:"Bolivia",b:["#d52b1e","#f4e400","#007a3d"],accent:"#f4e400"},
+  {name:"Guatemala",b:["#4997d0","#ffffff","#4997d0"],accent:"#7ab8e8"},
+  {name:"Costa Rica",b:["#002b7f","#cf142b","#ffffff"],accent:"#7ab8e8"},
+  {name:"Uruguay",b:["#ffffff","#5b9bd5","#ffffff"],accent:"#5b9bd5"},
+  {name:"Honduras",b:["#009bde","#ffffff","#009bde"],accent:"#7ab8e8"},
+  {name:"Nicaragua",b:["#003f87","#ffffff","#003f87"],accent:"#7ab8e8"},
+  {name:"El Salvador",b:["#0f47af","#ffffff","#0f47af"],accent:"#7ab8e8"},
+  {name:"República Dom.",b:["#002d62","#cf142b","#002d62"],accent:"#7ab8e8"},
+  {name:"Puerto Rico",b:["#002d62","#ffffff","#cf142b"],accent:"#7ab8e8"},
+  {name:"Panamá",b:["#da121a","#ffffff","#005eb8"],accent:"#7ab8e8"},
+  {name:"Paraguay",b:["#d52b1e","#ffffff","#0032a0"],accent:"#7ab8e8"}
+];
 
+  // Fisher-Yates shuffle for a non-repeating cycle
+  for(var i=flags.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=flags[i];flags[i]=flags[j];flags[j]=t;}
+
+  var idx = 0;
+  var bars = document.querySelectorAll('.flag .fbar');
+  var wrapper = bars.length ? bars[0].closest('.flag') : null;
+  var accentEl = document.querySelector('.htext h1 em');
+  var tip = null;
+
+  // Add CSS transitions to bars and accent
+  for(var b=0;b<bars.length;b++){
+    bars[b].style.transition='background 0.9s ease';
+  }
+  if(accentEl) accentEl.style.transition='color 0.9s ease';
+
+  function applyFlag(f){
+    if(bars.length===3){
+      bars[0].style.background=f.b[0];
+      bars[1].style.background=f.b[1];
+      bars[2].style.background=f.b[2];
+    }
+    if(wrapper) wrapper.setAttribute('aria-label','Flag of '+f.name);
+    if(accentEl) accentEl.style.color=f.accent;
+    if(tip){
+      tip.style.opacity='0';
+      // Update text after fade completes (only if tooltip is visible)
+      setTimeout(function(){tip.textContent=f.name;},200);
+    }
+  }
+
+  // Set initial flag immediately
+  applyFlag(flags[0]);
+
+  // Build tooltip
+  if(wrapper){
+    wrapper.style.position='relative';
+    tip = document.createElement('div');
+    tip.textContent=flags[0].name;
+    tip.style.cssText='position:absolute;left:52px;top:0;background:rgba(0,0,0,0.72);color:white;font-size:10px;font-weight:700;letter-spacing:.5px;padding:3px 8px;border-radius:4px;white-space:nowrap;opacity:0;transition:opacity .2s;pointer-events:none;z-index:10;';
+    wrapper.appendChild(tip);
+    wrapper.addEventListener('mouseenter',function(){tip.style.opacity='1';});
+    wrapper.addEventListener('mouseleave',function(){tip.style.opacity='0';});
+  }
+
+  // Cycle every 6 seconds
+  setInterval(function(){
+    idx=(idx+1)%flags.length;
+    applyFlag(flags[idx]);
+  },6000);
+})();
+</script>
 </body>
 </html>
