@@ -6,7 +6,7 @@
 <title>SPAN 1001 — Summer Lab 1: Mi presentación</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--red:#c8102e;--gold:#b8952a;--navy:#002147;--blue:#005fa3;--skylt:#e8f3ff;--ink:#0d1525;--soft:#1e3a5f;--muted:#4a5f75;--cream:#f7f9fc;--white:#ffffff;--parch:#dce8f5;--shadow:0 8px 40px rgba(0,33,71,0.13);--shadow-sm:0 2px 12px rgba(0,33,71,0.08);--red-lt:#fff0f2;--gold-lt:#fffbf0;--green:#1a5c1a;--green-lt:#f0f9f0;}
+:root{--red:#c8102e;--gold:#b8952a;--navy:#002147;--blue:#005fa3;--skylt:#e8f3ff;--ink:#0d1525;--soft:#1e3a5f;--muted:#4a5f75;--cream:#f7f9fc;--white:#ffffff;--parch:#dce8f5;--shadow:0 4px 24px rgba(0,33,71,0.10),0 1px 4px rgba(0,33,71,0.06);--shadow-sm:0 2px 8px rgba(0,33,71,0.07);--red-lt:#fff0f2;--gold-lt:#fffbf0;--green:#1a5c1a;--green-lt:#f0f9f0;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 5% 10%,rgba(200,16,46,0.05) 0%,transparent 50%),radial-gradient(ellipse at 95% 90%,rgba(0,95,163,0.05) 0%,transparent 50%);pointer-events:none;z-index:0;}
@@ -22,14 +22,14 @@ header::after{content:'UNO';position:absolute;right:-10px;top:50%;transform:tran
 .mode-pill{display:inline-flex;align-items:center;gap:5px;padding:4px 13px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;background:rgba(184,149,42,0.2);color:#e8d080;border:1px solid rgba(184,149,42,0.35);}
 @media(max-width:640px){header{padding:20px;}.htext h1{font-size:28px;}.lab-num{font-size:50px;}}
 .page{max-width:980px;margin:0 auto;padding:40px 24px 60px;position:relative;z-index:1;}
-.slabel{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;margin-top:28px;}
+.slabel{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;margin-top:28px;padding-left:2px;}
 .slabel:first-child{margin-top:0;}.slabel::after{content:'';flex:1;height:1px;background:var(--parch);}
-.card{background:var(--white);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:20px;}
+.card{background:var(--white);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:20px;border-top:1px solid rgba(255,255,255,0.9);}
 .card-inner{padding:28px 32px;}
 @media(max-width:640px){.card-inner{padding:20px 18px;}}
 .hero-card{display:grid;grid-template-columns:1fr 1fr;gap:0;overflow:hidden;border-radius:16px;box-shadow:var(--shadow);margin-bottom:20px;}
 @media(max-width:680px){.hero-card{grid-template-columns:1fr;}}
-.hero-img{position:relative;overflow:hidden;min-height:200px;}
+.hero-img{position:relative;overflow:hidden;min-height:240px;}
 .hero-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease;}.hero-img:hover img{transform:scale(1.04);}
 .hero-img-cap{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,20,50,0.7));padding:20px 16px 12px;font-size:9px;color:rgba(255,255,255,0.6);}
 .hero-body{background:var(--white);padding:28px 32px;display:flex;flex-direction:column;justify-content:center;}
@@ -43,7 +43,7 @@ header::after{content:'UNO';position:absolute;right:-10px;top:50%;transform:tran
 @media(max-width:640px){.two-col{grid-template-columns:1fr;}}
 .steps{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:4px;}
 .steps li{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;line-height:1.7;color:var(--soft);}
-.sn{width:26px;height:26px;min-width:26px;border-radius:50%;background:var(--blue);color:white;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.sn{width:26px;height:26px;min-width:26px;border-radius:50%;background:linear-gradient(135deg,var(--blue),#1a7fd4);color:white;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;box-shadow:0 2px 6px rgba(0,95,163,0.3);}
 /* Step track */
 .step-track{display:flex;align-items:flex-start;margin-bottom:18px;}
 .st-item{flex:1;text-align:center;position:relative;}
@@ -69,7 +69,7 @@ header::after{content:'UNO';position:absolute;right:-10px;top:50%;transform:tran
 .example p{font-size:14px;color:var(--soft);margin-bottom:3px;line-height:1.55;}
 .example .hl{color:var(--blue);font-weight:700;}
 /* Grammar box */
-.gram-box{background:#f4f0ff;border:1.5px solid #c4b5fd;border-radius:12px;padding:16px 20px;margin:14px 0;}
+.gram-box{background:linear-gradient(135deg,#f4f0ff 0%,#ede8ff 100%);border:1.5px solid #c4b5fd;border-radius:12px;padding:16px 20px;margin:14px 0;border-left:4px solid #7c3aed;}
 .gram-box h4{font-family:'Fraunces',serif;font-size:15px;color:#5b21b6;margin-bottom:8px;}
 .gram-box ul{padding-left:18px;font-size:13px;color:#4c1d95;line-height:1.8;}
 .gram-box code{background:rgba(91,46,138,.1);color:#5b21b6;padding:2px 6px;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;}
@@ -166,6 +166,14 @@ footer{text-align:center;padding:20px;font-size:11px;color:var(--muted);position
 
 /* Summer badge */
 .summer-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 13px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;background:rgba(232,130,94,0.2);color:#e8825e;border:1px solid rgba(232,130,94,0.35);margin-right:6px;}
+
+
+/* ── Inline image integration ── */
+.inline-img-block{float:right;margin:0 0 14px 20px;width:240px;}
+@media(max-width:640px){.inline-img-block{float:none;width:100%;margin:14px 0;}}
+.inline-img-block .lab-img-wrap{display:block;border-radius:10px;overflow:hidden;}
+.inline-img-block img{width:100%;height:170px;object-fit:cover;display:block;}
+
 </style>
 </head>
 <body>
@@ -202,30 +210,83 @@ footer{text-align:center;padding:20px;font-size:11px;color:var(--muted);position
     </div>
   </div>
 
-  <!-- How to complete -->
-  <div class="card">
-    <div class="card-inner">
-      <div class="slabel" style="margin-top:0;"><span>🚦</span>How to complete this lab</div>
-      <ul class="steps">
-                  <li><span class="sn">1</span><span>Complete the <a href="https://ung.view.usg.edu/d2l/common/dialogs/quickLink/quickLink.d2l?ou={orgUnitId}&type=quiz&rcode=usgx-SQUIZ1-REPLACE" target="_blank" rel="noopener" style="color:var(--blue);font-weight:700;">mini-quiz</a> — it is part of this lab grade.</span></li>
-        <li><span class="sn">2</span><span>Click the <strong>Summer Lab 1: Bongo Activity</strong> link above this page to open Bongo.</span></li>
-        <li><span class="sn">3</span><span>Review <strong>Key Vocabulary</strong> and <strong>Grammar Focus</strong> — practise speaking aloud before recording.</span></li>
-        <li><span class="sn">4</span><span>Record your video in Bongo — face visible, 1.5–2 minutes of Spanish.</span></li>
-        <li><span class="sn">5</span><span>Submit and you're done. No peer comment needed for summer labs.</span></li>
-      </ul>
-      <div class="resource-row">
-        <button class="resource-btn blue" onclick="openModal('modal-vocab')">📋 Key Vocabulary</button>
-        <button class="resource-btn" style="background:var(--muted);" onclick="openModal('modal-bongo')">🔧 Bongo Help</button>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-inner">
+        <div class="slabel" style="margin-top:0;"><span>🚦</span>How to complete this lab</div>
+        <div class="step-track" role="list">
+          <div class="st-item act"><div class="st-circle">1</div><div class="st-label">Quiz</div></div>
+          <div class="st-item"><div class="st-circle">2</div><div class="st-label">Record</div></div>
+          <div class="st-item"><div class="st-circle">✓</div><div class="st-label">Done</div></div>
+        </div>
+        <ol class="steps">
+          <li><span class="sn">1</span><span>Complete the <a href="https://ung.view.usg.edu/d2l/common/dialogs/quickLink/quickLink.d2l?ou={orgUnitId}&type=quiz&rcode=usgx-SQUIZ1-REPLACE" target="_blank" rel="noopener" style="color:var(--blue);font-weight:700;">mini-quiz</a> — it is part of this lab grade.</span></li>
+          <li><span class="sn">2</span><span>Click the <strong>Summer Lab 1: Bongo Activity</strong> link above this page to open Bongo.</span></li>
+          <li><span class="sn">3</span><span>Review <strong>Key Vocabulary</strong> and practise speaking aloud before recording.</span></li>
+          <li><span class="sn">4</span><span>Record — face visible, 60–90 seconds in Spanish.</span></li>
+        </ol>
+        <div class="resource-row">
+          <button class="resource-btn blue" onclick="openModal('modal-vocab')">📋 Key Vocabulary</button>
+          <button class="resource-btn teal" onclick="openModal('modal-bongo')">🔧 Bongo Help</button>
+        </div>
+<div class="alert gold" style="margin-top:14px;">📅 <strong>Due Tuesday at 5:00 PM.</strong> Contact the Language Lab before the deadline if you have any technical issues.</div>
       </div>
-      <div class="alert gold" style="margin-top:12px;">📅 <strong>Due Tuesday at 5:00 PM.</strong> Contact the Language Lab before the deadline if you have any technical issues — not after.</div>
+    </div>
+
+        <div class="card" style="overflow:hidden;">
+      <a class="lab-img-wrap" data-full="https://junnynoh-tech.github.io/span1001-instructions/span1001-images/lab-1-image-2.jpg" data-caption="Photo by Skyler Wang · Unsplash"
+         role="button" tabindex="0" aria-label="Expand image: Students gathered outdoors"
+         style="display:block;overflow:hidden;height:200px;border-radius:0;">
+        <img src="https://junnynoh-tech.github.io/span1001-instructions/span1001-images/lab-1-image-2.jpg" alt="Students gathered outdoors" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <span class="img-expand-hint" aria-hidden="true">🔍 Expand</span>
+      </a>
+      <div style="padding:4px 12px;text-align:center;">
+        <p class="img-caption"><a href="https://unsplash.com/photos/AE99CzcdBCk" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">Photo by Skyler Wang</a> · Unsplash</p>
+      </div>
+      <div class="card-inner" style="padding-top:8px;">
+        <div class="slabel" style="margin-top:0;"><span>✅</span>Requirements</div>
+        <div class="req-acc">
+          <div class="req-item">
+            <button class="req-toggle" aria-expanded="false" onclick="tog(this)"><span>🎥</span>Video basics<span class="arr">▼</span></button>
+            <div class="req-body"><ul>
+              <li><strong>60–90 seconds</strong> of spoken Spanish</li>
+              <li><strong>Face visible</strong> throughout</li>
+              <li>Record individually — no peer comment this session</li>
+            </ul></div>
+          </div>
+          <div class="req-item">
+            <button class="req-toggle" aria-expanded="false" onclick="tog(this)"><span>📋</span>Content checklist<span class="arr">▼</span></button>
+            <div class="req-body"><ul>
+              <li>Greeting + your full name</li>
+              <li>Where you are from (<em>ser de</em>)</li>
+              <li>Occupation or what you study (<em>ser</em>)</li>
+              <li>Number of classes this semester (numbers 0–30)</li>
+              <li>Time one class meets (<em>son las… / es la una…</em>)</li>
+              <li>One interesting fact about yourself using <em>ser</em></li>
+            </ul></div>
+          </div>
+          <div class="req-item">
+            <button class="req-toggle" aria-expanded="false" onclick="tog(this)"><span>🗣️</span>Language rules<span class="arr">▼</span></button>
+            <div class="req-body"><ul>
+              <li>Speak <strong>only in Spanish</strong></li>
+              <li>Use <strong>complete sentences</strong> — subject + verb</li>
+              <li>One notecard, up to <strong>15 words</strong> allowed — no scripts</li>
+            </ul></div>
+          </div>
+          <div class="req-item">
+            <button class="req-toggle" aria-expanded="false" onclick="tog(this)"><span>📊</span>Rubric<span class="arr">▼</span></button>
+            <div class="req-body"><p>A rubric is available inside Bongo when you open the assignment. Review it before recording.</p></div>
+          </div>
+        </div>
+        <div class="alert warn" style="margin-top:14px;">🚫 No online translators or AI writing tools allowed.</div>
+      </div>
     </div>
   </div>
 
     <div class="card">
     <div class="card-inner">
       <div class="part-badge pb-blue">🎥 Your video — 60–90 seconds</div>
-      <div class="slabel" style="margin-top:0;"><span>✅</span>What to include</div>
-      <p style="font-size:14px;line-height:1.75;color:var(--soft);margin-bottom:16px;">Introduce yourself in Spanish. Cover all six elements below — in any order, in your own words. This is a real introduction, not a fill-in-the-blank exercise.</p>
+
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
         <div style="background:var(--skylt);border:1.5px solid var(--parch);border-radius:10px;padding:13px 15px;">
@@ -280,16 +341,6 @@ footer{text-align:center;padding:20px;font-size:11px;color:var(--muted);position
     </div>
   </div>
 
-  <!-- Bottom image -->
-  <div class="card">
-    <div class="card-inner">
-            <a class="lab-img-wrap" data-full="https://junnynoh-tech.github.io/span1001-instructions/span1001-images/lab-1-image-2.jpg" data-caption="Photo by Skyler Wang · Unsplash" role="button" tabindex="0" aria-label="Expand image: Students on campus">
-      <img src="https://junnynoh-tech.github.io/span1001-instructions/span1001-images/lab-1-image-2.jpg" alt="Students on campus" loading="lazy">
-      <span class="img-expand-hint" aria-hidden="true">🔍 Expand</span>
-    </a>
-    <div class="img-caption"><a href="https://junnynoh-tech.github.io/span1001-instructions/span1001-images/lab-1-image-2.jpg" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">Photo by Skyler Wang</a> · Unsplash</div>
-    </div>
-  </div>
 
 </main>
 <footer>SPAN 1001 — Summer Lab 1: Mi presentación · University of North Georgia · Capítulo 1</footer>
@@ -377,9 +428,12 @@ document.addEventListener('DOMContentLoaded',function(){
   document.querySelectorAll('.lab-img-wrap').forEach(function(el){
     el.addEventListener('click',function(e){
       e.preventDefault();
-      var src=el.getAttribute('data-full')||el.querySelector('img').src;
+      if(!lb||!lbImg)return;
+      var imgEl=el.querySelector('img');
+      var src=el.getAttribute('data-full')||(imgEl?imgEl.src:'');
       var cap=el.getAttribute('data-caption')||'';
-      lbImg.src=src;lbImg.alt=el.querySelector('img').alt||'';
+      lbImg.src=src;
+      lbImg.alt=imgEl?imgEl.alt:'';
       lbCap.innerHTML=cap;
       lb.classList.add('open');lb.removeAttribute('aria-hidden');
       document.body.style.overflow='hidden';
