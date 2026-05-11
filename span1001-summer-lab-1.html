@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SPAN 1001 — Summer Lab 1: Mi presentación</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--red:#c8102e;--gold:#b8952a;--navy:#002147;--blue:#005fa3;--skylt:#e8f3ff;--ink:#0d1525;--soft:#1e3a5f;--muted:#4a5f75;--cream:#f7f9fc;--white:#ffffff;--parch:#dce8f5;--shadow:0 8px 40px rgba(0,33,71,0.13);--shadow-sm:0 2px 12px rgba(0,33,71,0.08);--red-lt:#fff0f2;--gold-lt:#fffbf0;--green:#1a5c1a;--green-lt:#f0f9f0;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 5% 10%,rgba(200,16,46,0.05) 0%,transparent 50%),radial-gradient(ellipse at 95% 90%,rgba(0,95,163,0.05) 0%,transparent 50%);pointer-events:none;z-index:0;}
+.skip-link{position:absolute;top:-40px;left:0;background:var(--gold);color:var(--ink);padding:8px 16px;font-weight:700;z-index:10000;border-radius:0 0 8px 0;transition:top .2s;}.skip-link:focus{top:0;}
+a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:3px;}
+header{background:var(--navy);color:white;padding:28px 48px;display:flex;align-items:center;gap:24px;position:relative;overflow:hidden;z-index:1;}
+header::after{content:'UNO';position:absolute;right:-10px;top:50%;transform:translateY(-50%);font-family:'Fraunces',serif;font-size:110px;font-weight:900;color:rgba(255,255,255,0.03);letter-spacing:-4px;pointer-events:none;}
+.flag{display:flex;flex-direction:column;gap:3px;flex-shrink:0;}.fbar{width:44px;height:5px;border-radius:2px;}.fbar.r{background:var(--red);}.fbar.y{background:var(--gold);}
+.htext h1{font-family:'Fraunces',serif;font-size:36px;font-weight:900;letter-spacing:-0.5px;line-height:1;}.htext h1 em{color:#7ab8e8;font-style:normal;}
+.htext p{margin-top:4px;font-size:12px;font-weight:300;color:rgba(255,255,255,0.45);letter-spacing:.5px;}
+.hbadge{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:6px;}
+.lab-num{font-family:'Fraunces',serif;font-size:68px;font-weight:900;line-height:1;color:#7ab8e8;letter-spacing:-3px;}
+.mode-pill{display:inline-flex;align-items:center;gap:5px;padding:4px 13px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;background:rgba(184,149,42,0.2);color:#e8d080;border:1px solid rgba(184,149,42,0.35);}
+@media(max-width:640px){header{padding:20px;}.htext h1{font-size:28px;}.lab-num{font-size:50px;}}
+.page{max-width:980px;margin:0 auto;padding:40px 24px 60px;position:relative;z-index:1;}
+.slabel{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;margin-top:28px;}
+.slabel:first-child{margin-top:0;}.slabel::after{content:'';flex:1;height:1px;background:var(--parch);}
+.card{background:var(--white);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:20px;}
+.card-inner{padding:28px 32px;}
+@media(max-width:640px){.card-inner{padding:20px 18px;}}
+.hero-card{display:grid;grid-template-columns:1fr 1fr;gap:0;overflow:hidden;border-radius:16px;box-shadow:var(--shadow);margin-bottom:20px;}
+@media(max-width:680px){.hero-card{grid-template-columns:1fr;}}
+.hero-img{position:relative;overflow:hidden;min-height:200px;}
+.hero-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease;}.hero-img:hover img{transform:scale(1.04);}
+.hero-img-cap{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,20,50,0.7));padding:20px 16px 12px;font-size:9px;color:rgba(255,255,255,0.6);}
+.hero-body{background:var(--white);padding:28px 32px;display:flex;flex-direction:column;justify-content:center;}
+.hero-body .chapter-tag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.hero-body h2{font-family:'Fraunces',serif;font-size:30px;font-weight:900;font-style:italic;color:var(--ink);line-height:1.15;}
+.hero-body p.desc{margin-top:12px;font-size:14px;line-height:1.75;color:var(--soft);}
+@media(max-width:640px){.hero-body{padding:20px 18px;}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+.chip{background:var(--cream);border:1.5px solid var(--parch);border-radius:20px;padding:4px 13px;font-size:12px;font-weight:500;color:var(--soft);}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media(max-width:640px){.two-col{grid-template-columns:1fr;}}
+.steps{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:4px;}
+.steps li{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;line-height:1.7;color:var(--soft);}
+.sn{width:26px;height:26px;min-width:26px;border-radius:50%;background:var(--blue);color:white;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+/* Step track */
+.step-track{display:flex;align-items:flex-start;margin-bottom:18px;}
+.st-item{flex:1;text-align:center;position:relative;}
+.st-item::before{content:'';position:absolute;top:18px;left:calc(-50% + 20px);right:calc(50% + 20px);height:2px;background:var(--parch);z-index:0;}
+.st-item:first-child::before{display:none;}
+.st-circle{width:36px;height:36px;border-radius:50%;background:var(--parch);color:var(--muted);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;margin:0 auto 6px;position:relative;z-index:1;}
+.st-item.act .st-circle{background:var(--blue);color:white;}
+.st-label{font-size:11px;color:var(--muted);line-height:1.3;}
+.st-item.act .st-label{color:var(--blue);font-weight:600;}
+/* Part badge */
+.part-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 14px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin-bottom:10px;}
+.pb-blue{background:var(--skylt);color:var(--blue);border:1.5px solid var(--blue);}
+.pb-green{background:var(--green-lt);color:var(--green);border:1.5px solid var(--green);}
+/* Checklist */
+.cklist{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px;}
+.cklist li{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;line-height:1.65;color:var(--soft);padding:10px 14px;background:var(--cream);border-radius:9px;border:1px solid var(--parch);}
+.ckn{width:24px;height:24px;min-width:24px;border-radius:50%;border:2px solid var(--blue);color:var(--blue);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.cklist.green li{border-color:#b8ddb8;background:var(--green-lt);}
+.cklist.green .ckn{border-color:var(--green);color:var(--green);}
+/* Example block */
+.example{background:var(--cream);border:1px solid var(--parch);border-radius:10px;padding:16px 20px;margin:14px 0;position:relative;}
+.example::before{content:'EJEMPLO';position:absolute;top:-9px;left:14px;background:white;padding:2px 8px;border-radius:20px;border:1px solid var(--parch);font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--muted);}
+.example p{font-size:14px;color:var(--soft);margin-bottom:3px;line-height:1.55;}
+.example .hl{color:var(--blue);font-weight:700;}
+/* Grammar box */
+.gram-box{background:#f4f0ff;border:1.5px solid #c4b5fd;border-radius:12px;padding:16px 20px;margin:14px 0;}
+.gram-box h4{font-family:'Fraunces',serif;font-size:15px;color:#5b21b6;margin-bottom:8px;}
+.gram-box ul{padding-left:18px;font-size:13px;color:#4c1d95;line-height:1.8;}
+.gram-box code{background:rgba(91,46,138,.1);color:#5b21b6;padding:2px 6px;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;}
+/* Vocab table */
+.vtable{width:100%;border-collapse:collapse;border-radius:10px;overflow:hidden;border:1.5px solid var(--parch);font-size:13px;margin-top:8px;margin-bottom:14px;}
+.vtable thead tr{background:var(--blue);}
+.vtable thead th{padding:8px 12px;color:white;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-align:left;border:none;}
+.vtable tbody tr{border-bottom:1px solid var(--parch);}.vtable tbody tr:last-child{border-bottom:none;}
+.vtable tbody tr:nth-child(even){background:#f5f9ff;}
+.vtable td{padding:9px 12px;vertical-align:middle;}
+.es-cell{font-weight:700;color:var(--ink);font-size:13.5px;}
+.en-cell{color:var(--muted);font-size:12.5px;}
+.pron-cell{color:var(--blue);font-style:italic;font-size:12px;}
+.pron-cell button{background:none;border:none;cursor:pointer;font-size:14px;padding:0 4px;opacity:.7;transition:opacity .15s;vertical-align:middle;}
+.pron-cell button:hover{opacity:1;}
+/* Alerts */
+.alert{border-radius:10px;padding:12px 16px;font-size:13px;line-height:1.65;margin-top:12px;}
+.alert.warn{background:var(--red-lt);border:1.5px solid #f5c4cc;color:#8a1020;}
+.alert.info{background:var(--skylt);border:1.5px solid #b8d4ef;color:var(--soft);}
+.alert.gold{background:var(--gold-lt);border:1.5px solid #e8d080;color:#6b5a10;}
+.alert strong{font-weight:700;}
+/* Resource buttons */
+.resource-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;}
+.resource-btn{display:inline-flex;align-items:center;gap:7px;color:white;border:none;border-radius:10px;padding:10px 18px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;box-shadow:var(--shadow-sm);text-decoration:none;white-space:nowrap;}
+.resource-btn:hover{filter:brightness(.88);transform:translateY(-1px);}
+.resource-btn.blue{background:var(--blue);}.resource-btn.teal{background:#0f766e;}
+/* Lab option */
+.lab-option{background:var(--green-lt);border:1.5px solid #b8ddb8;border-radius:12px;padding:20px 24px;margin-top:16px;}
+.lab-option-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.lab-option-header h3{font-size:14px;font-weight:700;color:var(--green);margin:0;}
+.lab-badge{background:var(--green);color:white;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:3px 9px;border-radius:10px;}
+/* Req accordion */
+.req-acc{border:1.5px solid var(--parch);border-radius:12px;overflow:hidden;margin-top:4px;}
+.req-item{border-bottom:1px solid var(--parch);}.req-item:last-child{border-bottom:none;}
+.req-toggle{width:100%;background:none;border:none;cursor:pointer;padding:12px 16px;display:flex;align-items:center;gap:10px;text-align:left;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--ink);transition:background .15s;}
+.req-toggle:hover{background:var(--cream);}
+.req-toggle .arr{margin-left:auto;color:var(--muted);font-size:10px;transition:transform .2s;}
+.req-toggle[aria-expanded='true'] .arr{transform:rotate(180deg);}
+.req-body{display:none;padding:4px 16px 14px 42px;font-size:13px;line-height:1.75;color:var(--soft);}
+.req-body.open{display:block;}
+.req-body ul{padding-left:18px;}.req-body li{margin-bottom:4px;}
+.submit-note{background:var(--gold-lt);border:1.5px solid #e8d080;border-radius:8px;padding:10px 14px;font-size:13px;color:#6b5a10;margin-top:16px;line-height:1.6;}
+/* Bongo modal */
+.modal{position:fixed;inset:0;background:rgba(0,21,71,0.85);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px);}
+.modal.open{display:flex;animation:mIn .22s ease;}
+@keyframes mIn{from{opacity:0}to{opacity:1}}
+.modal-panel{background:white;border-radius:16px;width:100%;max-width:700px;max-height:88vh;overflow-y:auto;padding:28px 32px;position:relative;animation:mUp .25s cubic-bezier(.16,1,.3,1);}
+@keyframes mUp{from{transform:translateY(28px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-close{position:absolute;top:14px;right:14px;background:var(--cream);border:1.5px solid var(--parch);border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .15s;}
+.modal-close:hover{background:var(--red);color:white;border-color:var(--red);}
+.modal-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--navy);margin-bottom:4px;}
+.modal-sub{font-size:12px;color:var(--muted);margin-bottom:16px;}
+.vsec-title{font-family:'Fraunces',serif;font-size:14px;font-weight:700;color:var(--blue);margin-bottom:6px;padding-bottom:5px;border-bottom:2px solid var(--skylt);margin-top:16px;}
+.vsec-title:first-child{margin-top:0;}
+.bongo-tip{display:flex;align-items:flex-start;gap:10px;background:#f0faf9;border:1.5px solid #99d6cc;border-radius:10px;padding:10px 14px;margin-bottom:7px;font-size:13px;line-height:1.65;color:var(--navy);}
+.bt-icon{font-size:15px;flex-shrink:0;margin-top:1px;}
+.bongo-s-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#0f766e;margin:12px 0 7px;}
+footer{text-align:center;padding:20px;font-size:11px;color:var(--muted);position:relative;z-index:1;}
+
+/* Lightbox */
+.lab-img-wrap{position:relative;overflow:hidden;border-radius:12px;cursor:zoom-in;display:block;}
+.lab-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease;}
+.lab-img-wrap:hover img{transform:scale(1.04);}
+.img-expand-hint{position:absolute;bottom:8px;right:8px;background:rgba(0,21,71,0.72);color:white;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:4px 9px;border-radius:20px;pointer-events:none;}
+.img-caption{font-size:10px;color:var(--muted);margin-top:5px;text-align:center;font-style:italic;}
+.lightbox{position:fixed;inset:0;background:rgba(0,10,30,0.92);z-index:99999;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px);}
+.lightbox.open{display:flex;animation:lbIn .2s ease;}
+@keyframes lbIn{from{opacity:0}to{opacity:1}}
+.lightbox-inner{position:relative;max-width:min(90vw,860px);max-height:88vh;}
+.lightbox-inner img{max-width:100%;max-height:80vh;object-fit:contain;border-radius:8px;display:block;}
+.lightbox-caption{margin-top:8px;font-size:12px;color:rgba(255,255,255,0.65);text-align:center;line-height:1.5;}
+.lightbox-close{position:absolute;top:-14px;right:-14px;background:var(--red);color:white;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:background .15s;z-index:1;}
+.lightbox-close:hover{background:#a00020;}
+
+/* Attribution tooltip on hover */
+.lab-img-wrap[data-caption]::after{
+  content:attr(data-caption);
+  position:absolute;bottom:0;left:0;right:0;
+  background:rgba(0,15,45,0.88);
+  color:rgba(255,255,255,0.9);
+  font-size:10px;line-height:1.4;
+  padding:7px 10px;
+  transform:translateY(100%);
+  transition:transform .22s ease;
+  pointer-events:none;
+  z-index:2;
+}
+.lab-img-wrap:hover[data-caption]::after,
+.lab-img-wrap:focus[data-caption]::after{
+  transform:translateY(0);
+}
+
+
+
+/* Summer badge */
+.summer-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 13px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;background:rgba(232,130,94,0.2);color:#e8825e;border:1px solid rgba(232,130,94,0.35);margin-right:6px;}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<header role="banner">
+  <div class="flag" role="img" aria-label="Spanish flag"><div class="fbar r"></div><div class="fbar y"></div><div class="fbar r"></div></div>
+  <div class="htext"><h1>SPAN <em>1001</em></h1><p>Introductory Spanish — Language Lab</p></div>
+  <div class="hbadge">
+    <div class="lab-num">1</div>
+    <span class="summer-badge">☀️ Summer</span>
+    <span class="mode-pill">🙋 Mi presentación</span>
+  </div>
+</header>
+
+<main class="page" id="main-content">
+
+  <div class="hero-card">
+    <div class="hero-img">
+            <a class="lab-img-wrap" data-full="https://junnynoh-tech.github.io/span1001-instructions/span1001-images/lab-1-image-1.jpg" data-caption="Photo by Javier Trueba · Unsplash" role="button" tabindex="0" aria-label="Expand image: Student with textbooks">
+      <img src="https://junnynoh-tech.github.io/span1001-instructions/span1001-images/lab-1-image-1.jpg" alt="Student with textbooks" loading="lazy">
+      <span class="img-expand-hint" aria-hidden="true">🔍 Expand</span>
+    </a>
+    <div class="img-caption"><a href="https://junnynoh-tech.github.io/span1001-instructions/span1001-images/lab-1-image-1.jpg" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">Photo by Javier Trueba</a> · Unsplash</div>
+    </div>
+    <div class="hero-body">
+      <div class="chapter-tag">Capítulo 1 · ser · greetings · numbers · telling time</div>
+      <h2>¡Hola! Preséntate.</h2>
+      <p class="desc">Introduce yourself in Spanish — who you are, where you're from, what you study, and more. This individual video covers the core vocabulary and grammar of Chapter 1.</p>
+      <div class="chips">
+        <span class="chip">☀️ Summer Session</span>
+        <span class="chip">🙋 Individual video</span>
+        <span class="chip">🎥 60–90 seconds</span><span class="chip">📋 Mini-quiz first</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- How to complete -->
+  <div class="card">
+    <div class="card-inner">
+      <div class="slabel" style="margin-top:0;"><span>🚦</span>How to complete this lab</div>
+      <ul class="steps">
+                  <li><span class="sn">1</span><span>Complete the <a href="https://ung.view.usg.edu/d2l/common/dialogs/quickLink/quickLink.d2l?ou={orgUnitId}&type=quiz&rcode=usgx-SQUIZ1-REPLACE" target="_blank" rel="noopener" style="color:var(--blue);font-weight:700;">mini-quiz</a> — it is part of this lab grade.</span></li>
+        <li><span class="sn">2</span><span>Click the <strong>Summer Lab 1: Bongo Activity</strong> link above this page to open Bongo.</span></li>
+        <li><span class="sn">3</span><span>Review <strong>Key Vocabulary</strong> and <strong>Grammar Focus</strong> — practise speaking aloud before recording.</span></li>
+        <li><span class="sn">4</span><span>Record your video in Bongo — face visible, 1.5–2 minutes of Spanish.</span></li>
+        <li><span class="sn">5</span><span>Submit and you're done. No peer comment needed for summer labs.</span></li>
+      </ul>
+      <div class="resource-row">
+        <button class="resource-btn blue" onclick="openModal('modal-vocab')">📋 Key Vocabulary</button>
+        <button class="resource-btn" style="background:var(--muted);" onclick="openModal('modal-bongo')">🔧 Bongo Help</button>
+      </div>
+      <div class="alert gold" style="margin-top:12px;">📅 <strong>Due Tuesday at 5:00 PM.</strong> Contact the Language Lab before the deadline if you have any technical issues — not after.</div>
+    </div>
+  </div>
+
+    <div class="card">
+    <div class="card-inner">
+      <div class="part-badge pb-blue">🎥 Your video — 60–90 seconds</div>
+      <div class="slabel" style="margin-top:0;"><span>✅</span>What to include</div>
+      <p style="font-size:14px;line-height:1.75;color:var(--soft);margin-bottom:16px;">Introduce yourself in Spanish. Cover all six elements below — in any order, in your own words. This is a real introduction, not a fill-in-the-blank exercise.</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+        <div style="background:var(--skylt);border:1.5px solid var(--parch);border-radius:10px;padding:13px 15px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-bottom:6px;">1 · Greeting + Name</div>
+          <p style="font-size:13px;color:var(--soft);line-height:1.5;">Greet your audience and say your full name using a natural greeting.</p>
+        </div>
+        <div style="background:var(--skylt);border:1.5px solid var(--parch);border-radius:10px;padding:13px 15px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-bottom:6px;">2 · Origin</div>
+          <p style="font-size:13px;color:var(--soft);line-height:1.5;">Where are you from? City, state, or country. Use <em>ser de</em>.</p>
+        </div>
+        <div style="background:var(--skylt);border:1.5px solid var(--parch);border-radius:10px;padding:13px 15px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-bottom:6px;">3 · Occupation or Major</div>
+          <p style="font-size:13px;color:var(--soft);line-height:1.5;">What are you? What do you study? Use <em>ser</em> — check the Word Bank.</p>
+        </div>
+        <div style="background:var(--skylt);border:1.5px solid var(--parch);border-radius:10px;padding:13px 15px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-bottom:6px;">4 · Number of Classes</div>
+          <p style="font-size:13px;color:var(--soft);line-height:1.5;">How many classes are you taking? Use Spanish numbers 0–30.</p>
+        </div>
+        <div style="background:var(--skylt);border:1.5px solid var(--parch);border-radius:10px;padding:13px 15px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-bottom:6px;">5 · Tell the Time</div>
+          <p style="font-size:13px;color:var(--soft);line-height:1.5;">What time is it right now, or when does one of your classes meet? Use <em>Son las… / Es la una…</em></p>
+        </div>
+        <div style="background:#f4f0ff;border:1.5px solid #c4b5fd;border-radius:10px;padding:13px 15px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#5b21b6;margin-bottom:6px;">6 · Something Interesting</div>
+          <p style="font-size:13px;color:#4c1d95;line-height:1.5;">One surprising or unique fact about yourself using <em>ser</em>. Nationality? An unexpected title?</p>
+        </div>
+      </div>
+
+      <div class="gram-box">
+        <h4>📌 Grammar focus for this video</h4>
+        <ul>
+          <li><code>ser</code> for identity and origin: <em>Soy de… · Soy estudiante de…</em></li>
+          <li>Numbers 0–30 for your class count — say them aloud first</li>
+          <li>Telling time: <em>Son las dos. · Es la una y media. · Son las tres de la tarde.</em></li>
+          <li><code>tomo</code> (I take): -AR verbs are Chapter 2, but <em>tomo clases</em> works here</li>
+        </ul>
+      </div>
+
+      <div style="background:var(--cream);border:1px solid var(--parch);border-radius:10px;padding:14px 18px;margin-top:12px;">
+        <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">Your video needs to cover — in any order, in your own words:</div>
+        <div style="display:flex;flex-wrap:wrap;gap:7px;">
+          <span style="background:var(--skylt);border:1.5px solid var(--parch);border-radius:20px;padding:5px 13px;font-size:12.5px;color:var(--soft);font-weight:500;">quién eres</span>
+          <span style="background:var(--skylt);border:1.5px solid var(--parch);border-radius:20px;padding:5px 13px;font-size:12.5px;color:var(--soft);font-weight:500;">de dónde eres</span>
+          <span style="background:var(--skylt);border:1.5px solid var(--parch);border-radius:20px;padding:5px 13px;font-size:12.5px;color:var(--soft);font-weight:500;">qué eres / estudias</span>
+          <span style="background:var(--skylt);border:1.5px solid var(--parch);border-radius:20px;padding:5px 13px;font-size:12.5px;color:var(--soft);font-weight:500;">cuántas clases tomas</span>
+          <span style="background:var(--skylt);border:1.5px solid var(--parch);border-radius:20px;padding:5px 13px;font-size:12.5px;color:var(--soft);font-weight:500;">a qué hora es una clase</span>
+          <span style="background:#f4f0ff;border:1.5px solid #c4b5fd;border-radius:20px;padding:5px 13px;font-size:12.5px;color:#5b21b6;font-weight:500;">algo interesante sobre ti</span>
+        </div>
+        <p style="font-size:11.5px;color:var(--muted);margin-top:10px;font-style:italic;">Build the sentences yourself using the Grammar Focus and Key Vocabulary above. The order is yours.</p>
+      </div>
+      <div class="alert gold" style="margin-top:12px;">💡 Your video should sound like you — not like you're reading from notes. Practise many times out loud before recording.</div>
+    </div>
+  </div>
+
+  <!-- Bottom image -->
+  <div class="card">
+    <div class="card-inner">
+            <a class="lab-img-wrap" data-full="https://junnynoh-tech.github.io/span1001-instructions/span1001-images/lab-1-image-2.jpg" data-caption="Photo by Skyler Wang · Unsplash" role="button" tabindex="0" aria-label="Expand image: Students on campus">
+      <img src="https://junnynoh-tech.github.io/span1001-instructions/span1001-images/lab-1-image-2.jpg" alt="Students on campus" loading="lazy">
+      <span class="img-expand-hint" aria-hidden="true">🔍 Expand</span>
+    </a>
+    <div class="img-caption"><a href="https://junnynoh-tech.github.io/span1001-instructions/span1001-images/lab-1-image-2.jpg" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">Photo by Skyler Wang</a> · Unsplash</div>
+    </div>
+  </div>
+
+</main>
+<footer>SPAN 1001 — Summer Lab 1: Mi presentación · University of North Georgia · Capítulo 1</footer>
+
+<!-- Vocab Modal -->
+<div id="modal-vocab" class="modal" role="dialog" aria-modal="true" aria-label="Key Vocabulary" aria-hidden="true">
+  <div class="modal-panel">
+    <button class="modal-close" onclick="closeModal('modal-vocab')" aria-label="Close">✕</button>
+    <div class="modal-title">Key Vocabulary — Summer Lab 1</div>
+    <div class="modal-sub">Chapters covered · click 🔊 to hear the pronunciation</div>
+    
+    <div class="vsec-title">Greetings &amp; Introductions</div>
+    <table class="vtable"><thead><tr><th>Español</th><th>English</th><th>Pronunciation</th></tr></thead><tbody>
+      <tr><td class="es-cell">Hola / Buenos días</td><td class="en-cell">Hello / Good morning</td><td class="pron-cell"><em>OH-lah</em> <button onclick="speak('Hola')">🔊</button></td></tr>
+      <tr><td class="es-cell">Me llamo…</td><td class="en-cell">My name is…</td><td class="pron-cell"><em>meh YAH-moh</em> <button onclick="speak('Me llamo')">🔊</button></td></tr>
+      <tr><td class="es-cell">Soy de…</td><td class="en-cell">I'm from…</td><td class="pron-cell"><em>soy deh</em> <button onclick="speak('Soy de')">🔊</button></td></tr>
+      <tr><td class="es-cell">Mucho gusto</td><td class="en-cell">Nice to meet you</td><td class="pron-cell"><em>MOO-choh GOOS-toh</em> <button onclick="speak('Mucho gusto')">🔊</button></td></tr>
+      <tr><td class="es-cell">Chau / Adiós</td><td class="en-cell">Goodbye</td><td class="pron-cell"><em>chow / ah-DYOS</em> <button onclick="speak('Adiós')">🔊</button></td></tr>
+    </tbody></table>
+    <div class="vsec-title">Ser — Present Tense</div>
+    <table class="vtable"><thead><tr><th>Form</th><th>Meaning</th><th>Example</th></tr></thead><tbody>
+      <tr><td class="es-cell">soy</td><td class="en-cell">I am</td><td class="pron-cell"><em>Soy de Georgia.</em> <button onclick="speak('Soy de Georgia')">🔊</button></td></tr>
+      <tr><td class="es-cell">eres</td><td class="en-cell">you are</td><td class="pron-cell"><em>¿Eres de aquí?</em> <button onclick="speak('Eres de aquí')">🔊</button></td></tr>
+      <tr><td class="es-cell">es</td><td class="en-cell">he/she is</td><td class="pron-cell"><em>Es estudiante.</em> <button onclick="speak('Es estudiante')">🔊</button></td></tr>
+    </tbody></table>
+    <div class="vsec-title">Ocupaciones — use Soy…</div>
+    <table class="vtable"><thead><tr><th>Español</th><th>English</th><th>Pronunciation</th></tr></thead><tbody>
+      <tr><td class="es-cell">estudiante</td><td class="en-cell">student</td><td class="pron-cell"><em>es-too-DYAN-teh</em> <button onclick="speak('estudiante')">🔊</button></td></tr>
+      <tr><td class="es-cell">mesero / mesera</td><td class="en-cell">waiter/waitress</td><td class="pron-cell"><em>meh-SEH-roh</em> <button onclick="speak('mesero')">🔊</button></td></tr>
+      <tr><td class="es-cell">atleta</td><td class="en-cell">athlete</td><td class="pron-cell"><em>aht-LEH-tah</em> <button onclick="speak('atleta')">🔊</button></td></tr>
+      <tr><td class="es-cell">voluntario / voluntaria</td><td class="en-cell">volunteer</td><td class="pron-cell"><em>boh-loon-TAH-ryoh</em> <button onclick="speak('voluntario')">🔊</button></td></tr>
+      <tr><td class="es-cell">empleado / empleada</td><td class="en-cell">employee</td><td class="pron-cell"><em>em-pleh-AH-doh</em> <button onclick="speak('empleado')">🔊</button></td></tr>
+    </tbody></table>
+    <div class="vsec-title">Estudios y materias — use Soy estudiante de…</div>
+    <table class="vtable"><thead><tr><th>Español</th><th>English</th><th>Pronunciation</th></tr></thead><tbody>
+      <tr><td class="es-cell">español</td><td class="en-cell">Spanish</td><td class="pron-cell"><em>es-pah-NYOL</em> <button onclick="speak('español')">🔊</button></td></tr>
+      <tr><td class="es-cell">biología</td><td class="en-cell">Biology</td><td class="pron-cell"><em>byoh-loh-HEE-ah</em> <button onclick="speak('biología')">🔊</button></td></tr>
+      <tr><td class="es-cell">negocios</td><td class="en-cell">Business</td><td class="pron-cell"><em>neh-GOH-syos</em> <button onclick="speak('negocios')">🔊</button></td></tr>
+      <tr><td class="es-cell">matemáticas</td><td class="en-cell">Mathematics</td><td class="pron-cell"><em>mah-teh-MAH-tee-kas</em> <button onclick="speak('matemáticas')">🔊</button></td></tr>
+      <tr><td class="es-cell">ingeniería</td><td class="en-cell">Engineering</td><td class="pron-cell"><em>een-heh-nyeh-REE-ah</em> <button onclick="speak('ingeniería')">🔊</button></td></tr>
+      <tr><td class="es-cell">enfermería</td><td class="en-cell">Nursing</td><td class="pron-cell"><em>en-fer-meh-REE-ah</em> <button onclick="speak('enfermería')">🔊</button></td></tr>
+      <tr><td class="es-cell">psicología</td><td class="en-cell">Psychology</td><td class="pron-cell"><em>see-koh-loh-HEE-ah</em> <button onclick="speak('psicología')">🔊</button></td></tr>
+      <tr><td class="es-cell">historia</td><td class="en-cell">History</td><td class="pron-cell"><em>ees-TOH-ryah</em> <button onclick="speak('historia')">🔊</button></td></tr>
+      <tr><td class="es-cell">informática</td><td class="en-cell">Computer Science</td><td class="pron-cell"><em>een-for-MAH-tee-kah</em> <button onclick="speak('informática')">🔊</button></td></tr>
+    </tbody></table>
+    <div class="alert gold" style="margin-top:10px;">📚 For the full vocabulary list, refer to your <strong>Vistas textbook</strong>.</div>
+  </div>
+</div>
+<!-- Bongo Help Modal -->
+<div id="modal-bongo" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-panel">
+    <button class="modal-close" onclick="closeModal('modal-bongo')" aria-label="Close">✕</button>
+    <div class="modal-title">🔧 Bongo Troubleshooting</div>
+    <div class="modal-sub">Try these before contacting the Language Lab</div>
+    <div class="bongo-tip"><span class="bt-icon">💻</span><div><strong>Use Google Chrome on a laptop or desktop.</strong> iPads are not fully supported.</div></div>
+    <div class="bongo-tip"><span class="bt-icon">🔓</span><div>Allow <strong>camera and microphone</strong> in Chrome for D2L.</div></div>
+    <div class="bongo-tip"><span class="bt-icon">🗑️</span><div>Stuck on "Activating recorder"? Clear <strong>cache and cookies</strong>, then refresh.</div></div>
+    <div class="bongo-tip"><span class="bt-icon">🕵️</span><div>Try <strong>Chrome Incognito</strong>. Close other apps using the mic/camera.</div></div>
+    <div class="bongo-s-title">Still not working?</div>
+    <div class="bongo-tip"><span class="bt-icon">❓</span><div>Visit the <a href="https://bongolearn.zendesk.com/hc/en-us/articles/360009373374" target="_blank" rel="noopener" style="color:#0f766e;font-weight:700;">Bongo Help Center</a>.</div></div>
+    <div class="bongo-tip" style="background:var(--red-lt);border-color:#f5c4cc;"><span class="bt-icon">📧</span><div>Contact the Language Lab <strong>before the deadline</strong>.</div></div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" aria-hidden="true">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" aria-label="Close image">✕</button>
+    <img id="lb-img" src="" alt="">
+    <div id="lb-cap" class="lightbox-caption"></div>
+  </div>
+</div>
+
+<script>
+function tog(btn){var b=btn.nextElementSibling;var o=b.classList.contains('open');btn.setAttribute('aria-expanded',String(!o));b.classList.toggle('open',!o);}
+function openModal(id){var m=document.getElementById(id);if(!m)return;m.classList.add('open');m.removeAttribute('aria-hidden');document.body.style.overflow='hidden';setTimeout(function(){var cl=m.querySelector('.modal-close');if(cl)cl.focus();},60);}
+function closeModal(id){var m=document.getElementById(id);if(!m)return;m.classList.remove('open');m.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){document.querySelectorAll('.modal.open').forEach(function(m){closeModal(m.id);});}});
+function speak(text){if(!window.speechSynthesis)return;window.speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(text);u.lang='es-MX';u.rate=0.82;window.speechSynthesis.speak(u);}
+
+// Lightbox
+document.addEventListener('DOMContentLoaded',function(){
+  var lb=document.getElementById('lightbox'),lbImg=document.getElementById('lb-img'),lbCap=document.getElementById('lb-cap');
+  if(!lb)return;
+  document.querySelectorAll('.lab-img-wrap').forEach(function(el){
+    el.addEventListener('click',function(e){
+      e.preventDefault();
+      var src=el.getAttribute('data-full')||el.querySelector('img').src;
+      var cap=el.getAttribute('data-caption')||'';
+      lbImg.src=src;lbImg.alt=el.querySelector('img').alt||'';
+      lbCap.innerHTML=cap;
+      lb.classList.add('open');lb.removeAttribute('aria-hidden');
+      document.body.style.overflow='hidden';
+      lb.querySelector('.lightbox-close').focus();
+    });
+    el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click();}}); 
+  });
+  function closeLb(){lb.classList.remove('open');lb.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+  lb.querySelector('.lightbox-close').addEventListener('click',closeLb);
+  lb.addEventListener('click',function(e){if(e.target===lb)closeLb();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&lb.classList.contains('open'))closeLb();});
+});
+</script>
+
+<script>
+(function(){
+  var flags = [
+  {name:"España",b:["#c8102e","#b8952a","#c8102e"],accent:"#7ab8e8"},
+  {name:"México",b:["#006847","#ffffff","#ce1126"],accent:"#7ab8e8"},
+  {name:"Argentina",b:["#74acdf","#ffffff","#74acdf"],accent:"#7ab8e8"},
+  {name:"Colombia",b:["#fcd116","#003087","#ce1126"],accent:"#fcd116"},
+  {name:"Chile",b:["#d52b1e","#ffffff","#002d62"],accent:"#7ab8e8"},
+  {name:"Perú",b:["#d91023","#ffffff","#d91023"],accent:"#7ab8e8"},
+  {name:"Venezuela",b:["#cf142b","#00247d","#cf9a00"],accent:"#cf9a00"},
+  {name:"Cuba",b:["#002a8f","#ffffff","#002a8f"],accent:"#7ab8e8"},
+  {name:"Ecuador",b:["#ffd100","#003893","#ef3340"],accent:"#ffd100"},
+  {name:"Bolivia",b:["#d52b1e","#f4e400","#007a3d"],accent:"#f4e400"},
+  {name:"Guatemala",b:["#4997d0","#ffffff","#4997d0"],accent:"#7ab8e8"},
+  {name:"Costa Rica",b:["#002b7f","#cf142b","#ffffff"],accent:"#7ab8e8"},
+  {name:"Uruguay",b:["#ffffff","#5b9bd5","#ffffff"],accent:"#5b9bd5"},
+  {name:"Honduras",b:["#009bde","#ffffff","#009bde"],accent:"#7ab8e8"},
+  {name:"Nicaragua",b:["#003f87","#ffffff","#003f87"],accent:"#7ab8e8"},
+  {name:"El Salvador",b:["#0f47af","#ffffff","#0f47af"],accent:"#7ab8e8"},
+  {name:"República Dom.",b:["#002d62","#cf142b","#002d62"],accent:"#7ab8e8"},
+  {name:"Puerto Rico",b:["#002d62","#ffffff","#cf142b"],accent:"#7ab8e8"},
+  {name:"Panamá",b:["#da121a","#ffffff","#005eb8"],accent:"#7ab8e8"},
+  {name:"Paraguay",b:["#d52b1e","#ffffff","#0032a0"],accent:"#7ab8e8"}
+];
+
+  // Fisher-Yates shuffle for a non-repeating cycle
+  for(var i=flags.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=flags[i];flags[i]=flags[j];flags[j]=t;}
+
+  var idx = 0;
+  var bars = document.querySelectorAll('.flag .fbar');
+  var wrapper = bars.length ? bars[0].closest('.flag') : null;
+  var accentEl = document.querySelector('.htext h1 em');
+  var tip = null;
+
+  // Add CSS transitions to bars and accent
+  for(var b=0;b<bars.length;b++){
+    bars[b].style.transition='background 0.9s ease';
+  }
+  if(accentEl) accentEl.style.transition='color 0.9s ease';
+
+  function applyFlag(f){
+    if(bars.length===3){
+      bars[0].style.background=f.b[0];
+      bars[1].style.background=f.b[1];
+      bars[2].style.background=f.b[2];
+    }
+    if(wrapper) wrapper.setAttribute('aria-label','Flag of '+f.name);
+    if(accentEl) accentEl.style.color=f.accent;
+    if(tip){
+      tip.style.opacity='0';
+      // Update text after fade completes (only if tooltip is visible)
+      setTimeout(function(){tip.textContent=f.name;},200);
+    }
+  }
+
+  // Set initial flag immediately
+  applyFlag(flags[0]);
+
+  // Build tooltip
+  if(wrapper){
+    wrapper.style.position='relative';
+    tip = document.createElement('div');
+    tip.textContent=flags[0].name;
+    tip.style.cssText='position:absolute;left:52px;top:0;background:rgba(0,0,0,0.72);color:white;font-size:10px;font-weight:700;letter-spacing:.5px;padding:3px 8px;border-radius:4px;white-space:nowrap;opacity:0;transition:opacity .2s;pointer-events:none;z-index:10;';
+    wrapper.appendChild(tip);
+    wrapper.addEventListener('mouseenter',function(){tip.style.opacity='1';});
+    wrapper.addEventListener('mouseleave',function(){tip.style.opacity='0';});
+  }
+
+  // Cycle every 6 seconds
+  setInterval(function(){
+    idx=(idx+1)%flags.length;
+    applyFlag(flags[idx]);
+  },6000);
+})();
+</script>
+</body>
+</html>
