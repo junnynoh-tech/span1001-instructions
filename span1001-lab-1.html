@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<html lang="es"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SPAN 1001 — Lab 1: Mi presentación</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400;1,700&amp;family=DM+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
 <style>
-:root{--red:#c8102e;--gold:#b8952a;--navy:#002147;--blue:#005fa3;--skylt:#e8f3ff;--ink:#0d1525;--soft:#1e3a5f;--muted:#4a5f75;--cream:#f7f9fc;--white:#ffffff;--parch:#dce8f5;--shadow:0 8px 40px rgba(0,33,71,0.13);--shadow-sm:0 2px 12px rgba(0,33,71,0.08);--red-lt:#fff0f2;--gold-lt:#fffbf0;--green:#1a5c1a;--green-lt:#f0f9f0;}
+:root{--red:#c8102e;--gold:#b8952a;--navy:#002147;--blue:#005fa3;--skylt:#e8f3ff;--ink:#0d1525;--soft:#1e3a5f;--muted:#4a5f75;--cream:#f7f9fc;--white:#ffffff;--parch:#dce8f5;--shadow:0 4px 24px rgba(0,33,71,0.10),0 1px 4px rgba(0,33,71,0.06);--shadow-sm:0 2px 8px rgba(0,33,71,0.07);--red-lt:#fff0f2;--gold-lt:#fffbf0;--green:#1a5c1a;--green-lt:#f0f9f0;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 5% 10%,rgba(200,16,46,0.05) 0%,transparent 50%),radial-gradient(ellipse at 95% 90%,rgba(0,95,163,0.05) 0%,transparent 50%);pointer-events:none;z-index:0;}
@@ -22,14 +21,14 @@ header::after{content:'UNO';position:absolute;right:-10px;top:50%;transform:tran
 .mode-pill{display:inline-flex;align-items:center;gap:5px;padding:4px 13px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;background:rgba(184,149,42,0.2);color:#e8d080;border:1px solid rgba(184,149,42,0.35);}
 @media(max-width:640px){header{padding:20px;}.htext h1{font-size:28px;}.lab-num{font-size:50px;}}
 .page{max-width:980px;margin:0 auto;padding:40px 24px 60px;position:relative;z-index:1;}
-.slabel{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;margin-top:28px;}
+.slabel{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;margin-top:28px;padding-left:2px;}
 .slabel:first-child{margin-top:0;}.slabel::after{content:'';flex:1;height:1px;background:var(--parch);}
-.card{background:var(--white);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:20px;}
+.card{background:var(--white);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:20px;border-top:1px solid rgba(255,255,255,0.9);}
 .card-inner{padding:28px 32px;}
 @media(max-width:640px){.card-inner{padding:20px 18px;}}
 .hero-card{display:grid;grid-template-columns:1fr 1fr;gap:0;overflow:hidden;border-radius:16px;box-shadow:var(--shadow);margin-bottom:20px;}
 @media(max-width:680px){.hero-card{grid-template-columns:1fr;}}
-.hero-img{position:relative;overflow:hidden;min-height:200px;}
+.hero-img{position:relative;overflow:hidden;min-height:240px;}
 .hero-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease;}.hero-img:hover img{transform:scale(1.04);}
 .hero-img-cap{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,20,50,0.7));padding:20px 16px 12px;font-size:9px;color:rgba(255,255,255,0.6);}
 .hero-body{background:var(--white);padding:28px 32px;display:flex;flex-direction:column;justify-content:center;}
@@ -43,7 +42,7 @@ header::after{content:'UNO';position:absolute;right:-10px;top:50%;transform:tran
 @media(max-width:640px){.two-col{grid-template-columns:1fr;}}
 .steps{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:4px;}
 .steps li{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;line-height:1.7;color:var(--soft);}
-.sn{width:26px;height:26px;min-width:26px;border-radius:50%;background:var(--blue);color:white;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.sn{width:26px;height:26px;min-width:26px;border-radius:50%;background:linear-gradient(135deg,var(--blue),#1a7fd4);color:white;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;box-shadow:0 2px 6px rgba(0,95,163,0.3);}
 /* Step track */
 .step-track{display:flex;align-items:flex-start;margin-bottom:18px;}
 .st-item{flex:1;text-align:center;position:relative;}
@@ -69,7 +68,7 @@ header::after{content:'UNO';position:absolute;right:-10px;top:50%;transform:tran
 .example p{font-size:14px;color:var(--soft);margin-bottom:3px;line-height:1.55;}
 .example .hl{color:var(--blue);font-weight:700;}
 /* Grammar box */
-.gram-box{background:#f4f0ff;border:1.5px solid #c4b5fd;border-radius:12px;padding:16px 20px;margin:14px 0;}
+.gram-box{background:linear-gradient(135deg,#f4f0ff 0%,#ede8ff 100%);border:1.5px solid #c4b5fd;border-radius:12px;padding:16px 20px;margin:14px 0;border-left:4px solid #7c3aed;}
 .gram-box h4{font-family:'Fraunces',serif;font-size:15px;color:#5b21b6;margin-bottom:8px;}
 .gram-box ul{padding-left:18px;font-size:13px;color:#4c1d95;line-height:1.8;}
 .gram-box code{background:rgba(91,46,138,.1);color:#5b21b6;padding:2px 6px;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;}
@@ -144,305 +143,698 @@ footer{text-align:center;padding:20px;font-size:11px;color:var(--muted);position
 .lightbox-close{position:absolute;top:-14px;right:-14px;background:var(--red);color:white;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:background .15s;z-index:1;}
 .lightbox-close:hover{background:#a00020;}
 
+/* Attribution tooltip on hover */
+.lab-img-wrap[data-caption]::after{
+  content:attr(data-caption);
+  position:absolute;bottom:0;left:0;right:0;
+  background:rgba(0,15,45,0.88);
+  color:rgba(255,255,255,0.9);
+  font-size:10px;line-height:1.4;
+  padding:7px 10px;
+  transform:translateY(100%);
+  transition:transform .22s ease;
+  pointer-events:none;
+  z-index:2;
+}
+.lab-img-wrap:hover[data-caption]::after,
+.lab-img-wrap:focus[data-caption]::after{
+  transform:translateY(0);
+}
+
+
+
+/* ── Closing image banner ── */
+.closing-banner{position:relative;overflow:hidden;height:260px;border-radius:0 0 16px 16px;margin:0;}
+.closing-banner img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 6s ease;}
+.closing-banner:hover img{transform:scale(1.04);}
+.closing-banner-grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,21,71,0.75) 0%,rgba(0,21,71,0.2) 50%,transparent 100%);}
+.closing-banner-cap{position:absolute;bottom:14px;left:18px;right:18px;font-size:10px;color:rgba(255,255,255,0.55);line-height:1.5;font-style:italic;}
+.closing-banner-cap a{color:rgba(255,255,255,0.65);text-decoration:none;border-bottom:1px dotted rgba(255,255,255,0.3);}
+.closing-banner-cap a:hover{color:white;}
+.closing-banner-expand{position:absolute;top:12px;right:14px;background:rgba(0,0,0,0.4);color:rgba(255,255,255,0.8);font-size:10px;font-weight:700;letter-spacing:.8px;padding:3px 9px;border-radius:20px;pointer-events:none;}
+/* Hide the old img-caption below banner images */
+.banner-caption-replaced{display:none;}
+
 </style>
-</head>
-<body>
-<a href="#main-content" class="skip-link">Skip to main content</a>
+</head><body><p><a href="#main-content" class="skip-link">Skip to main content</a></p>
 <header role="banner">
-  <div class="flag" role="img" aria-label="Spanish flag"><div class="fbar r"></div><div class="fbar y"></div><div class="fbar r"></div></div>
-  <div class="htext"><h1>SPAN <em>1001</em></h1><p>Introductory Spanish — Language Lab</p></div>
-  <div class="hbadge" aria-label="Lab 1"><div class="lab-num" aria-hidden="true">1</div><span class="mode-pill">🙋 Mi presentación</span></div>
-</header>
-
-<main class="page" id="main-content">
-
-  <div class="hero-card">
-    <div class="hero-img">
-      <a class="lab-img-wrap" data-full="https://junnynoh-tech.github.io/span1001-instructions/span1001-images/lab-1-image-1.jpg" data-caption="Photo by Javier Trueba · Unsplash" role="button" tabindex="0" aria-label="Expand image: Students meeting on campus">
-      <img src="https://junnynoh-tech.github.io/span1001-instructions/span1001-images/lab-1-image-1.jpg" alt="Students meeting on campus" loading="lazy">
-      <span class="img-expand-hint" aria-hidden="true">🔍 Expand</span>
-    </a>
-    <div class="img-caption"><a href="https://unsplash.com/photos/iQPr1XkF5F0" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">Photo by Javier Trueba</a> · Unsplash</div>
-    </div>
-    <div class="hero-body">
-      <div class="chapter-tag">Capítulo 1 · ser · saludos · profesiones · números</div>
-      <h2>Mi presentación</h2>
-      <p class="desc">Introduce yourself in Spanish using greetings, <em>ser</em>, where you're from, and occupations from Chapter 1 — then introduce a classmate to a third student.</p>
-      <div class="chips">
-        <span class="chip">📋 Mini-quiz first</span>
-        <span class="chip">🎥 Part 1: Preséntate (30–60 sec)</span>
-        <span class="chip">💬 Part 2: Te presento a… (video comment)</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="two-col">
-    <div class="card">
-      <div class="card-inner">
-        <div class="slabel" style="margin-top:0;"><span>🚦</span>How to complete this lab</div>
-        <div class="step-track" role="list">
-          <div class="st-item act"><div class="st-circle">1</div><div class="st-label">Quiz</div></div>
-          <div class="st-item"><div class="st-circle">2</div><div class="st-label">Record<br>Part 1</div></div>
-          <div class="st-item"><div class="st-circle">3</div><div class="st-label">Watch<br>2 classmates</div></div>
-          <div class="st-item"><div class="st-circle">4</div><div class="st-label">Video<br>comment</div></div>
-          <div class="st-item"><div class="st-circle">✓</div><div class="st-label">Done</div></div>
-        </div>
-        <ol class="steps">
-          <li><span class="sn">1</span><span>Complete the <a href="https://ung.view.usg.edu/d2l/common/dialogs/quickLink/quickLink.d2l?ou={orgUnitId}&type=quiz&rcode=usgx-40376221" target="_blank" rel="noopener" style="color:var(--blue);font-weight:700;">Preparation Mini-Quiz</a> in D2L.</span></li>
-          <li><span class="sn">2</span><span>Open the <a href="https://ung.view.usg.edu/d2l/common/dialogs/quickLink/quickLink.d2l?ou={orgUnitId}&type=lti&rcode=usgx-42692182&srcou=830130" target="_blank" rel="noopener" style="color:var(--blue);font-weight:700;">Lab 1: Bongo Activity</a> and record <strong>Part 1</strong>.</span></li>
-          <li><span class="sn">3</span><span>After submitting, classmates' videos will appear in Bongo. Watch at least <strong>two</strong> before responding.</span></li>
-          <li><span class="sn">4</span><span>Choose one and leave a <strong>video comment</strong> (Part 2).</span></li>
-          
-        </ol>
-        <div class="lab-option">
-          <div class="lab-option-header"><span style="font-size:18px;">🏫</span><h3>Want help? Do it in the Lab</h3><span class="lab-badge">Optional</span></div>
-          <p style="font-size:13px;color:#2a4a2a;line-height:1.6;margin-bottom:10px;">A Language Lab TA can help you practice greetings and pronunciation before recording. Book with your UNG student email via WCONLINE.</p>
-          <a href="https://unglanglab.mywconline.com" target="_blank" rel="noopener" class="resource-btn" style="background:var(--green);font-size:12px;padding:8px 16px;">🗓️ Reserve a Lab Spot</a>
-        </div>
-        <div class="resource-row">
-          <button class="resource-btn blue" onclick="openModal('modal-vocab')">📋 Key Vocabulary</button>
-          <button class="resource-btn teal" onclick="openModal('modal-bongo')">🔧 Bongo Help</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-inner">
-        <div class="slabel" style="margin-top:0;"><span>✅</span>Requirements — both parts</div>
-        <div class="req-acc">
-          <div class="req-item">
-            <button class="req-toggle" aria-expanded="false" onclick="tog(this)"><span>🎥</span>Video basics<span class="arr">▼</span></button>
-            <div class="req-body"><ul>
-              <li>Part 1: <strong>30–60 seconds</strong></li>
-              <li>Part 2 comment: shorter — complete and clear</li>
-              <li><strong>Face visible</strong> in every recording</li>
-            </ul></div>
-          </div>
-          <div class="req-item">
-            <button class="req-toggle" aria-expanded="false" onclick="tog(this)"><span>🗣️</span>Language rules<span class="arr">▼</span></button>
-            <div class="req-body"><ul>
-              <li>Speak <strong>only in Spanish</strong></li>
-              <li>Use <strong>complete sentences</strong> — subject + verb</li>
-              <li>One notecard, up to <strong>15 words</strong> allowed — no scripts</li>
-            </ul></div>
-          </div>
-          <div class="req-item">
-            <button class="req-toggle" aria-expanded="false" onclick="tog(this)"><span>💬</span>Peer comment rules<span class="arr">▼</span></button>
-            <div class="req-body"><p>Your response must be a <strong>video comment</strong> — not text. Face visible, Spanish only.</p><p style="margin-top:6px;">To view classmates' videos: open the assignment in Bongo → select a classmate's submission → click <strong>Video Comment</strong> to respond.</p></div>
-          </div>
-          <div class="req-item">
-            <button class="req-toggle" aria-expanded="false" onclick="tog(this)"><span>⚠️</span>Incomplete submissions<span class="arr">▼</span></button>
-            <div class="req-body"><ul>
-              <li><strong>First occurrence</strong> (no face / no audio): Incomplete — resubmit</li>
-              <li><strong>Subsequent:</strong> Score of 0</li>
-            </ul></div>
-          </div>
-          <div class="req-item">
-            <button class="req-toggle" aria-expanded="false" onclick="tog(this)"><span>📊</span>Rubric<span class="arr">▼</span></button>
-            <div class="req-body"><p>A rubric is available inside Bongo when you open the assignment. Review it before recording.</p></div>
-          </div>
-        </div>
-        <div class="alert warn" style="margin-top:14px;">🚫 No online translators or AI writing tools allowed.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Part 1 -->
-  <div class="card">
-    <div class="card-inner">
-      <div class="part-badge pb-blue">🎥 Part 1 — Preséntate</div>
-      <div class="slabel" style="margin-top:0;"><span></span>Record a 60–90 second introduction</div>
-      <p style="font-size:14px;line-height:1.75;color:var(--soft);margin-bottom:16px;">Introduce yourself in Spanish. Cover <strong>all six</strong> of the elements below — in any order, in your own words. This is a real conversation, not a script. The content must be yours.</p>
-
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
-        <div style="background:var(--skylt);border:1.5px solid var(--parch);border-radius:10px;padding:13px 15px;">
-          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-bottom:6px;">1 · Greeting + Name</div>
-          <p style="font-size:13px;color:var(--soft);line-height:1.5;">Greet your audience and say your full name. Use a natural greeting — not just "hola."</p>
-        </div>
-        <div style="background:var(--skylt);border:1.5px solid var(--parch);border-radius:10px;padding:13px 15px;">
-          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-bottom:6px;">2 · Origin</div>
-          <p style="font-size:13px;color:var(--soft);line-height:1.5;">Say where you are from — city, state, or country. Use <em>ser de</em>.</p>
-        </div>
-        <div style="background:var(--skylt);border:1.5px solid var(--parch);border-radius:10px;padding:13px 15px;">
-          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-bottom:6px;">3 · Occupation or Title</div>
-          <p style="font-size:13px;color:var(--soft);line-height:1.5;">Say what you are — student, worker, athlete, etc. Use <em>ser</em>. Pick from the Word Bank or invent one.</p>
-        </div>
-        <div style="background:var(--skylt);border:1.5px solid var(--parch);border-radius:10px;padding:13px 15px;">
-          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-bottom:6px;">4 · Number of Classes</div>
-          <p style="font-size:13px;color:var(--soft);line-height:1.5;">Say how many classes you are taking this semester — in Spanish numbers (0–30).</p>
-        </div>
-        <div style="background:var(--skylt);border:1.5px solid var(--parch);border-radius:10px;padding:13px 15px;">
-          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-bottom:6px;">5 · Tell the Time</div>
-          <p style="font-size:13px;color:var(--soft);line-height:1.5;">Say what time <em>right now</em> it is, or what time one of your classes meets. Use <em>son las… / es la una…</em></p>
-        </div>
-        <div style="background:#f4f0ff;border:1.5px solid #c4b5fd;border-radius:10px;padding:13px 15px;">
-          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#5b21b6;margin-bottom:6px;">6 · Something Interesting</div>
-          <p style="font-size:13px;color:#4c1d95;line-height:1.5;">Share one surprising or unique fact about yourself using <em>ser</em>. Nationality? An unexpected title? Something classmates won't predict.</p>
-        </div>
-      </div>
-
-      <div class="gram-box">
-        <h4>📌 Grammar focus for this video</h4>
-        <ul>
-          <li><code>ser</code> for identity and origin: <em>Soy de… · Soy estudiante de…</em></li>
-          <li>Numbers 0–30: needed for your class count — say them aloud before recording</li>
-          <li>Telling time: <em>Son las dos. · Es la una y media. · Son las tres de la tarde.</em></li>
-          <li><code>tomo</code> (I take): you'll learn -AR verbs fully in Chapter 2, but <em>tomo clases</em> is a useful expression for this video</li>
-        </ul>
-      </div>
-
-      <div style="background:var(--cream);border:1px solid var(--parch);border-radius:10px;padding:14px 18px;margin-top:12px;">
-        <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Structure — fill in with your own content</div>
-        <p style="font-size:13.5px;color:var(--soft);line-height:1.7;font-family:monospace;">
-          [Greeting]. [Your name]. Soy de [origin].<br>
-          Soy [occupation/title].<br>
-          Tomo [number] clases este semestre.<br>
-          Son las [time] / Es la una…<br>
-          [Interesting fact using ser.]
-        </p>
-        <p style="font-size:11.5px;color:var(--muted);margin-top:6px;font-style:italic;">This shows the structure only — the content and order are yours to decide.</p>
-      </div>
-
-      <div class="alert gold" style="margin-top:12px;">💡 Use the structure above as a starting point, then make it your own. Your video should sound natural, not like you're reading brackets off a screen.</div>
-    </div>
-  </div>
-
-  <!-- Part 2 -->
-  <div class="card">
-    <div class="card-inner">
-      <div class="part-badge pb-green">💬 Part 2 — Te presento a…</div>
-      <div class="slabel" style="margin-top:0;"><span></span>Introduce a classmate via video comment</div>
-      <div class="alert warn" style="margin-top:0;margin-bottom:14px;"><strong>⚠️ Submit your video first.</strong> Your classmates' videos only become visible in Bongo <em>after you have submitted your own Part 1 video</em>. Once you can see them, watch at least <strong>two</strong>, then choose <strong>one</strong> to respond to with a video comment. If no one has posted yet, check back before the deadline.</div>
-      <p style="font-size:14px;line-height:1.75;color:var(--soft);margin-bottom:14px;">In your comment video, <strong>introduce the classmate you watched</strong> to a third student. Include all five:</p>
-      <ul class="cklist green">
-        <li><div class="ckn">1</div><span><strong>Greet the classmate</strong> by name — <em>Hola, [nombre]…</em></span></li>
-        <li><div class="ckn">2</div><span><strong>Introduce a third student</strong> — <em>Te presento a [nombre].</em></span></li>
-        <li><div class="ckn">3</div><span><strong>Where that person is from</strong> — <em>Es de…</em></span></li>
-        <li><div class="ckn">4</div><span><strong>Their occupation or major</strong> — <em>Es estudiante de… / Es…</em></span></li>
-        <li><div class="ckn">5</div><span><strong>Two similarities</strong> between both — use <em>Ustedes son…</em> or <em>Son de…</em></span></li>
-      </ul>
-      <div class="example">
-        <p>Hola, <span class="hl">Carlos</span>.</p>
-        <p>Te presento a <span class="hl">Ana</span>.</p>
-        <p>Es de <span class="hl">Georgia</span>.</p>
-        <p>Es <span class="hl">estudiante de español</span>.</p>
-        <p><span class="hl">Ustedes son estudiantes.</span></p>
-        <p><span class="hl">Son de Georgia.</span></p>
-        <p>¡Chau!</p>
-      </div>
-      <div class="alert info">💡 You may need to return later if classmates haven't posted yet — check back before the deadline.</div>
-    </div>
-  </div>
-
-</main>
-<footer>SPAN 1001 — Lab 1: Mi presentación · University of North Georgia · Capítulo 1</footer>
-
-<!-- Vocab Modal -->
-<div id="modal-vocab" class="modal" role="dialog" aria-modal="true" aria-label="Key Vocabulary" aria-hidden="true">
-  <div class="modal-panel">
-    <button class="modal-close" onclick="closeModal('modal-vocab')" aria-label="Close">✕</button>
-    <div class="modal-title">Key Vocabulary — Lab 1</div>
-    <div class="modal-sub">Chapter 1 essentials only · click 🔊 to hear the pronunciation</div>
-
-    <div class="vsec-title">Greetings &amp; Introductions</div>
-    <table class="vtable">
-      <thead><tr><th>Español</th><th>English</th><th>Pronunciation</th></tr></thead>
-      <tbody>
-        <tr><td class="es-cell">Hola</td><td class="en-cell">Hello</td><td class="pron-cell"><em>OH-lah</em> <button onclick="speak('Hola')" aria-label="Listen">🔊</button></td></tr>
-        <tr><td class="es-cell">Me llamo…</td><td class="en-cell">My name is…</td><td class="pron-cell"><em>meh YAH-moh</em> <button onclick="speak('Me llamo')" aria-label="Listen">🔊</button></td></tr>
-        <tr><td class="es-cell">Soy de…</td><td class="en-cell">I'm from…</td><td class="pron-cell"><em>soy deh</em> <button onclick="speak('Soy de')" aria-label="Listen">🔊</button></td></tr>
-        <tr><td class="es-cell">Te presento a…</td><td class="en-cell">I'd like you to meet…</td><td class="pron-cell"><em>teh preh-SEN-toh ah</em> <button onclick="speak('Te presento a')" aria-label="Listen">🔊</button></td></tr>
-        <tr><td class="es-cell">Mucho gusto</td><td class="en-cell">Nice to meet you</td><td class="pron-cell"><em>MOO-choh GOOS-toh</em> <button onclick="speak('Mucho gusto')" aria-label="Listen">🔊</button></td></tr>
-        <tr><td class="es-cell">¡Chau! / Adiós</td><td class="en-cell">Goodbye</td><td class="pron-cell"><em>chow / ah-DYOS</em> <button onclick="speak('Chau')" aria-label="Listen">🔊</button></td></tr>
-      </tbody>
-    </table>
-
-    <div class="vsec-title">Ser — Present Tense</div>
-    <table class="vtable">
-      <thead><tr><th>Form</th><th>Meaning</th><th>Example</th></tr></thead>
-      <tbody>
-        <tr><td class="es-cell">soy</td><td class="en-cell">I am</td><td class="pron-cell"><em>Soy estudiante.</em> <button onclick="speak('Soy estudiante')" aria-label="Listen">🔊</button></td></tr>
-        <tr><td class="es-cell">eres</td><td class="en-cell">you are</td><td class="pron-cell"><em>Eres de Georgia.</em> <button onclick="speak('Eres de Georgia')" aria-label="Listen">🔊</button></td></tr>
-        <tr><td class="es-cell">es</td><td class="en-cell">he / she is</td><td class="pron-cell"><em>Es de México.</em> <button onclick="speak('Es de México')" aria-label="Listen">🔊</button></td></tr>
-        <tr><td class="es-cell">son</td><td class="en-cell">they / you all are</td><td class="pron-cell"><em>Son estudiantes.</em> <button onclick="speak('Son estudiantes')" aria-label="Listen">🔊</button></td></tr>
-      </tbody>
-    </table>
-
-    <div class="vsec-title">Occupations &amp; Titles — choose one for Part 1</div>
-    <p style="font-size:11.5px;color:var(--muted);margin-bottom:6px;">Use <strong>Soy…</strong> — real or invented</p>
-    <table class="vtable">
-      <thead><tr><th>Español</th><th>English</th><th>Pronunciation</th></tr></thead>
-      <tbody>
-        <tr><td class="es-cell">estudiante de español</td><td class="en-cell">Spanish student</td><td class="pron-cell"><em>es-too-DYAN-teh</em> <button onclick="speak('estudiante de español')" aria-label="Listen">🔊</button></td></tr>
-        <tr><td class="es-cell">estudiante de biología</td><td class="en-cell">Biology student</td><td class="pron-cell"><em>byoh-loh-HEE-ah</em> <button onclick="speak('estudiante de biología')" aria-label="Listen">🔊</button></td></tr>
-        <tr><td class="es-cell">estudiante de negocios</td><td class="en-cell">Business student</td><td class="pron-cell"><em>neh-GOH-syos</em> <button onclick="speak('negocios')" aria-label="Listen">🔊</button></td></tr>
-        <tr><td class="es-cell">estudiante de historia</td><td class="en-cell">History student</td><td class="pron-cell"><em>ees-TOH-ryah</em> <button onclick="speak('historia')" aria-label="Listen">🔊</button></td></tr>
-        <tr><td class="es-cell">mesero / mesera</td><td class="en-cell">Waiter / Waitress</td><td class="pron-cell"><em>meh-SEH-roh</em> <button onclick="speak('mesero')" aria-label="Listen">🔊</button></td></tr>
-        <tr><td class="es-cell">atleta</td><td class="en-cell">Athlete</td><td class="pron-cell"><em>aht-LEH-tah</em> <button onclick="speak('atleta')" aria-label="Listen">🔊</button></td></tr>
-        <tr><td class="es-cell">voluntario / voluntaria</td><td class="en-cell">Volunteer</td><td class="pron-cell"><em>boh-loon-TAH-ryoh</em> <button onclick="speak('voluntario')" aria-label="Listen">🔊</button></td></tr>
-      </tbody>
-    </table>
-    <div class="alert gold" style="margin-top:10px;">📚 For the full vocabulary list, refer to your <strong>Vistas textbook, Capítulo 1</strong>.</div>
-  </div>
+<div class="flag" role="img" aria-label="Spanish flag">
+<div class="fbar r"></div>
+<div class="fbar y"></div>
+<div class="fbar r"></div>
 </div>
-
+<div class="htext">
+<h1>SPAN <em>1001</em></h1>
+<p>Elementary Spanish I — Language Lab</p>
+</div>
+<div class="hbadge" aria-label="Lab 1">
+<div class="lab-num" aria-hidden="true">1</div>
+<span class="mode-pill">🙋 Mi presentación</span></div>
+</header><main class="page" id="main-content">
+<div class="hero-card">
+<div class="hero-img"><a class="lab-img-wrap" data-full="https://junnynoh-tech.github.io/span1001-instructions/span1001-images/lab-1-image-1.jpg" data-caption="Photo by Javier Trueba · Unsplash" role="button" aria-label="Expand image: Students meeting on campus" tabindex="0"> <img src="https://junnynoh-tech.github.io/span1001-instructions/span1001-images/lab-1-image-1.jpg" alt="Students meeting on campus" loading="lazy"> <span class="img-expand-hint" aria-hidden="true">🔍 Expand</span> </a>
+<div class="img-caption"><a href="https://unsplash.com/photos/iQPr1XkF5F0" target="_blank" rel="noopener" style="color: inherit; text-decoration: underline;">Photo by Javier Trueba</a> · Unsplash</div>
+</div>
+<div class="hero-body">
+<div class="chapter-tag">Capítulo 1 · ser · saludos · profesiones · números</div>
+<h2>Mi presentación</h2>
+<p class="desc">Introduce yourself in Spanish using greetings, <em>ser</em>, where you're from, and occupations from Chapter 1 — then introduce a real person in your life.</p>
+<div class="chips"><span class="chip">📋 Mini-quiz first</span> <span class="chip">🎥 Camera · 1.5–2 min</span></div>
+</div>
+</div>
+<div class="two-col">
+<div class="card">
+<div class="card-inner">
+<div class="slabel" style="margin-top: 0;"><span>🚦</span>How to complete this lab</div>
+<div class="step-track" role="list">
+<div class="st-item act">
+<div class="st-circle">1</div>
+<div class="st-label">Quiz</div>
+</div>
+<div class="st-item">
+<div class="st-circle">2</div>
+<div class="st-label">Record</div>
+</div>
+<div class="st-item">
+<div class="st-circle">3</div>
+<div class="st-label">Submit</div>
+</div>
+<div class="st-item">
+<div class="st-circle">✓</div>
+<div class="st-label">Done</div>
+</div>
+</div>
+<ol class="steps">
+<li><span class="sn">1</span><span>Complete the <strong>Preparation Mini-Quiz</strong> in D2L — it is part of this lab grade.</span></li>
+<li><span class="sn">2</span><span>Click the <strong>Lab 1: Bongo Activity</strong> link below. Record your introduction in one take — no need to split it into sections.</span></li>
+<li><span class="sn">3</span><span>Play back your recording — check audio and face — then submit. Reset with <strong>⋮</strong> before the deadline if needed.</span></li>
+</ol>
+<div class="lab-option">
+<div class="lab-option-header"><span style="font-size: 18px;">🏫</span>
+<h3>Want help? Do it in the Lab</h3>
+<span class="lab-badge">Optional</span></div>
+<p style="font-size: 13px; color: #2a4a2a; line-height: 1.6; margin-bottom: 10px;">A Language Lab TA can help you practice greetings and pronunciation before recording. Book with your UNG student email via WCONLINE.</p>
+<a href="https://unglanglab.mywconline.com" target="_blank" rel="noopener" class="resource-btn" style="background: var(--green); font-size: 12px; padding: 8px 16px;">🗓️ Reserve a Lab Spot</a></div>
+<div class="resource-row"><button class="resource-btn blue" onclick="openModal('modal-vocab')">📋 Key Vocabulary</button> <button class="resource-btn teal" onclick="openModal('modal-bongo')">🔧 Bongo Help</button></div>
+</div>
+</div>
+<div class="card" style="overflow: hidden;"><a class="lab-img-wrap" data-full="https://junnynoh-tech.github.io/span1001-instructions/span1001-images/lab-1-image-2.jpg" data-caption="Photo by Skyler Wang · Unsplash" role="button" aria-label="Expand image: Students gathered outdoors" style="display: block; overflow: hidden; height: 200px; border-radius: 0;" tabindex="0"> <img src="https://junnynoh-tech.github.io/span1001-instructions/span1001-images/lab-1-image-2.jpg" alt="Students gathered outdoors" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block;"> <span class="img-expand-hint" aria-hidden="true">🔍 Expand</span> </a>
+<div style="padding: 4px 12px; text-align: center;">
+<p class="img-caption"><a href="https://unsplash.com/photos/AE99CzcdBCk" target="_blank" rel="noopener" style="color: inherit; text-decoration: underline;">Photo by Skyler Wang</a> · Unsplash</p>
+</div>
+<div class="card-inner" style="padding-top: 8px;">
+<div class="slabel" style="margin-top: 0;"><span>✅</span>Requirements</div>
+<div class="req-acc">
+<div class="req-item"><button class="req-toggle" aria-expanded="false" onclick="tog(this)"><span>🎥</span>Video requirements<span class="arr">▼</span></button>
+<div class="req-body">
+<ul>
+<li><strong>1.5–2 minutes</strong> in length</li>
+<li><strong>Face visible</strong> throughout</li>
+<li>One notecard, up to <strong>15 words</strong> allowed — no scripts</li>
+</ul>
+</div>
+</div>
+<div class="req-item"><button class="req-toggle" aria-expanded="false" onclick="tog(this)"><span>🗣️</span>Language rules<span class="arr">▼</span></button>
+<div class="req-body">
+<ul>
+<li>Speak <strong>only in Spanish</strong></li>
+<li>Use <strong>complete sentences</strong> — subject + verb</li>
+<li>Speak naturally — do not read a script</li>
+</ul>
+</div>
+</div>
+<div class="req-item"><button class="req-toggle" aria-expanded="false" onclick="tog(this)"><span>⚠️</span>Incomplete submissions<span class="arr">▼</span></button>
+<div class="req-body">
+<ul>
+<li><strong>First occurrence</strong> (no face / no audio): Incomplete — resubmit</li>
+<li><strong>Subsequent:</strong> Score of 0</li>
+</ul>
+</div>
+</div>
+<div class="req-item"><button class="req-toggle" aria-expanded="false" onclick="tog(this)"><span>📊</span>Rubric<span class="arr">▼</span></button>
+<div class="req-body">
+<p>A rubric is available inside Bongo when you open the assignment. Review it before recording.</p>
+</div>
+</div>
+</div>
+<div class="alert warn" style="margin-top: 14px;">🚫 No online translators or AI writing tools allowed.</div>
+</div>
+</div>
+</div>
+<!-- Activity -->
+<div class="card">
+<div class="card-inner">
+<div class="part-badge pb-blue">🎥 Lab 1 — Mi presentación</div>
+<div class="slabel" style="margin-top: 0;"><span></span>Record a 1.5–2 minute introduction</div>
+<p style="font-size: 14px; line-height: 1.75; color: var(--soft); margin-bottom: 16px;">Record one continuous video in Spanish. Cover <strong>all eight</strong> of the elements below — in any order, in your own words. This is a real introduction, not a script. The content must be yours.</p>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px;">
+<div style="background: var(--skylt); border: 1.5px solid var(--parch); border-radius: 10px; padding: 13px 15px;">
+<div style="font-size: 11px; font-weight: bold; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue); margin-bottom: 6px;">1 · Greeting + Name</div>
+<p style="font-size: 13px; color: var(--soft); line-height: 1.5;">Greet your audience and say your full name. Use a natural greeting — not just "hola."</p>
+</div>
+<div style="background: var(--skylt); border: 1.5px solid var(--parch); border-radius: 10px; padding: 13px 15px;">
+<div style="font-size: 11px; font-weight: bold; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue); margin-bottom: 6px;">2 · Origin</div>
+<p style="font-size: 13px; color: var(--soft); line-height: 1.5;">Say where you are from — city, state, or country. Use <em>ser de</em>.</p>
+</div>
+<div style="background: var(--skylt); border: 1.5px solid var(--parch); border-radius: 10px; padding: 13px 15px;">
+<div style="font-size: 11px; font-weight: bold; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue); margin-bottom: 6px;">3 · Occupation or Major</div>
+<p style="font-size: 13px; color: var(--soft); line-height: 1.5;">Say what you are or what you study — student, nurse, business major, etc. Use <em>ser</em>. If you name a field of study, link it with <strong>de</strong>: <span style="color:var(--green);">✓ Soy estudiante <u>de</u> enfermería</span> — <span style="color:var(--red);text-decoration:line-through;">✗ Soy estudiante enfermería</span>.</p>
+</div>
+<div style="background: var(--skylt); border: 1.5px solid var(--parch); border-radius: 10px; padding: 13px 15px;">
+<div style="font-size: 11px; font-weight: bold; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue); margin-bottom: 6px;">4 · Your Classes</div>
+<p style="font-size: 13px; color: var(--soft); line-height: 1.5;">Say what classes you are taking this semester — name two or three subjects. Use <em>ser</em>: <em>Mis clases son [materia], [materia] y [materia].</em></p>
+</div>
+<div style="background: var(--skylt); border: 1.5px solid var(--parch); border-radius: 10px; padding: 13px 15px;">
+<div style="font-size: 11px; font-weight: bold; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue); margin-bottom: 6px;">5 · Your Schedule</div>
+<p style="font-size: 13px; color: var(--soft); line-height: 1.5;">Tell the time of your <strong>primera clase</strong> (first class) and your <strong>última clase</strong> (last class) of the day. If your classes are online, tell the time of <strong>two or more events</strong> this week instead — a practice, a meeting, a party. Use <em>ser</em>: <em>Mi primera clase es a las… · Mi última clase es a las…</em></p>
+</div>
+<div style="background: var(--skylt); border: 1.5px solid var(--parch); border-radius: 10px; padding: 13px 15px;">
+<div style="font-size: 11px; font-weight: bold; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue); margin-bottom: 6px;">6 · Something Interesting</div>
+<p style="font-size: 13px; color: var(--soft); line-height: 1.5;">Share one surprising or unique fact about yourself using <em>ser</em>. Nationality? An unexpected hobby or title? Something classmates won't predict.</p>
+</div>
+<div style="background: #f4f0ff; border: 1.5px solid #c4b5fd; border-radius: 10px; padding: 13px 15px;">
+<div style="font-size: 11px; font-weight: bold; letter-spacing: 1.5px; text-transform: uppercase; color: #5b21b6; margin-bottom: 6px;">7 · Introduce a Real Person</div>
+<p style="font-size: 13px; color: #4c1d95; line-height: 1.5;">Introduce someone real in your life — a friend, roommate, sibling, or professor: <em>Te presento a [nombre].</em></p>
+</div>
+<div style="background: #f4f0ff; border: 1.5px solid #c4b5fd; border-radius: 10px; padding: 13px 15px;">
+<div style="font-size: 11px; font-weight: bold; letter-spacing: 1.5px; text-transform: uppercase; color: #5b21b6; margin-bottom: 6px;">8 · About That Person</div>
+<p style="font-size: 13px; color: #4c1d95; line-height: 1.5;">Say where they are from and what they do or study: <em>Es de… · Es estudiante de…</em></p>
+<p style="font-size: 11.5px; color: #6b5a9a; margin-top: 6px; font-style: italic;">Optional: hold up a photo of them while you talk.</p>
+</div>
+</div>
+<div class="gram-box">
+<h4>📌 Grammar focus for this video</h4>
+<ul>
+<li><code>ser</code> for identity and origin: <em>Soy de… · Soy estudiante de…</em></li>
+<li><strong>Don't drop the <code>de</code></strong> before a field of study or class subject — Spanish always links them: <span style="color:#1a5c1a;">✓ estudiante <u>de</u> enfermería · clase <u>de</u> español</span>, never <span style="color:#c8102e;text-decoration:line-through;">✗ estudiante enfermería · clase español</span></li>
+<li><code>primera</code> (first) / <code>última</code> (last) — use <code>ser</code> to give two times: <em>Mi primera clase es a las ocho. · Mi última clase es a las dos.</em> Online? Two events instead: <em>Mi práctica es el lunes a las diez. · Mi reunión es el jueves a la una.</em></li>
+<li><code>Te presento a…</code> — a fixed expression used the same way every time, regardless of who you're introducing</li>
+<li>Switch to <code>es</code> when describing the other person: <em>Es de… · Es estudiante de…</em> — not <em>soy</em>, which is only for yourself</li>
+</ul>
+</div>
+<div style="background: var(--cream); border: 1px solid var(--parch); border-radius: 10px; padding: 14px 18px; margin-top: 12px;">
+<div style="font-size: 10px; font-weight: bold; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px;">Your video needs to cover — in any order, in your own words:</div>
+<div style="display: flex; flex-wrap: wrap; gap: 7px;"><span style="background: var(--skylt); border: 1.5px solid var(--parch); border-radius: 20px; padding: 5px 13px; font-size: 12.5px; color: var(--soft); font-weight: 500;">quién eres</span> <span style="background: var(--skylt); border: 1.5px solid var(--parch); border-radius: 20px; padding: 5px 13px; font-size: 12.5px; color: var(--soft); font-weight: 500;">de dónde eres</span> <span style="background: var(--skylt); border: 1.5px solid var(--parch); border-radius: 20px; padding: 5px 13px; font-size: 12.5px; color: var(--soft); font-weight: 500;">qué eres / estudias</span> <span style="background: var(--skylt); border: 1.5px solid var(--parch); border-radius: 20px; padding: 5px 13px; font-size: 12.5px; color: var(--soft); font-weight: 500;">cuáles son tus clases</span> <span style="background: var(--skylt); border: 1.5px solid var(--parch); border-radius: 20px; padding: 5px 13px; font-size: 12.5px; color: var(--soft); font-weight: 500;">tu primera y última clase (o dos eventos)</span> <span style="background: var(--skylt); border: 1.5px solid var(--parch); border-radius: 20px; padding: 5px 13px; font-size: 12.5px; color: var(--soft); font-weight: 500;">algo interesante sobre ti</span> <span style="background: #f4f0ff; border: 1.5px solid #c4b5fd; border-radius: 20px; padding: 5px 13px; font-size: 12.5px; color: #5b21b6; font-weight: 500;">presentar a alguien real</span> <span style="background: #f4f0ff; border: 1.5px solid #c4b5fd; border-radius: 20px; padding: 5px 13px; font-size: 12.5px; color: #5b21b6; font-weight: 500;">de dónde es y qué es esa persona</span></div>
+<p style="font-size: 11.5px; color: var(--muted); margin-top: 10px; font-style: italic;">The order is yours — start anywhere. Build sentences yourself using the Grammar Focus and Key Vocabulary above.</p>
+</div>
+<div class="alert gold" style="margin-top: 12px;">💡 Your video should sound like you — not like you're filling in blanks. Practise out loud many times before recording.</div>
+</div>
+</div>
+</main><footer>SPAN 1001 — Lab 1: Mi presentación · University of North Georgia · Capítulo 1</footer><!-- Vocab Modal -->
+<div id="modal-vocab" class="modal" role="dialog" aria-modal="true" aria-label="Key Vocabulary" aria-hidden="true">
+<div class="modal-panel"><button class="modal-close" aria-label="Close" onclick="closeModal('modal-vocab')">✕</button>
+<div class="modal-title">Key Vocabulary — Lab 1</div>
+<div class="modal-sub">Chapter 1 essentials only · click 🔊 to hear the pronunciation</div>
+<div class="vsec-title">Greetings &amp; Introductions</div>
+<table class="vtable">
+<thead>
+<tr>
+<th>Español</th>
+<th>English</th>
+<th>Pronunciation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="es-cell">Hola</td>
+<td class="en-cell">Hello</td>
+<td class="pron-cell"><em>OH-lah</em> <button aria-label="Listen" onclick="speak('Hola')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">Me llamo…</td>
+<td class="en-cell">My name is…</td>
+<td class="pron-cell"><em>meh YAH-moh</em> <button aria-label="Listen" onclick="speak('Me llamo')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">Soy de…</td>
+<td class="en-cell">I'm from…</td>
+<td class="pron-cell"><em>soy deh</em> <button aria-label="Listen" onclick="speak('Soy de')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">Te presento a…</td>
+<td class="en-cell">I'd like you to meet…</td>
+<td class="pron-cell"><em>teh preh-SEN-toh ah</em> <button aria-label="Listen" onclick="speak('Te presento a')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">Mucho gusto</td>
+<td class="en-cell">Nice to meet you</td>
+<td class="pron-cell"><em>MOO-choh GOOS-toh</em> <button aria-label="Listen" onclick="speak('Mucho gusto')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">¡Chau! / Adiós</td>
+<td class="en-cell">Goodbye</td>
+<td class="pron-cell"><em>chow / ah-DYOS</em> <button aria-label="Listen" onclick="speak('Chau')">🔊</button></td>
+</tr>
+</tbody>
+</table>
+<div class="vsec-title">Ser — Present Tense</div>
+<table class="vtable">
+<thead>
+<tr>
+<th>Form</th>
+<th>Meaning</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="es-cell">soy</td>
+<td class="en-cell">I am</td>
+<td class="pron-cell"><em>Soy estudiante.</em> <button aria-label="Listen" onclick="speak('Soy estudiante')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">eres</td>
+<td class="en-cell">you are</td>
+<td class="pron-cell"><em>Eres de Georgia.</em> <button aria-label="Listen" onclick="speak('Eres de Georgia')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">es</td>
+<td class="en-cell">he / she is</td>
+<td class="pron-cell"><em>Es de México.</em> <button aria-label="Listen" onclick="speak('Es de México')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">son</td>
+<td class="en-cell">they / you all are</td>
+<td class="pron-cell"><em>Son estudiantes.</em> <button aria-label="Listen" onclick="speak('Son estudiantes')">🔊</button></td>
+</tr>
+</tbody>
+</table>
+<div class="vsec-title">Ocupaciones — use <strong>Soy…</strong></div>
+<p style="font-size: 11.5px; color: var(--muted); margin-bottom: 6px;">What are you? Use real or invented — it just needs to be true for your video.</p>
+<table class="vtable">
+<thead>
+<tr>
+<th>Español</th>
+<th>English</th>
+<th>Pronunciation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="es-cell">estudiante</td>
+<td class="en-cell">student</td>
+<td class="pron-cell"><em>es-too-DYAN-teh</em> <button aria-label="Listen" onclick="speak('estudiante')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">mesero / mesera</td>
+<td class="en-cell">waiter / waitress</td>
+<td class="pron-cell"><em>meh-SEH-roh</em> <button aria-label="Listen" onclick="speak('mesero')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">atleta</td>
+<td class="en-cell">athlete</td>
+<td class="pron-cell"><em>aht-LEH-tah</em> <button aria-label="Listen" onclick="speak('atleta')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">voluntario / voluntaria</td>
+<td class="en-cell">volunteer</td>
+<td class="pron-cell"><em>boh-loon-TAH-ryoh</em> <button aria-label="Listen" onclick="speak('voluntario')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">empleado / empleada</td>
+<td class="en-cell">employee</td>
+<td class="pron-cell"><em>em-pleh-AH-doh</em> <button aria-label="Listen" onclick="speak('empleado')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">artista</td>
+<td class="en-cell">artist</td>
+<td class="pron-cell"><em>ar-TEES-tah</em> <button aria-label="Listen" onclick="speak('artista')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">músico / música</td>
+<td class="en-cell">musician</td>
+<td class="pron-cell"><em>MOO-see-koh</em> <button aria-label="Listen" onclick="speak('músico')">🔊</button></td>
+</tr>
+</tbody>
+</table>
+<div class="vsec-title">Estudios y materias — use <strong>Soy estudiante de…</strong></div>
+<p style="font-size: 11.5px; color: var(--muted); margin-bottom: 6px;">What are you studying? Pick your real major or field — say it in Spanish. The <strong>de</strong> is required: <span style="color:#1a5c1a;">Soy estudiante <u>de</u> biología</span> ✓ — not <span style="color:#c8102e;text-decoration:line-through;">Soy estudiante biología</span> ✗</p>
+<table class="vtable">
+<thead>
+<tr>
+<th>Español</th>
+<th>English</th>
+<th>Pronunciation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="es-cell">español</td>
+<td class="en-cell">Spanish</td>
+<td class="pron-cell"><em>es-pah-NYOL</em> <button aria-label="Listen" onclick="speak('español')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">biología</td>
+<td class="en-cell">Biology</td>
+<td class="pron-cell"><em>byoh-loh-HEE-ah</em> <button aria-label="Listen" onclick="speak('biología')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">negocios</td>
+<td class="en-cell">Business</td>
+<td class="pron-cell"><em>neh-GOH-syos</em> <button aria-label="Listen" onclick="speak('negocios')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">historia</td>
+<td class="en-cell">History</td>
+<td class="pron-cell"><em>ees-TOH-ryah</em> <button aria-label="Listen" onclick="speak('historia')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">matemáticas</td>
+<td class="en-cell">Mathematics</td>
+<td class="pron-cell"><em>mah-teh-MAH-tee-kas</em> <button aria-label="Listen" onclick="speak('matemáticas')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">ingeniería</td>
+<td class="en-cell">Engineering</td>
+<td class="pron-cell"><em>een-heh-nyeh-REE-ah</em> <button aria-label="Listen" onclick="speak('ingeniería')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">enfermería</td>
+<td class="en-cell">Nursing</td>
+<td class="pron-cell"><em>en-fer-meh-REE-ah</em> <button aria-label="Listen" onclick="speak('enfermería')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">psicología</td>
+<td class="en-cell">Psychology</td>
+<td class="pron-cell"><em>see-koh-loh-HEE-ah</em> <button aria-label="Listen" onclick="speak('psicología')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">geología</td>
+<td class="en-cell">Geology</td>
+<td class="pron-cell"><em>heh-oh-loh-HEE-ah</em> <button aria-label="Listen" onclick="speak('geología')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">informática</td>
+<td class="en-cell">Computer Science</td>
+<td class="pron-cell"><em>een-for-MAH-tee-kah</em> <button aria-label="Listen" onclick="speak('informática')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">educación</td>
+<td class="en-cell">Education</td>
+<td class="pron-cell"><em>eh-doo-kah-SYON</em> <button aria-label="Listen" onclick="speak('educación')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">arte</td>
+<td class="en-cell">Art</td>
+<td class="pron-cell"><em>AR-teh</em> <button aria-label="Listen" onclick="speak('arte')">🔊</button></td>
+</tr>
+</tbody>
+</table>
+<div class="vsec-title">Tu horario — primera y última clase</div>
+<p style="font-size: 11.5px; color: var(--muted); margin-bottom: 6px;">Needed for item 5: <strong>Mi primera clase es a las ocho. Mi última clase es a las dos.</strong></p>
+<table class="vtable">
+<thead>
+<tr>
+<th>Español</th>
+<th>English</th>
+<th>Pronunciation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="es-cell">la primera clase</td>
+<td class="en-cell">the first class</td>
+<td class="pron-cell"><em>pree-MEH-rah KLAH-seh</em> <button aria-label="Listen" onclick="speak('primera clase')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">la última clase</td>
+<td class="en-cell">the last class</td>
+<td class="pron-cell"><em>OOL-tee-mah KLAH-seh</em> <button aria-label="Listen" onclick="speak('última clase')">🔊</button></td>
+</tr>
+</tbody>
+</table>
+<div class="vsec-title">Los días de la semana</div>
+<p style="font-size: 11.5px; color: var(--muted); margin-bottom: 6px;">Needed to say when your class or event happens: <strong>Mi clase es los lunes.</strong></p>
+<table class="vtable">
+<thead>
+<tr>
+<th>Español</th>
+<th>English</th>
+<th>Pronunciation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="es-cell">lunes</td>
+<td class="en-cell">Monday</td>
+<td class="pron-cell"><em>LOO-ness</em> <button aria-label="Listen" onclick="speak('lunes')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">martes</td>
+<td class="en-cell">Tuesday</td>
+<td class="pron-cell"><em>MAR-tess</em> <button aria-label="Listen" onclick="speak('martes')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">miércoles</td>
+<td class="en-cell">Wednesday</td>
+<td class="pron-cell"><em>MYEHR-koh-less</em> <button aria-label="Listen" onclick="speak('miércoles')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">jueves</td>
+<td class="en-cell">Thursday</td>
+<td class="pron-cell"><em>HWEH-vess</em> <button aria-label="Listen" onclick="speak('jueves')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">viernes</td>
+<td class="en-cell">Friday</td>
+<td class="pron-cell"><em>VYEHR-ness</em> <button aria-label="Listen" onclick="speak('viernes')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">sábado</td>
+<td class="en-cell">Saturday</td>
+<td class="pron-cell"><em>SAH-bah-doh</em> <button aria-label="Listen" onclick="speak('sábado')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">domingo</td>
+<td class="en-cell">Sunday</td>
+<td class="pron-cell"><em>doh-MEEN-goh</em> <button aria-label="Listen" onclick="speak('domingo')">🔊</button></td>
+</tr>
+</tbody>
+</table>
+<div class="vsec-title">Eventos de la semana — for online classes</div>
+<p style="font-size: 11.5px; color: var(--muted); margin-bottom: 6px;">No class meeting in person? Tell the time of <strong>two or more</strong> instead: <strong>Mi práctica es el lunes a las cinco. Mi cita es el jueves a la una.</strong></p>
+<table class="vtable">
+<thead>
+<tr>
+<th>Español</th>
+<th>English</th>
+<th>Pronunciation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="es-cell">la reunión</td>
+<td class="en-cell">meeting</td>
+<td class="pron-cell"><em>reh-oo-NYON</em> <button aria-label="Listen" onclick="speak('reunión')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">la presentación</td>
+<td class="en-cell">presentation</td>
+<td class="pron-cell"><em>preh-sen-tah-SYON</em> <button aria-label="Listen" onclick="speak('presentación')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">la práctica</td>
+<td class="en-cell">practice</td>
+<td class="pron-cell"><em>PRAHK-tee-kah</em> <button aria-label="Listen" onclick="speak('práctica')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">la cita</td>
+<td class="en-cell">appointment</td>
+<td class="pron-cell"><em>SEE-tah</em> <button aria-label="Listen" onclick="speak('cita')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">el partido</td>
+<td class="en-cell">game / match</td>
+<td class="pron-cell"><em>par-TEE-doh</em> <button aria-label="Listen" onclick="speak('partido')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">la fiesta</td>
+<td class="en-cell">party</td>
+<td class="pron-cell"><em>FYES-tah</em> <button aria-label="Listen" onclick="speak('fiesta')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">el cumpleaños</td>
+<td class="en-cell">birthday</td>
+<td class="pron-cell"><em>koom-pleh-AH-nyohs</em> <button aria-label="Listen" onclick="speak('cumpleaños')">🔊</button></td>
+</tr>
+<tr>
+<td class="es-cell">la cena familiar</td>
+<td class="en-cell">family dinner</td>
+<td class="pron-cell"><em>SEH-nah fah-mee-LYAR</em> <button aria-label="Listen" onclick="speak('cena familiar')">🔊</button></td>
+</tr>
+</tbody>
+</table>
+<div class="alert gold" style="margin-top: 10px;">📚 For the full vocabulary list, refer to your <strong>Vistas textbook, Capítulo 1</strong>.</div>
+</div>
+</div>
 <!-- Bongo Help Modal -->
 <div id="modal-bongo" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
-  <div class="modal-panel">
-    <button class="modal-close" onclick="closeModal('modal-bongo')" aria-label="Close">✕</button>
-    <div class="modal-title">🔧 Bongo Troubleshooting</div>
-    <div class="modal-sub">Try these before contacting the Language Lab</div>
-    <div class="bongo-tip"><span class="bt-icon">💻</span><div><strong>Use Google Chrome on a laptop or desktop.</strong> iPads are not fully supported.</div></div>
-    <div class="bongo-tip"><span class="bt-icon">🔓</span><div>Allow <strong>camera and microphone</strong> in Chrome for D2L.</div></div>
-    <div class="bongo-tip"><span class="bt-icon">🗑️</span><div>Stuck on "Activating recorder"? Clear <strong>cache and cookies</strong>, then refresh.</div></div>
-    <div class="bongo-tip"><span class="bt-icon">🕵️</span><div>Try <strong>Chrome Incognito</strong>. Close other apps using the mic/camera.</div></div>
-    <div class="bongo-tip"><span class="bt-icon">💬</span><div>To leave a <strong>video comment</strong>: open a classmate's video → click the comment icon → choose <strong>Video Comment</strong> → allow camera access.</div></div>
-    <div class="bongo-s-title">Still not working?</div>
-    <div class="bongo-tip"><span class="bt-icon">❓</span><div>Visit the <a href="https://bongolearn.zendesk.com/hc/en-us/articles/360009373374" target="_blank" rel="noopener" style="color:#0f766e;font-weight:700;">Bongo Help Center</a>.</div></div>
-    <div class="bongo-tip" style="background:var(--red-lt);border-color:#f5c4cc;"><span class="bt-icon">📧</span><div>Contact the Language Lab <strong>before the deadline</strong>.</div></div>
-  </div>
+<div class="modal-panel"><button class="modal-close" aria-label="Close" onclick="closeModal('modal-bongo')">✕</button>
+<div class="modal-title">🔧 Bongo Troubleshooting</div>
+<div class="modal-sub">Try these before contacting the Language Lab</div>
+<div class="bongo-tip"><span class="bt-icon">💻</span>
+<div><strong>Use Google Chrome on a laptop or desktop.</strong> iPads are not fully supported.</div>
 </div>
-
-<script>
+<div class="bongo-tip"><span class="bt-icon">🔓</span>
+<div>Allow <strong>camera and microphone</strong> in Chrome for D2L.</div>
+</div>
+<div class="bongo-tip"><span class="bt-icon">🗑️</span>
+<div>Stuck on "Activating recorder"? Clear <strong>cache and cookies</strong>, then refresh.</div>
+</div>
+<div class="bongo-tip"><span class="bt-icon">🕵️</span>
+<div>Try <strong>Chrome Incognito</strong>. Close other apps using the mic/camera.</div>
+</div>
+<div class="bongo-s-title">Reset your submission</div>
+<div class="bongo-tip" style="background: var(--gold-lt); border-color: #e8d080;"><span class="bt-icon">⋮</span>
+<div>Click the <strong>three-dot menu (⋮)</strong> next to the submitted question → <strong>Retake</strong>. Available before the deadline.</div>
+</div>
+<div class="bongo-s-title">Still not working?</div>
+<div class="bongo-tip"><span class="bt-icon">❓</span>
+<div>Visit the <a href="https://bongolearn.zendesk.com/hc/en-us/articles/360009373374" target="_blank" rel="noopener" style="color: #0f766e; font-weight: bold;">Bongo Help Center</a>.</div>
+</div>
+<div class="bongo-tip" style="background: var(--red-lt); border-color: #f5c4cc;"><span class="bt-icon">📧</span>
+<div>Contact the Language Lab <strong>before the deadline</strong>.</div>
+</div>
+</div>
+</div>
+<p><script>
 function tog(btn){var b=btn.nextElementSibling;var o=b.classList.contains('open');btn.setAttribute('aria-expanded',String(!o));b.classList.toggle('open',!o);}
 function openModal(id){var m=document.getElementById(id);if(!m)return;m.classList.add('open');m.removeAttribute('aria-hidden');document.body.style.overflow='hidden';setTimeout(function(){var cl=m.querySelector('.modal-close');if(cl)cl.focus();},60);}
 function closeModal(id){var m=document.getElementById(id);if(!m)return;m.classList.remove('open');m.setAttribute('aria-hidden','true');document.body.style.overflow='';}
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){document.querySelectorAll('.modal.open').forEach(function(m){closeModal(m.id);});}});
-function speak(text){if(!window.speechSynthesis)return;window.speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(text);u.lang='es-MX';u.rate=0.82;window.speechSynthesis.speak(u);}
+function speak(text){
+  if(!window.speechSynthesis) return;
+  var t = text;
+  // "+ inf." is never spoken, with or without parens
+  t = t.replace(/\+\s*inf\.?/gi, '');
+  // remaining parenthetical grammar notes (e:ie), (imp.), (pret.), etc. -- not spoken
+  t = t.replace(/\([^)]*\)/g, '');
+  // em-dash/en-dash used as a separator -> natural pause, never read as a literal symbol
+  t = t.replace(/\s*[—–]\s*/g, ', ');
+  // stray colons/semicolons left dangling after the above
+  t = t.replace(/[:;]+/g, '');
+  // Pass 1: tight slash with NO surrounding space = gender marker (niño/a, pequeño/a) -> speak both full forms
+  t = t.replace(/([^\s\/]+)\/([^\s\/]{1,3})(?=\s|$)/g, function(_, left, suf){
+    var fem = (suf === 'a' && left.slice(-1) === 'o') ? left.slice(0,-1) + 'a' : left + suf;
+    return left + ' ' + fem;
+  });
+  // Pass 2: slash WITH surrounding space = two full alternative words/phrases -> say both, drop the slash
+  t = t.replace(/([^\s\/]+)\s+\/\s+([^\s\/]+)/g, function(_, left, right){
+    return left + ' ' + right;
+  });
+  t = t.replace(/\s{2,}/g, ' ').trim();
+  window.speechSynthesis.cancel();
+  var u = new SpeechSynthesisUtterance(t);
+  u.lang = 'es-MX';
+  u.rate = 0.82;
+  window.speechSynthesis.speak(u);
+}
 
 // Lightbox
-(function(){
+document.addEventListener('DOMContentLoaded',function(){
   var lb=document.getElementById('lightbox'),lbImg=document.getElementById('lb-img'),lbCap=document.getElementById('lb-cap');
   if(!lb)return;
   document.querySelectorAll('.lab-img-wrap').forEach(function(el){
-    el.addEventListener('click',function(){
-      var src=el.getAttribute('data-full')||el.querySelector('img').src;
+    el.addEventListener('click',function(e){
+      e.preventDefault();
+      if(!lb||!lbImg)return;
+      var imgEl=el.querySelector('img');
+      var src=el.getAttribute('data-full')||(imgEl?imgEl.src:'');
       var cap=el.getAttribute('data-caption')||'';
-      lbImg.src=src;lbCap.textContent=cap;
+      lbImg.src=src;
+      lbImg.alt=imgEl?imgEl.alt:'';
+      lbCap.innerHTML=cap;
       lb.classList.add('open');lb.removeAttribute('aria-hidden');
       document.body.style.overflow='hidden';
       lb.querySelector('.lightbox-close').focus();
     });
-    el.setAttribute('tabindex','0');
-    el.setAttribute('role','button');
-    el.setAttribute('aria-label','Expand image');
-    el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' ')el.click();});
+    el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click();}});
   });
   function closeLb(){lb.classList.remove('open');lb.setAttribute('aria-hidden','true');document.body.style.overflow='';}
   lb.querySelector('.lightbox-close').addEventListener('click',closeLb);
   lb.addEventListener('click',function(e){if(e.target===lb)closeLb();});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&lb.classList.contains('open'))closeLb();});
-})();
-</script>
-
+});
+</script></p>
 <!-- Lightbox -->
 <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" aria-hidden="true">
-  <div class="lightbox-inner">
-    <button class="lightbox-close" aria-label="Close image">✕</button>
-    <img id="lb-img" src="" alt="">
-    <div id="lb-cap" class="lightbox-caption"></div>
-  </div>
+<div class="lightbox-inner"><button class="lightbox-close" aria-label="Close image">✕</button> <img id="lb-img" src="./" alt="">
+<div id="lb-cap" class="lightbox-caption"></div>
 </div>
+</div>
+<p><script>
+(function(){
+  var flags = [
+  {name:"España",b:["#c8102e","#b8952a","#c8102e"],accent:"#7ab8e8"},
+  {name:"México",b:["#006847","#ffffff","#ce1126"],accent:"#7ab8e8"},
+  {name:"Argentina",b:["#74acdf","#ffffff","#74acdf"],accent:"#7ab8e8"},
+  {name:"Colombia",b:["#fcd116","#003087","#ce1126"],accent:"#fcd116"},
+  {name:"Chile",b:["#d52b1e","#ffffff","#002d62"],accent:"#7ab8e8"},
+  {name:"Perú",b:["#d91023","#ffffff","#d91023"],accent:"#7ab8e8"},
+  {name:"Venezuela",b:["#cf142b","#00247d","#cf9a00"],accent:"#cf9a00"},
+  {name:"Cuba",b:["#002a8f","#ffffff","#002a8f"],accent:"#7ab8e8"},
+  {name:"Ecuador",b:["#ffd100","#003893","#ef3340"],accent:"#ffd100"},
+  {name:"Bolivia",b:["#d52b1e","#f4e400","#007a3d"],accent:"#f4e400"},
+  {name:"Guatemala",b:["#4997d0","#ffffff","#4997d0"],accent:"#7ab8e8"},
+  {name:"Costa Rica",b:["#002b7f","#cf142b","#ffffff"],accent:"#7ab8e8"},
+  {name:"Uruguay",b:["#ffffff","#5b9bd5","#ffffff"],accent:"#5b9bd5"},
+  {name:"Honduras",b:["#009bde","#ffffff","#009bde"],accent:"#7ab8e8"},
+  {name:"Nicaragua",b:["#003f87","#ffffff","#003f87"],accent:"#7ab8e8"},
+  {name:"El Salvador",b:["#0f47af","#ffffff","#0f47af"],accent:"#7ab8e8"},
+  {name:"República Dom.",b:["#002d62","#cf142b","#002d62"],accent:"#7ab8e8"},
+  {name:"Puerto Rico",b:["#002d62","#ffffff","#cf142b"],accent:"#7ab8e8"},
+  {name:"Panamá",b:["#da121a","#ffffff","#005eb8"],accent:"#7ab8e8"},
+  {name:"Paraguay",b:["#d52b1e","#ffffff","#0032a0"],accent:"#7ab8e8"}
+];
 
-</body>
-</html>
+  // Fisher-Yates shuffle for a non-repeating cycle
+  for(var i=flags.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=flags[i];flags[i]=flags[j];flags[j]=t;}
+
+  var idx = 0;
+  var bars = document.querySelectorAll('.flag .fbar');
+  var wrapper = bars.length ? bars[0].closest('.flag') : null;
+  var accentEl = document.querySelector('.htext h1 em');
+  var tip = null;
+
+  // Add CSS transitions to bars and accent
+  for(var b=0;b<bars.length;b++){
+    bars[b].style.transition='background 0.9s ease';
+  }
+  if(accentEl) accentEl.style.transition='color 0.9s ease';
+
+  function applyFlag(f){
+    if(bars.length===3){
+      bars[0].style.background=f.b[0];
+      bars[1].style.background=f.b[1];
+      bars[2].style.background=f.b[2];
+    }
+    if(wrapper) wrapper.setAttribute('aria-label','Flag of '+f.name);
+    if(accentEl) accentEl.style.color=f.accent;
+    if(tip){
+      tip.style.opacity='0';
+      // Update text after fade completes (only if tooltip is visible)
+      setTimeout(function(){tip.textContent=f.name;},200);
+    }
+  }
+
+  // Set initial flag immediately
+  applyFlag(flags[0]);
+
+  // Build tooltip
+  if(wrapper){
+    wrapper.style.position='relative';
+    tip = document.createElement('div');
+    tip.textContent=flags[0].name;
+    tip.style.cssText='position:absolute;left:52px;top:0;background:rgba(0,0,0,0.72);color:white;font-size:10px;font-weight:700;letter-spacing:.5px;padding:3px 8px;border-radius:4px;white-space:nowrap;opacity:0;transition:opacity .2s;pointer-events:none;z-index:10;';
+    wrapper.appendChild(tip);
+    wrapper.addEventListener('mouseenter',function(){tip.style.opacity='1';});
+    wrapper.addEventListener('mouseleave',function(){tip.style.opacity='0';});
+  }
+
+  // Cycle every 6 seconds
+  setInterval(function(){
+    idx=(idx+1)%flags.length;
+    applyFlag(flags[idx]);
+  },6000);
+})();
+</script></p></body></html>
