@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>SPAN 1001 — Lab 2 Bongo Activity</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --navy:#002147;--red:#c8102e;--gold:#b8952a;--blue:#005fa3;
+  --skylt:#e8f3ff;--ink:#0d1525;--soft:#1e3a5f;--muted:#4a5f75;
+  --cream:#f7f9fc;--white:#ffffff;--parch:#dce8f5;
+  --green:#1a5c1a;--green-lt:#f0f9f0;--green-bdr:#a8d5ae;
+  --red-lt:#fff0f2;--gold-lt:#fffbf0;--gold-bdr:rgba(184,149,42,0.4);
+  --teal:#0f766e;--teal-lt:#f0faf9;--teal-bdr:#99d6cc;
+  --shadow:0 4px 24px rgba(0,33,71,0.10),0 1px 4px rgba(0,33,71,0.06);
+  --shadow-sm:0 2px 8px rgba(0,33,71,0.07);
+}
+body{font-family:'DM Sans',Arial,sans-serif;background:var(--cream);color:var(--ink);padding:16px;}
+.box{max-width:660px;margin:0 auto;background:var(--white);border-radius:14px;
+     box-shadow:var(--shadow);overflow:hidden;}
+/* Top bar */
+.top-bar{background:var(--navy);padding:16px 24px;display:flex;align-items:center;gap:14px;}
+.lab-num{font-family:'Fraunces',Georgia,serif;font-size:32px;font-weight:900;
+         color:#7ab8e8;letter-spacing:-1px;flex-shrink:0;line-height:1;}
+.top-bar-text h2{font-family:'Fraunces',Georgia,serif;font-size:17px;font-weight:700;
+                 font-style:italic;color:var(--white);margin:0 0 2px 0;line-height:1.2;}
+.top-bar-text p{font-size:11px;color:rgba(255,255,255,0.50);margin:0;letter-spacing:.4px;}
+.mode-tag{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0;}
+.mode-pill{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+           padding:3px 10px;border-radius:12px;white-space:nowrap;}
+.mode-pill.camera{background:rgba(0,95,163,0.25);color:#7ab8e8;border:1px solid rgba(122,184,232,0.3);}
+.mode-pill.camscreen{background:rgba(15,118,110,0.25);color:#5eead4;border:1px solid rgba(94,234,212,0.3);}
+.mode-pill.peer{background:rgba(184,149,42,0.25);color:#fcd34d;border:1px solid rgba(252,211,77,0.3);}
+/* Type bar */
+.type-bar{padding:9px 24px;font-size:11px;font-weight:700;letter-spacing:1.5px;
+          text-transform:uppercase;display:flex;align-items:center;gap:8px;
+          border-bottom:1.5px solid var(--parch);}
+.type-bar.camera{background:var(--skylt);color:var(--blue);}
+.type-bar.camscreen{background:var(--teal-lt);color:var(--teal);}
+/* Body */
+.body{padding:18px 24px 20px;}
+/* Requirement rows */
+.req-list{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:14px;}
+.req-list li{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;
+             line-height:1.65;color:var(--soft);background:var(--cream);
+             border:1.5px solid var(--parch);border-radius:8px;padding:9px 13px;}
+.req-list li .ico{font-size:15px;flex-shrink:0;margin-top:1px;}
+/* Alert rows */
+.alert{border-radius:8px;padding:10px 14px;font-size:13px;line-height:1.65;
+       margin-bottom:10px;display:flex;gap:8px;align-items:flex-start;}
+.alert .aic{flex-shrink:0;margin-top:1px;}
+.alert.gold{background:var(--gold-lt);border:1.5px solid var(--gold-bdr);color:#5a3e00;}
+.alert.red{background:var(--red-lt);border:1.5px solid #f5c4cc;color:#7a0010;}
+.alert.teal{background:var(--teal-lt);border:1.5px solid var(--teal-bdr);color:#134e4a;}
+.alert.green{background:var(--green-lt);border:1.5px solid var(--green-bdr);color:#1a3d1a;}
+/* Section label */
+.slabel{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+        color:var(--muted);display:flex;align-items:center;gap:6px;margin:14px 0 8px;}
+.slabel::after{content:'';flex:1;height:1px;background:var(--parch);}
+/* Buttons row */
+.btn-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+.btn{display:inline-flex;align-items:center;gap:7px;font-family:'DM Sans',Arial,sans-serif;
+     font-size:13px;font-weight:700;padding:10px 16px;border-radius:8px;cursor:pointer;
+     border:none;text-decoration:none;transition:transform .15s,box-shadow .15s,filter .15s;}
+.btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm);filter:brightness(1.08);}
+.btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:8px;}
+.btn.navy{background:var(--navy);color:var(--white);}
+.btn.teal{background:var(--teal);color:var(--white);}
+.btn.green{background:linear-gradient(135deg,#1a5c1a,#0f3a0f);color:var(--white);}
+.btn.red{background:var(--red);color:var(--white);}
+/* Modal */
+.modal{position:fixed;inset:0;background:rgba(0,21,71,0.88);z-index:9999;display:none;
+       align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px);}
+.modal.open{display:flex;animation:mIn .2s ease;}
+@keyframes mIn{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
+.modal-panel{background:var(--white);border-radius:14px;width:100%;max-width:640px;
+             max-height:88vh;overflow-y:auto;padding:24px 28px;position:relative;}
+.modal-close{position:absolute;top:12px;right:12px;background:var(--cream);
+             border:1.5px solid var(--parch);border-radius:50%;width:28px;height:28px;
+             cursor:pointer;font-size:14px;display:flex;align-items:center;
+             justify-content:center;color:var(--muted);transition:all .15s;}
+.modal-close:hover{background:var(--red);color:white;border-color:var(--red);}
+.modal-title{font-family:'Fraunces',Georgia,serif;font-size:20px;font-weight:700;
+             color:var(--navy);margin-bottom:3px;}
+.modal-sub{font-size:12px;color:var(--muted);margin-bottom:14px;}
+.msec{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+      color:var(--blue);padding-bottom:5px;border-bottom:2px solid var(--skylt);
+      margin:14px 0 8px;}
+.msec:first-of-type{margin-top:0;}
+.tip{display:flex;gap:9px;align-items:flex-start;background:var(--teal-lt);
+     border:1.5px solid var(--teal-bdr);border-radius:8px;padding:9px 12px;
+     margin-bottom:6px;font-size:13px;line-height:1.6;color:var(--ink);}
+.tip .ti{font-size:14px;flex-shrink:0;margin-top:1px;}
+.tip.gold{background:var(--gold-lt);border-color:var(--gold-bdr);color:#5a3e00;}
+.tip.red{background:var(--red-lt);border-color:#f5c4cc;color:#7a0010;}
+.tip.navy{background:var(--skylt);border-color:var(--parch);color:var(--soft);}
+.tip.green{background:var(--green-lt);border-color:var(--green-bdr);color:#1a3d1a;}
+/* Step list inside modal */
+.mstep-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:8px;}
+.mstep-list li{display:flex;gap:10px;font-size:13px;line-height:1.65;color:var(--soft);}
+.mstep-num{width:22px;height:22px;min-width:22px;border-radius:50%;
+           background:var(--blue);color:white;font-size:11px;font-weight:800;
+           display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+</style>
+</head>
+<body>
+<div class="box">
+  <div class="top-bar">
+    <div class="lab-num">2</div>
+    <div class="top-bar-text">
+      <h2>Bongo Activity</h2>
+      <p>SPAN 1001 · Regular Session · Language Lab</p>
+    </div>
+    <div class="mode-tag">
+    <span class="mode-pill camscreen">🖥️ Camera + Screen</span>
+    </div>
+  </div>
+  <div class="type-bar camscreen">🖥️ Camera + Screen Recording</div>
+
+  <div class="body">
+    <div class="slabel" style="margin-top:0;"><span>📋</span>What to do</div>
+    <ul class="req-list">
+      <li><span class="ico">1️⃣</span><span>Complete the <strong>Preparation Mini-Quiz</strong> in D2L first — it is part of this lab grade.</span></li>
+      <li><span class="ico">2️⃣</span><span>Open the <strong>Lab 2: Bongo Activity</strong> link below. Select <strong>Camera + Screen</strong> mode, allow camera and microphone access, and record your video.</span></li>
+      <li><span class="ico">3️⃣</span><span>Review your recording before submitting. Submit when ready — you can reset and re-record using the <strong>three-dot menu (⋮)</strong> at the top-right before the deadline.</span></li>
+    </ul>
+
+    <div class="slabel"><span>⚙️</span>Technical requirements</div>
+    <ul class="req-list">
+      <li><span class="ico">🎥</span><span><strong>Recording mode:</strong> Camera + Screen. Open the assignment in Bongo and select this mode. Allow camera and microphone access when prompted.</span></li>
+      <li><span class="ico">🖥️</span><span><strong>Slides required.</strong> Your slides must be visible on screen while you present. Prepare your slides in advance — PowerPoint, Google Slides, or any full-screen presentation works.</span></li>
+      <li><span class="ico">👤</span><span><strong>Face + audio required.</strong> Your face must be visible and your voice clearly audible throughout. Recordings that do not meet this requirement will not receive credit.</span></li>
+      <li><span class="ico">🇪🇸</span><span><strong>Spanish only.</strong> Do not switch to English at any point during the recording.</span></li>
+      <li><span class="ico">⏱️</span><span><strong>Length:</strong> Follow the time requirement listed in the assignment rubric inside Bongo.</span></li>
+      <li><span class="ico">⋮</span><span><strong>Reset if needed:</strong> Click the <strong>three-dot menu (⋮)</strong> at the top-right of the Bongo page → <strong>Reset Submission</strong> to re-record before the deadline.</span></li>
+    </ul>
+
+
+    <div class="slabel"><span>🛠️</span>Help</div>
+    <div class="btn-row">
+      <button class="btn navy" onclick="openModal('modal-bongo')" aria-haspopup="dialog">🔧 Bongo Troubleshooting</button>
+      <button class="btn teal" onclick="openModal('modal-pptx')" aria-haspopup="dialog">🎬 Recording with PowerPoint</button>
+      <button class="btn green" onclick="openModal('modal-lab')" aria-haspopup="dialog">🏫 Do It in the Lab</button>
+    </div>
+  </div>
+</div>
+<div id="modal-bongo" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-panel">
+    <button class="modal-close" onclick="closeModal('modal-bongo')" aria-label="Close">✕</button>
+    <div class="modal-title">🔧 Bongo Troubleshooting</div>
+    <div class="modal-sub">Try these steps before contacting the Language Lab</div>
+    <div class="msec">Before you start</div>
+    <div class="tip"><span class="ti">💻</span><div>Use <strong>Google Chrome on a laptop or desktop</strong>. iPads and phones are not fully supported.</div></div>
+    <div class="tip"><span class="ti">🔓</span><div>Allow <strong>camera and microphone</strong> access when Chrome prompts you. If you blocked it, click the camera icon in the address bar to reset.</div></div>
+    <div class="tip"><span class="ti">🔇</span><div>Close other apps using your mic or camera — Zoom, Teams, FaceTime, etc.</div></div>
+    <div class="msec">Recorder won't load</div>
+    <div class="tip"><span class="ti">🗑️</span><div>Clear <strong>cache and cookies</strong> in Chrome → reload the page.</div></div>
+    <div class="tip"><span class="ti">🕵️</span><div>Try <strong>Chrome Incognito</strong> mode — this bypasses most extension conflicts.</div></div>
+    <div class="msec">Upload instead of recording live</div>
+    <div class="tip navy"><span class="ti">📤</span><div>If recording in Bongo keeps failing, click <strong>Upload Video</strong> in the assignment. Record locally using your phone camera or laptop's camera app, then upload the file.</div></div>
+    <div class="msec">Resetting your submission</div>
+    <div class="tip gold"><span class="ti">⋮</span><div>Click the <strong>three-dot menu (⋮)</strong> at the top-right of the Bongo assignment page → <strong>Reset Submission</strong>. You can do this any time before the deadline.</div></div>
+    <div class="msec">Still not working?</div>
+    <div class="tip red"><span class="ti">📧</span><div>Email the Language Lab <strong>before the deadline</strong> — not after. Include your name, CRN, and a description of the issue.</div></div>
+  </div>
+</div>
+<div id="modal-pptx" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-panel">
+    <button class="modal-close" onclick="closeModal('modal-pptx')" aria-label="Close">✕</button>
+    <div class="modal-title">🎬 Record a Video with PowerPoint</div>
+    <div class="modal-sub">Use this if Camera + Screen recording fails in Bongo</div>
+    <div class="msec">Access PowerPoint Online (free via UNG)</div>
+    <div class="tip navy"><span class="ti">🎓</span><div>UNG provides Microsoft 365 to all students. Go to <a href="https://office.com" target="_blank" rel="noopener" style="color:var(--blue);font-weight:700;">office.com</a> → sign in with your <strong>UNG email</strong> (yourname@northgeorgia.edu) → click <strong>PowerPoint</strong>.</div></div>
+    <div class="tip navy"><span class="ti">💾</span><div>Or use the <strong>PowerPoint desktop app</strong> if it is installed on your computer.</div></div>
+    <div class="msec">Record your presentation</div>
+    <ol class="mstep-list">
+      <li><span class="mstep-num">1</span><span>Open or create your presentation. Go to the <strong>Record</strong> tab (or <strong>Slide Show → Record Slide Show</strong>).</span></li>
+      <li><span class="mstep-num">2</span><span>Click <strong>Record from Beginning</strong>. Make sure your <strong>camera and microphone</strong> are enabled in the top toolbar.</span></li>
+      <li><span class="mstep-num">3</span><span>Advance slides manually using arrow keys. Speak clearly — your face and voice must both be visible and audible.</span></li>
+      <li><span class="mstep-num">4</span><span>Click <strong>Stop</strong> when finished. Go to <strong>File → Export → Export to Video</strong> (or <strong>Create a Video</strong>) and save as an .mp4 file.</span></li>
+      <li><span class="mstep-num">5</span><span>In D2L, open the Bongo assignment → click <strong>Upload Video</strong> → select your .mp4 file.</span></li>
+    </ol>
+    <div class="tip gold"><span class="ti">⏱️</span><div>Keep your exported video under <strong>500 MB</strong>. Use <strong>Standard HD (720p)</strong> quality when exporting.</div></div>
+    <div class="tip red"><span class="ti">📧</span><div>Having trouble? Email the Language Lab <strong>before the deadline</strong>.</div></div>
+  </div>
+</div>
+<div id="modal-lab" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-panel">
+    <button class="modal-close" onclick="closeModal('modal-lab')" aria-label="Close">✕</button>
+    <div class="modal-title">🏫 Want help? Do it in the Lab</div>
+    <div class="modal-sub">The Language Lab has computers with cameras and microphones set up for Bongo recordings</div>
+    <div class="tip green"><span class="ti">✅</span><div>Lab computers are pre-configured for Bongo — camera, microphone, and Chrome are all set up. No technical issues to troubleshoot on your own.</div></div>
+    <div class="tip navy"><span class="ti">📅</span><div>Reserve a spot in advance on WCONLINE. Walk-ins are welcome when space is available, but booking guarantees you a station.</div></div>
+    <div class="tip gold"><span class="ti">🕐</span><div>Come during open lab hours with your notes ready. Staff are available to help if you run into any issues.</div></div>
+    <div style="margin-top:14px;">
+      <a href="https://unglanglab.mywconline.com/schedule/calendar?scheduleid=sc6655efb977156" target="_blank" rel="noopener"
+         style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+                background:linear-gradient(135deg,#1a5c1a,#0f3a0f);color:white;
+                font-family:'DM Sans',Arial,sans-serif;font-size:14px;font-weight:700;
+                padding:12px 20px;border-radius:8px;border:1.5px solid rgba(255,255,255,0.15);
+                box-shadow:0 4px 14px rgba(0,0,0,0.2);"
+         aria-label="Reserve a lab spot on WCONLINE">
+        📅 Reserve a Lab Spot on WCONLINE →
+      </a>
+    </div>
+  </div>
+</div>
+<script>
+function openModal(id){
+  var m=document.getElementById(id);if(!m)return;
+  m.classList.add('open');m.removeAttribute('aria-hidden');
+  document.body.style.overflow='hidden';
+  setTimeout(function(){var cl=m.querySelector('.modal-close');if(cl)cl.focus();},60);
+}
+function closeModal(id){
+  var m=document.getElementById(id);if(!m)return;
+  m.classList.remove('open');m.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){
+    document.querySelectorAll('.modal.open').forEach(function(m){closeModal(m.id);});
+  }
+});
+</script>
+</body>
+</html>
